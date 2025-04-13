@@ -18,430 +18,512 @@
 <body>
     <!-- Keep all your existing HTML content here -->
     
-    <script>
-        // Debug logging
-        console.log("Script loaded");
+   <script>
+    // Debug logging
+    console.log("Script loaded");
+    
+    // Global variables
+    let scene, camera, renderer, particles, geometry, material, particleSystem;
+    const particlesCount = 2000; // Increased particle count for more impressive effect
+    
+    // Check if THREE is loaded
+    function isThreeJSLoaded() {
+        if (typeof THREE === 'undefined') {
+            console.error('THREE.js is not loaded!');
+            return false;
+        }
+        console.log('THREE.js loaded successfully');
+        return true;
+    }
+    
+    // Initialize 3D particles
+    function initThreeJS() {
+        console.log("Initializing ThreeJS...");
         
-        // Global variables
-        let scene, camera, renderer, particles, geometry, material, particleSystem;
-        const particlesCount = 1000;
-        
-        // Check if THREE is loaded
-        function isThreeJSLoaded() {
-            if (typeof THREE === 'undefined') {
-                console.error('THREE.js is not loaded!');
-                return false;
-            }
-            console.log('THREE.js loaded successfully');
-            return true;
+        if (!isThreeJSLoaded()) {
+            setTimeout(initThreeJS, 1000);
+            return;
         }
         
-        // Initialize 3D particles
-        function initThreeJS() {
-            console.log("Initializing ThreeJS...");
-            
-            if (!isThreeJSLoaded()) {
-                setTimeout(initThreeJS, 1000);
-                return;
-            }
-            
-            const container = document.getElementById('canvas-container');
-            if (!container) {
-                console.error('Canvas container not found!');
-                setTimeout(initThreeJS, 1000);
-                return;
-            }
-            
-            try {
-                scene = new THREE.Scene();
-                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                camera.position.z = 50;
-                
-                renderer = new THREE.WebGLRenderer({ alpha: true });
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setClearColor(0x000000, 0);
-                
-                container.innerHTML = ''; // Clear container first
-                container.appendChild(renderer.domElement);
-                
-                geometry = new THREE.BufferGeometry();
-                const positions = new Float32Array(particlesCount * 3);
-                const velocities = new Float32Array(particlesCount * 3);
-                
-                for (let i = 0; i < particlesCount * 3; i += 3) {
-                    // Position
-                    positions[i] = (Math.random() - 0.5) * 100;
-                    positions[i + 1] = (Math.random() - 0.5) * 100;
-                    positions[i + 2] = (Math.random() - 0.5) * 100;
-                    
-                    // Velocity
-                    velocities[i] = (Math.random() - 0.5) * 0.1;
-                    velocities[i + 1] = (Math.random() - 0.5) * 0.1;
-                    velocities[i + 2] = (Math.random() - 0.5) * 0.1;
-                }
-                
-                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-                geometry.setAttribute('velocity', new THREE.BufferAttribute(velocities, 3));
-                
-                material = new THREE.PointsMaterial({
-                    color: 0xffffff,
-                    size: 0.7,
-                    transparent: true,
-                    opacity: 0.6,
-                    sizeAttenuation: true
-                });
-                
-                particleSystem = new THREE.Points(geometry, material);
-                scene.add(particleSystem);
-                
-                window.addEventListener('resize', onWindowResize, false);
-                document.addEventListener('mousemove', onMouseMove, false);
-                
-                console.log("ThreeJS initialized successfully");
-                animate();
-            } catch (error) {
-                console.error("Error initializing ThreeJS:", error);
-                setTimeout(initThreeJS, 1000);
-            }
+        const container = document.getElementById('canvas-container');
+        if (!container) {
+            console.error('Canvas container not found!');
+            setTimeout(initThreeJS, 1000);
+            return;
         }
         
-        function onWindowResize() {
-            if (!camera || !renderer) return;
+        try {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 30; // Closer camera for more immersive effect
             
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
+            renderer = new THREE.WebGLRenderer({ 
+                alpha: true,
+                antialias: true // Added for smoother particles
+            });
             renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-        
-        let mouseX = 0, mouseY = 0;
-        
-        function onMouseMove(event) {
-            mouseX = (event.clientX - window.innerWidth / 2) * 0.01;
-            mouseY = (event.clientY - window.innerHeight / 2) * 0.01;
-        }
-        
-        function animate() {
-            if (!scene || !camera || !renderer || !particleSystem || !geometry) return;
+            renderer.setClearColor(0x000000, 0);
             
-            requestAnimationFrame(animate);
+            container.innerHTML = ''; // Clear container first
+            container.appendChild(renderer.domElement);
             
-            try {
-                const positions = geometry.attributes.position.array;
-                const velocities = geometry.attributes.velocity.array;
+            // Create stars/particles
+            geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particlesCount * 3);
+            const velocities = new Float32Array(particlesCount * 3);
+            const sizes = new Float32Array(particlesCount);
+            const colors = new Float32Array(particlesCount * 3);
+            
+            for (let i = 0; i < particlesCount; i++) {
+                const i3 = i * 3;
                 
-                for (let i = 0; i < particlesCount * 3; i += 3) {
-                    positions[i] += velocities[i];
-                    positions[i + 1] += velocities[i + 1];
-                    positions[i + 2] += velocities[i + 2];
-                    
-                    // Boundaries check
-                    if (Math.abs(positions[i]) > 50) velocities[i] = -velocities[i];
-                    if (Math.abs(positions[i + 1]) > 50) velocities[i + 1] = -velocities[i + 1];
-                    if (Math.abs(positions[i + 2]) > 50) velocities[i + 2] = -velocities[i + 2];
+                // Position - use spherical distribution for more depth
+                const radius = Math.random() * 50 + 20;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(2 * Math.random() - 1);
+                
+                positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+                positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+                positions[i3 + 2] = radius * Math.cos(phi);
+                
+                // Velocity - varied for more natural movement
+                velocities[i3] = (Math.random() - 0.5) * 0.05;
+                velocities[i3 + 1] = (Math.random() - 0.5) * 0.05;
+                velocities[i3 + 2] = (Math.random() - 0.5) * 0.05;
+                
+                // Size variation
+                sizes[i] = Math.random() * 2 + 0.5;
+                
+                // Color - slight variation in white/blue for futuristic feel
+                colors[i3] = 0.8 + Math.random() * 0.2;     // R
+                colors[i3 + 1] = 0.8 + Math.random() * 0.2; // G
+                colors[i3 + 2] = 0.9 + Math.random() * 0.1; // B - slightly more blue
+            }
+            
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('velocity', new THREE.BufferAttribute(velocities, 3));
+            geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            // Use a custom shader material for better looking particles
+            const vertexShader = `
+                attribute float size;
+                attribute vec3 color;
+                varying vec3 vColor;
+                void main() {
+                    vColor = color;
+                    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                    gl_PointSize = size * (300.0 / -mvPosition.z);
+                    gl_Position = projectionMatrix * mvPosition;
+                }
+            `;
+            
+            const fragmentShader = `
+                varying vec3 vColor;
+                void main() {
+                    if (length(gl_PointCoord - vec2(0.5, 0.5)) > 0.475) discard;
+                    gl_FragColor = vec4(vColor, 1.0);
+                }
+            `;
+            
+            material = new THREE.ShaderMaterial({
+                uniforms: {},
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+                transparent: true,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending
+            });
+            
+            particleSystem = new THREE.Points(geometry, material);
+            scene.add(particleSystem);
+            
+            // Add subtle ambient light
+            const ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+            
+            window.addEventListener('resize', onWindowResize, false);
+            document.addEventListener('mousemove', onMouseMove, false);
+            
+            console.log("ThreeJS initialized successfully");
+            animate();
+        } catch (error) {
+            console.error("Error initializing ThreeJS:", error);
+            setTimeout(initThreeJS, 1000);
+        }
+    }
+    
+    function onWindowResize() {
+        if (!camera || !renderer) return;
+        
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    
+    let mouseX = 0, mouseY = 0;
+    let targetMouseX = 0, targetMouseY = 0;
+    
+    function onMouseMove(event) {
+        targetMouseX = (event.clientX - window.innerWidth / 2) * 0.001;
+        targetMouseY = (event.clientY - window.innerHeight / 2) * 0.001;
+    }
+    
+    function animate() {
+        if (!scene || !camera || !renderer || !particleSystem || !geometry) return;
+        
+        requestAnimationFrame(animate);
+        
+        try {
+            // Smooth mouse movement for more natural camera response
+            mouseX += (targetMouseX - mouseX) * 0.05;
+            mouseY += (targetMouseY - mouseY) * 0.05;
+            
+            const positions = geometry.attributes.position.array;
+            const velocities = geometry.attributes.velocity.array;
+            
+            for (let i = 0; i < particlesCount; i++) {
+                const i3 = i * 3;
+                
+                // Update positions based on velocity
+                positions[i3] += velocities[i3];
+                positions[i3 + 1] += velocities[i3 + 1];
+                positions[i3 + 2] += velocities[i3 + 2];
+                
+                // Create a subtle swirling effect
+                const x = positions[i3];
+                const y = positions[i3 + 1];
+                const z = positions[i3 + 2];
+                
+                const distance = Math.sqrt(x*x + y*y + z*z);
+                
+                // Add slight rotation around y axis based on distance
+                const angle = 0.0001 * distance;
+                const cosAngle = Math.cos(angle);
+                const sinAngle = Math.sin(angle);
+                
+                positions[i3] = x * cosAngle - z * sinAngle;
+                positions[i3 + 2] = z * cosAngle + x * sinAngle;
+                
+                // Boundaries check - make particles wrap around
+                const limit = 70;
+                if (Math.abs(positions[i3]) > limit) velocities[i3] = -velocities[i3];
+                if (Math.abs(positions[i3 + 1]) > limit) velocities[i3 + 1] = -velocities[i3 + 1];
+                if (Math.abs(positions[i3 + 2]) > limit) velocities[i3 + 2] = -velocities[i3 + 2];
+            }
+            
+            geometry.attributes.position.needsUpdate = true;
+            
+            // Rotate particle system for ambient movement
+            particleSystem.rotation.y += 0.0005;
+            
+            // Move based on mouse position - more pronounced effect
+            camera.position.x += (mouseX * 10 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 10 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+            
+            renderer.render(scene, camera);
+        } catch (error) {
+            console.error("Error in animation loop:", error);
+        }
+    }
+    
+    // Data flow animation - enhanced version
+    function createDataFlow() {
+        console.log("Creating data flow...");
+        
+        const dataFlowContainer = document.getElementById('data-flow');
+        if (!dataFlowContainer) {
+            console.error('Data flow container not found!');
+            setTimeout(createDataFlow, 1000);
+            return;
+        }
+        
+        const numParticles = 40; // More particles
+        
+        dataFlowContainer.innerHTML = ''; // Clear container first
+        
+        for (let i = 0; i < numParticles; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('data-particle');
+            
+            // Random position
+            const leftPos = Math.random() * 100;
+            particle.style.left = `${leftPos}%`;
+            
+            // Random speed - faster for more dynamic effect
+            const speed = 3 + Math.random() * 12;
+            particle.style.animationDuration = `${speed}s`;
+            
+            // Random delay
+            const delay = Math.random() * 5;
+            particle.style.animationDelay = `${delay}s`;
+            
+            // Random height - some longer some shorter
+            const height = 5 + Math.random() * 25;
+            particle.style.height = `${height}px`;
+            
+            // Random width - some thicker
+            const width = 1 + Math.random() * 2;
+            particle.style.width = `${width}px`;
+            
+            // Random opacity
+            const opacity = 0.2 + Math.random() * 0.4;
+            particle.style.opacity = opacity;
+            
+            // Random glow effect
+            if (Math.random() > 0.7) {
+                particle.style.boxShadow = '0 0 8px rgba(255, 255, 255, 0.8)';
+            }
+            
+            dataFlowContainer.appendChild(particle);
+        }
+        
+        console.log("Data flow created successfully");
+    }
+    
+    // Custom cursor
+    function updateCursor() {
+        console.log("Updating cursor...");
+        
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorDot = document.querySelector('.custom-cursor-dot');
+        
+        if (!cursor || !cursorDot) {
+            console.error('Cursor elements not found!');
+            setTimeout(updateCursor, 1000);
+            return;
+        }
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+        
+        // Cursor grow on hoverable elements
+        const hoverables = document.querySelectorAll('a, button, .solution-card, .team-card, .blog-card, .suggestion-chip');
+        
+        hoverables.forEach(hoverable => {
+            hoverable.addEventListener('mouseenter', () => {
+                cursor.classList.add('cursor-grow');
+            });
+            
+            hoverable.addEventListener('mouseleave', () => {
+                cursor.classList.remove('cursor-grow');
+            });
+        });
+        
+        console.log("Cursor updated successfully");
+    }
+    
+    // Chat functionality
+    function initChat() {
+        console.log("Initializing chat...");
+        
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const suggestionChips = document.querySelectorAll('.suggestion-chip');
+        
+        if (!chatMessages || !chatInput || !sendBtn) {
+            console.error('Chat elements not found!');
+            setTimeout(initChat, 1000);
+            return;
+        }
+        
+        const responses = {
+            "galliera group": "Galliera Group is a Global Tech Accelerator composed of two main divisions: Galliera Ventures, our VC arm that invests in promising tech companies worldwide, and Galliera Tech, which includes tech/dev/growth/media partner companies that help accelerate startups through both product and growth phases.",
+            "technologies": "We utilize a sophisticated tech stack that includes 9 specialized LLMs (Large Language Models) and over 90 'home-made' agent models. Our architecture is designed to optimize startup growth through AI-driven analytics, development acceleration tools, and automated scaling processes.",
+            "partner": "We have multiple partnership opportunities. Startups can apply for investment through Galliera Ventures or work with our Galliera Tech division for development and growth support. Established companies can join our network as technology or distribution partners.",
+            "investments": "Galliera Ventures focuses on seed to Series A investments in innovative tech startups globally. We have a particular focus on AI, blockchain, SaaS, and emerging technologies with transformative potential. Our 50+ portfolio companies receive both capital and access to our technical resources.",
+            "team": "Our team combines human expertise with AI capabilities. Key members include human experts like Léonie - the Founder and her human-machine team, alongside AI systems like The AGI (Strategic Intelligence), The Donna (Operations), and The Benjamin (Financial Analysis)."
+        };
+        
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user' : 'ai');
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function processQuery(query) {
+            query = query.toLowerCase().trim();
+            addMessage(query, true);
+            
+            // Simulate thinking
+            setTimeout(() => {
+                let response = "You may want to talk to Léonie our big boss? ;)";
+                let matched = false;
+                
+                // More flexible matching
+                if (query.includes("galliera") || query.includes("about") || query.includes("group") || query.includes("company")) {
+                    response = responses["galliera group"];
+                    matched = true;
+                } else if (query.includes("tech") || query.includes("technology") || query.includes("technologies") || query.includes("use") || query.includes("llm") || query.includes("stack")) {
+                    response = responses["technologies"];
+                    matched = true;
+                } else if (query.includes("partner") || query.includes("collaboration") || query.includes("work") || query.includes("together")) {
+                    response = responses["partner"];
+                    matched = true;
+                } else if (query.includes("invest") || query.includes("funding") || query.includes("portfolio") || query.includes("startups") || query.includes("companies")) {
+                    response = responses["investments"];
+                    matched = true;
+                } else if (query.includes("team") || query.includes("people") || query.includes("who") || query.includes("staff") || query.includes("members")) {
+                    response = responses["team"];
+                    matched = true;
                 }
                 
-                geometry.attributes.position.needsUpdate = true;
+                console.log("Query:", query);
+                console.log("Matched:", matched);
+                console.log("Response:", response);
                 
-                particleSystem.rotation.x += 0.0002;
-                particleSystem.rotation.y += 0.0003;
+                const typingSpeed = 30; // ms per character
+                let i = 0;
+                const responseDiv = document.createElement('div');
+                responseDiv.classList.add('message', 'ai');
+                chatMessages.appendChild(responseDiv);
                 
-                // Mouse influence
-                particleSystem.rotation.x += mouseY * 0.0001;
-                particleSystem.rotation.y += mouseX * 0.0001;
-                
-                renderer.render(scene, camera);
-            } catch (error) {
-                console.error("Error in animation loop:", error);
-            }
-        }
-        
-        // Data flow animation
-        function createDataFlow() {
-            console.log("Creating data flow...");
-            
-            const dataFlowContainer = document.getElementById('data-flow');
-            if (!dataFlowContainer) {
-                console.error('Data flow container not found!');
-                setTimeout(createDataFlow, 1000);
-                return;
-            }
-            
-            const numParticles = 25;
-            
-            dataFlowContainer.innerHTML = ''; // Clear container first
-            
-            for (let i = 0; i < numParticles; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('data-particle');
-                
-                // Random position
-                const leftPos = Math.random() * 100;
-                particle.style.left = `${leftPos}%`;
-                
-                // Random speed
-                const speed = 2 + Math.random() * 8;
-                particle.style.animationDuration = `${speed}s`;
-                
-                // Random delay
-                const delay = Math.random() * 5;
-                particle.style.animationDelay = `${delay}s`;
-                
-                // Random height
-                const height = 5 + Math.random() * 15;
-                particle.style.height = `${height}px`;
-                
-                // Random opacity
-                const opacity = 0.1 + Math.random() * 0.3;
-                particle.style.opacity = opacity;
-                
-                dataFlowContainer.appendChild(particle);
-            }
-            
-            console.log("Data flow created successfully");
-        }
-        
-        // Custom cursor
-        function updateCursor() {
-            console.log("Updating cursor...");
-            
-            const cursor = document.querySelector('.custom-cursor');
-            const cursorDot = document.querySelector('.custom-cursor-dot');
-            
-            if (!cursor || !cursorDot) {
-                console.error('Cursor elements not found!');
-                setTimeout(updateCursor, 1000);
-                return;
-            }
-            
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                cursorDot.style.left = e.clientX + 'px';
-                cursorDot.style.top = e.clientY + 'px';
-            });
-            
-            // Cursor grow on hoverable elements
-            const hoverables = document.querySelectorAll('a, button, .solution-card, .team-card, .blog-card, .suggestion-chip');
-            
-            hoverables.forEach(hoverable => {
-                hoverable.addEventListener('mouseenter', () => {
-                    cursor.classList.add('cursor-grow');
-                });
-                
-                hoverable.addEventListener('mouseleave', () => {
-                    cursor.classList.remove('cursor-grow');
-                });
-            });
-            
-            console.log("Cursor updated successfully");
-        }
-        
-        // Chat functionality
-        function initChat() {
-            console.log("Initializing chat...");
-            
-            const chatMessages = document.getElementById('chat-messages');
-            const chatInput = document.getElementById('chat-input');
-            const sendBtn = document.getElementById('send-btn');
-            const suggestionChips = document.querySelectorAll('.suggestion-chip');
-            
-            if (!chatMessages || !chatInput || !sendBtn) {
-                console.error('Chat elements not found!');
-                setTimeout(initChat, 1000);
-                return;
-            }
-            
-            const responses = {
-                "galliera group": "Galliera Group is a Global Tech Accelerator composed of two main divisions: Galliera Ventures, our VC arm that invests in promising tech companies worldwide, and Galliera Tech, which includes tech/dev/growth/media partner companies that help accelerate startups through both product and growth phases.",
-                "technologies": "We utilize a sophisticated tech stack that includes 9 specialized LLMs (Large Language Models) and over 90 'home-made' agent models. Our architecture is designed to optimize startup growth through AI-driven analytics, development acceleration tools, and automated scaling processes.",
-                "partner": "We have multiple partnership opportunities. Startups can apply for investment through Galliera Ventures or work with our Galliera Tech division for development and growth support. Established companies can join our network as technology or distribution partners.",
-                "investments": "Galliera Ventures focuses on seed to Series A investments in innovative tech startups globally. We have a particular focus on AI, blockchain, SaaS, and emerging technologies with transformative potential. Our 50+ portfolio companies receive both capital and access to our technical resources.",
-                "team": "Our team combines human expertise with AI capabilities. Key members include human experts like Léonie - the Founder and her human-machine team, alongside AI systems like The AGI (Strategic Intelligence), The Donna (Operations), and The Benjamin (Financial Analysis)."
-            };
-            
-            function addMessage(text, isUser = false) {
-                const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message');
-                messageDiv.classList.add(isUser ? 'user' : 'ai');
-                messageDiv.textContent = text;
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-            
-            function processQuery(query) {
-                query = query.toLowerCase().trim();
-                addMessage(query, true);
-                
-                // Simulate thinking
-                setTimeout(() => {
-                    let response = "You may want to reach out to Léonie directly? ;)";
-                    let matched = false;
-                    
-                    // More flexible matching
-                    if (query.includes("galliera") || query.includes("about") || query.includes("group") || query.includes("company")) {
-                        response = responses["galliera group"];
-                        matched = true;
-                    } else if (query.includes("tech") || query.includes("technology") || query.includes("technologies") || query.includes("use") || query.includes("llm") || query.includes("stack")) {
-                        response = responses["technologies"];
-                        matched = true;
-                    } else if (query.includes("partner") || query.includes("collaboration") || query.includes("work") || query.includes("together")) {
-                        response = responses["partner"];
-                        matched = true;
-                    } else if (query.includes("invest") || query.includes("funding") || query.includes("portfolio") || query.includes("startups") || query.includes("companies")) {
-                        response = responses["investments"];
-                        matched = true;
-                    } else if (query.includes("team") || query.includes("people") || query.includes("who") || query.includes("staff") || query.includes("members")) {
-                        response = responses["team"];
-                        matched = true;
+                function typeWriter() {
+                    if (i < response.length) {
+                        responseDiv.textContent += response.charAt(i);
+                        i++;
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        setTimeout(typeWriter, typingSpeed);
                     }
-                    
-                    console.log("Query:", query);
-                    console.log("Matched:", matched);
-                    console.log("Response:", response);
-                    
-                    const typingSpeed = 30; // ms per character
-                    let i = 0;
-                    const responseDiv = document.createElement('div');
-                    responseDiv.classList.add('message', 'ai');
-                    chatMessages.appendChild(responseDiv);
-                    
-                    function typeWriter() {
-                        if (i < response.length) {
-                            responseDiv.textContent += response.charAt(i);
-                            i++;
-                            chatMessages.scrollTop = chatMessages.scrollHeight;
-                            setTimeout(typeWriter, typingSpeed);
-                        }
-                    }
-                    
-                    typeWriter();
-                }, 1000);
+                }
+                
+                typeWriter();
+            }, 1000);
+        }
+        
+        sendBtn.addEventListener('click', () => {
+            const query = chatInput.value.trim();
+            if (query) {
+                processQuery(query);
+                chatInput.value = '';
             }
-            
-            sendBtn.addEventListener('click', () => {
+        });
+        
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
                 const query = chatInput.value.trim();
                 if (query) {
                     processQuery(query);
                     chatInput.value = '';
                 }
-            });
-            
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    const query = chatInput.value.trim();
-                    if (query) {
-                        processQuery(query);
-                        chatInput.value = '';
-                    }
-                }
-            });
-            
-            suggestionChips.forEach(chip => {
-                chip.addEventListener('click', () => {
-                    const query = chip.getAttribute('data-query');
-                    processQuery(query);
-                });
-            });
-            
-            // Add a welcome message
-            setTimeout(() => {
-                addMessage("Hey there! I'm Galliera AI. How can I help you learn about our tech accelerator, investments, or team?", false);
-            }, 500);
-            
-            console.log("Chat initialized successfully");
-        }
-        
-        // Page animations
-        function initPageAnimations() {
-            console.log("Initializing page animations...");
-            
-            // Animate elements when they come into view
-            const animateOnScroll = (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            };
-            
-            const observer = new IntersectionObserver(animateOnScroll, {
-                root: null,
-                threshold: 0.1
-            });
-            
-            const elements = document.querySelectorAll('.solution-card, .team-card, .blog-card, h2, .section-title');
-            elements.forEach(el => {
-                observer.observe(el);
-            });
-            
-            // Add CSS for the animations
-            const style = document.createElement('style');
-            style.textContent = `
-                .solution-card, .team-card, .blog-card, h2, .section-title {
-                    opacity: 0;
-                    transform: translateY(30px);
-                    transition: opacity 0.6s ease, transform 0.6s ease;
-                }
-                
-                .animate-in {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Navbar scroll effect
-            window.addEventListener('scroll', () => {
-                const nav = document.querySelector('nav');
-                if (window.scrollY > 50) {
-                    nav.style.padding = '1rem 0';
-                    nav.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-                } else {
-                    nav.style.padding = '1.5rem 0';
-                    nav.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-                }
-            });
-            
-            console.log("Page animations initialized successfully");
-        }
-        
-        // Initialize everything with robust error handling
-        function initializeEverything() {
-            console.log("Starting initialization...");
-            
-            try {
-                initThreeJS();
-                createDataFlow();
-                updateCursor();
-                initChat();
-                initPageAnimations();
-                console.log("All components initialized successfully");
-            } catch (error) {
-                console.error("Error during initialization:", error);
-                console.log("Retrying initialization in 2 seconds...");
-                setTimeout(initializeEverything, 2000);
             }
-        }
-        
-        // Start initialization when DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("DOM Content Loaded");
-            setTimeout(initializeEverything, 500);
         });
         
-        // Backup initialization on window load
-        window.addEventListener('load', function() {
-            console.log("Window loaded");
-            // This timeout gives a little breathing room for other resources to load
-            setTimeout(function() {
-                // Check if ThreeJS is already running by checking if scene exists
-                if (!scene) {
-                    console.log("Backup initialization triggered");
-                    initializeEverything();
+        suggestionChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const query = chip.getAttribute('data-query');
+                processQuery(query);
+            });
+        });
+        
+        // Add a welcome message
+        setTimeout(() => {
+            addMessage("Hey there! I'm Galliera AI. How can I help you learn about our tech accelerator, investments, or team?", false);
+        }, 500);
+        
+        console.log("Chat initialized successfully");
+    }
+    
+    // Page animations
+    function initPageAnimations() {
+        console.log("Initializing page animations...");
+        
+        // Animate elements when they come into view
+        const animateOnScroll = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target);
                 }
-            }, 1000);
+            });
+        };
+        
+        const observer = new IntersectionObserver(animateOnScroll, {
+            root: null,
+            threshold: 0.1
         });
-    </script>
+        
+        const elements = document.querySelectorAll('.solution-card, .team-card, .blog-card, h2, .section-title');
+        elements.forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Add CSS for the animations
+        const style = document.createElement('style');
+        style.textContent = `
+            .solution-card, .team-card, .blog-card, h2, .section-title {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+            
+            .animate-in {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.padding = '1rem 0';
+                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                nav.style.padding = '1.5rem 0';
+                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            }
+        });
+        
+        console.log("Page animations initialized successfully");
+    }
+    
+    // Initialize everything with robust error handling
+    function initializeEverything() {
+        console.log("Starting initialization...");
+        
+        try {
+            initThreeJS();
+            createDataFlow();
+            updateCursor();
+            initChat();
+            initPageAnimations();
+            console.log("All components initialized successfully");
+        } catch (error) {
+            console.error("Error during initialization:", error);
+            console.log("Retrying initialization in 2 seconds...");
+            setTimeout(initializeEverything, 2000);
+        }
+    }
+    
+    // Start initialization when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("DOM Content Loaded");
+        setTimeout(initializeEverything, 500);
+    });
+    
+    // Backup initialization on window load
+    window.addEventListener('load', function() {
+        console.log("Window loaded");
+        // This timeout gives a little breathing room for other resources to load
+        setTimeout(function() {
+            // Check if ThreeJS is already running by checking if scene exists
+            if (!scene) {
+                console.log("Backup initialization triggered");
+                initializeEverything();
+            }
+        }, 1000);
+    });
+</script>
 </body>
 </html>
