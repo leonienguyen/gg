@@ -27,6 +27,8 @@
             --primary-bg: #000000;
 
             --secondary-bg: #111111;
+            --secondary-bg: #111111;
+            --secondary-bg: #111111;
 
             --accent: #ffffff;
 
@@ -2378,7 +2380,48 @@
 
         }
 
-        
+        // Add a welcome message when chat loads
+setTimeout(() => {
+    addMessage("Hey there! I'm Galliera AI. How can I help you learn about our tech accelerator, investments, or team?", false);
+}, 500);
+
+        // Add this right before the initThreeJS function
+function checkThreeJSLoaded() {
+    if (typeof THREE === 'undefined') {
+        console.error('THREE.js is not loaded! Retrying in 1 second...');
+        setTimeout(checkThreeJSLoaded, 1000);
+        return false;
+    }
+    return true;
+}
+
+// Then modify the initThreeJS function to check first
+function initThreeJS() {
+    if (!checkThreeJSLoaded()) return;
+    
+    // Existing code continues here...
+    scene = new THREE.Scene();
+    // ...
+}
+
+//Checking container existence
+function initThreeJS() {
+    if (!checkThreeJSLoaded()) return;
+    
+    const container = document.getElementById('canvas-container');
+    if (!container) {
+        console.error('Canvas container not found! Retrying in 1 second...');
+        setTimeout(initThreeJS, 1000);
+        return;
+    }
+    
+    scene = new THREE.Scene();
+    // Rest of the code...
+    
+    container.appendChild(renderer.domElement);
+    // ...
+}
+
 
         // Page animations
 
@@ -2503,3 +2546,4 @@
 </body>
 
 </html>
+
