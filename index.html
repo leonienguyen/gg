@@ -732,6 +732,21 @@
             border: 1px solid rgba(255, 255, 255, 0.8);
             background-color: rgba(255, 255, 255, 0.1);
         }
+
+        /* Founder card special styling */
+        .team-card.founder {
+            background: linear-gradient(145deg, rgba(30,30,30,0.7), rgba(60,60,60,0.7));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .team-card.founder::before {
+            background: linear-gradient(90deg, transparent, #ffcc00, transparent);
+            height: 4px;
+        }
+        
+        .team-card.founder h4 {
+            color: #ffcc00;
+        }
     </style>
 </head>
 <body>
@@ -840,6 +855,13 @@
         <div class="scan-line"></div>
         <div class="container">
             <div class="team-grid">
+                <!-- Added Léonie as Founder -->
+                <div class="team-card founder">
+                    <span class="team-type">Human</span>
+                    <h4>LÉONIE</h4>
+                    <h5>Founder</h5>
+                    <p>Visionary entrepreneur and tech strategist. Founded Galliera Group to bridge the gap between innovation, capital, and technical execution in the global startup ecosystem.</p>
+                </div>
                 <div class="team-card ai">
                     <span class="team-type">AI</span>
                     <h4>THE AGI</h4>
@@ -892,331 +914,3 @@
                     <p>How the convergence of AI, capital, and development expertise is transforming the startup ecosystem. A new paradigm for tech acceleration.</p>
                     <a href="#" class="read-more">READ MORE</a>
                 </div>
-                <div class="blog-card">
-                    <span class="blog-category">INSIGHTS</span>
-                    <h3>Venture Capital in the AI Era</h3>
-                    <span class="blog-date">May 28, 2023</span>
-                    <p>Exploring how AI-powered investment models are transforming the venture capital landscape. Data-driven decisions for better outcomes.</p>
-                    <a href="#" class="read-more">READ MORE</a>
-                </div>
-                <div class="blog-card">
-                    <span class="blog-category">TECHNOLOGY</span>
-                    <h3>Scaling Through Tech Partnerships</h3>
-                    <span class="blog-date">April 10, 2023</span>
-                    <p>How strategic technology partnerships can accelerate growth and reduce time-to-market for early-stage startups.</p>
-                    <a href="#" class="read-more">READ MORE</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="partners">
-        <div class="grid-bg"></div>
-        <div class="scan-line"></div>
-        <div class="container">
-            <div class="partners-content">
-                <p>Join our network of innovative companies and organizations driving the future of technology and business growth.</p>
-                <a href="#" class="btn">BECOME A PARTNER</a>
-            </div>
-        </div>
-    </section>
-    
-    <script>
-        // 3D Particles
-        let scene, camera, renderer, particles, geometry, material, particleSystem;
-        const particlesCount = 1000;
-        
-        function initThreeJS() {
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 50;
-            
-            renderer = new THREE.WebGLRenderer({ alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setClearColor(0x000000, 0);
-            document.getElementById('canvas-container').appendChild(renderer.domElement);
-            
-            geometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(particlesCount * 3);
-            const velocities = new Float32Array(particlesCount * 3);
-            
-            for (let i = 0; i < particlesCount * 3; i += 3) {
-                // Position
-                positions[i] = (Math.random() - 0.5) * 100;
-                positions[i + 1] = (Math.random() - 0.5) * 100;
-                positions[i + 2] = (Math.random() - 0.5) * 100;
-                
-                // Velocity
-                velocities[i] = (Math.random() - 0.5) * 0.1;
-                velocities[i + 1] = (Math.random() - 0.5) * 0.1;
-                velocities[i + 2] = (Math.random() - 0.5) * 0.1;
-            }
-            
-            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            geometry.setAttribute('velocity', new THREE.BufferAttribute(velocities, 3));
-            
-            material = new THREE.PointsMaterial({
-                color: 0xffffff,
-                size: 0.7,
-                transparent: true,
-                opacity: 0.6,
-                sizeAttenuation: true
-            });
-            
-            particleSystem = new THREE.Points(geometry, material);
-            scene.add(particleSystem);
-            
-            window.addEventListener('resize', onWindowResize, false);
-            document.addEventListener('mousemove', onMouseMove, false);
-            
-            animate();
-        }
-        
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-        
-        let mouseX = 0, mouseY = 0;
-        
-        function onMouseMove(event) {
-            mouseX = (event.clientX - window.innerWidth / 2) * 0.01;
-            mouseY = (event.clientY - window.innerHeight / 2) * 0.01;
-        }
-        
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            const positions = geometry.attributes.position.array;
-            const velocities = geometry.attributes.velocity.array;
-            
-            for (let i = 0; i < particlesCount * 3; i += 3) {
-                positions[i] += velocities[i];
-                positions[i + 1] += velocities[i + 1];
-                positions[i + 2] += velocities[i + 2];
-                
-                // Boundaries check
-                if (Math.abs(positions[i]) > 50) velocities[i] = -velocities[i];
-                if (Math.abs(positions[i + 1]) > 50) velocities[i + 1] = -velocities[i + 1];
-                if (Math.abs(positions[i + 2]) > 50) velocities[i + 2] = -velocities[i + 2];
-            }
-            
-            geometry.attributes.position.needsUpdate = true;
-            
-            particleSystem.rotation.x += 0.0002;
-            particleSystem.rotation.y += 0.0003;
-            
-            // Mouse influence
-            particleSystem.rotation.x += mouseY * 0.0001;
-            particleSystem.rotation.y += mouseX * 0.0001;
-            
-            renderer.render(scene, camera);
-        }
-        
-        // Data flow animation
-        function createDataFlow() {
-            const dataFlowContainer = document.getElementById('data-flow');
-            const numParticles = 25;
-            
-            for (let i = 0; i < numParticles; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('data-particle');
-                
-                // Random position
-                const leftPos = Math.random() * 100;
-                particle.style.left = `${leftPos}%`;
-                
-                // Random speed
-                const speed = 2 + Math.random() * 8;
-                particle.style.animationDuration = `${speed}s`;
-                
-                // Random delay
-                const delay = Math.random() * 5;
-                particle.style.animationDelay = `${delay}s`;
-                
-                // Random height
-                const height = 5 + Math.random() * 15;
-                particle.style.height = `${height}px`;
-                
-                // Random opacity
-                const opacity = 0.1 + Math.random() * 0.3;
-                particle.style.opacity = opacity;
-                
-                dataFlowContainer.appendChild(particle);
-            }
-        }
-        
-        // Custom cursor
-        function updateCursor() {
-            const cursor = document.querySelector('.custom-cursor');
-            const cursorDot = document.querySelector('.custom-cursor-dot');
-            
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                cursorDot.style.left = e.clientX + 'px';
-                cursorDot.style.top = e.clientY + 'px';
-            });
-            
-            // Cursor grow on hoverable elements
-            const hoverables = document.querySelectorAll('a, button, .solution-card, .team-card, .blog-card, .suggestion-chip');
-            
-            hoverables.forEach(hoverable => {
-                hoverable.addEventListener('mouseenter', () => {
-                    cursor.classList.add('cursor-grow');
-                });
-                
-                hoverable.addEventListener('mouseleave', () => {
-                    cursor.classList.remove('cursor-grow');
-                });
-            });
-        }
-        
-        // Chat functionality
-        function initChat() {
-            const chatMessages = document.getElementById('chat-messages');
-            const chatInput = document.getElementById('chat-input');
-            const sendBtn = document.getElementById('send-btn');
-            const suggestionChips = document.querySelectorAll('.suggestion-chip');
-            
-            const responses = {
-                "tell me about galliera group": "Galliera Group is a Global Tech Accelerator composed of two main divisions: Galliera Ventures, our VC arm that invests in promising tech companies worldwide, and Galliera Tech, which includes tech/dev/growth/media partner companies that help accelerate startups through both product and growth phases.",
-                "what technologies do you use": "We utilize a sophisticated tech stack that includes 9 specialized LLMs (Large Language Models) and over 90 agent models. Our architecture is designed to optimize startup growth through AI-driven analytics, development acceleration tools, and automated scaling processes.",
-                "how can we partner": "We have multiple partnership opportunities. Startups can apply for investment through Galliera Ventures or work with our Galliera Tech division for development and growth support. Established companies can join our network as technology or distribution partners.",
-                "tell me about your investments": "Galliera Ventures focuses on seed to Series A investments in innovative tech startups globally. We have a particular focus on AI, blockchain, SaaS, and emerging technologies with transformative potential. Our portfolio companies receive both capital and access to our technical resources.",
-                "who's on the team": "Our team combines human expertise with AI capabilities. Key members include human experts like Alex (Head of Investment), Michael (CTO), and Sarah (Growth Lead), alongside AI systems like The AGI (Strategic Intelligence), The Donna (Operations), and The Benjamin (Financial Analysis)."
-            };
-            
-            function addMessage(text, isUser = false) {
-                const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message');
-                messageDiv.classList.add(isUser ? 'user' : 'ai');
-                messageDiv.textContent = text;
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-            
-            function processQuery(query) {
-                query = query.toLowerCase().trim();
-                addMessage(query, true);
-                
-                // Simulate thinking
-                setTimeout(() => {
-                    let response = "I don't have information about that yet. Could you ask something about Galliera Group, our technologies, partnerships, investments, or team?";
-                    
-                    // Check for matching responses
-                    for (const key in responses) {
-                        if (query.includes(key)) {
-                            response = responses[key];
-                            break;
-                        }
-                    }
-                    
-                    const typingSpeed = 30; // ms per character
-                    let i = 0;
-                    const responseDiv = document.createElement('div');
-                    responseDiv.classList.add('message', 'ai');
-                    chatMessages.appendChild(responseDiv);
-                    
-                    function typeWriter() {
-                        if (i < response.length) {
-                            responseDiv.textContent += response.charAt(i);
-                            i++;
-                            chatMessages.scrollTop = chatMessages.scrollHeight;
-                            setTimeout(typeWriter, typingSpeed);
-                        }
-                    }
-                    
-                    typeWriter();
-                }, 1000);
-            }
-            
-            sendBtn.addEventListener('click', () => {
-                const query = chatInput.value.trim();
-                if (query) {
-                    processQuery(query);
-                    chatInput.value = '';
-                }
-            });
-            
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    const query = chatInput.value.trim();
-                    if (query) {
-                        processQuery(query);
-                        chatInput.value = '';
-                    }
-                }
-            });
-            
-            suggestionChips.forEach(chip => {
-                chip.addEventListener('click', () => {
-                    const query = chip.getAttribute('data-query');
-                    processQuery(query);
-                });
-            });
-        }
-        
-        // Page animations
-        function initPageAnimations() {
-            // Animate elements when they come into view
-            const animateOnScroll = (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            };
-            
-            const observer = new IntersectionObserver(animateOnScroll, {
-                root: null,
-                threshold: 0.1
-            });
-            
-            const elements = document.querySelectorAll('.solution-card, .team-card, .blog-card, h2, .section-title');
-            elements.forEach(el => {
-                observer.observe(el);
-            });
-            
-            // Add CSS for the animations
-            const style = document.createElement('style');
-            style.textContent = `
-                .solution-card, .team-card, .blog-card, h2, .section-title {
-                    opacity: 0;
-                    transform: translateY(30px);
-                    transition: opacity 0.6s ease, transform 0.6s ease;
-                }
-                
-                .animate-in {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Navbar scroll effect
-            window.addEventListener('scroll', () => {
-                const nav = document.querySelector('nav');
-                if (window.scrollY > 50) {
-                    nav.style.padding = '1rem 0';
-                    nav.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-                } else {
-                    nav.style.padding = '1.5rem 0';
-                    nav.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-                }
-            });
-        }
-        
-        // Initialize everything on load
-        window.addEventListener('load', () => {
-            initThreeJS();
-            createDataFlow();
-            updateCursor();
-            initChat();
-            initPageAnimations();
-        });
-    </script>
-</body>
-</html>
