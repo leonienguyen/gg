@@ -1,350 +1,309 @@
+I'll adapt the animation and interactive elements from the code you like while keeping your current content structure. Here's a complete, adapted version that combines the appealing animations from the example with your existing content:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galliera Group - Global Tech Accelerator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.1/dist/gsap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/space-mono@4.5.0/index.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/roboto-mono@4.5.0/index.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
     <style>
+        /* Custom Styles */
         :root {
-            --primary-bg: #000000;
-            --secondary-bg: #111111;
-            --accent: #ffffff;
-            --text-primary: #ffffff;
-            --text-secondary: #aaaaaa;
-            --glow: 0 0 10px rgba(255, 255, 255, 0.7);
+            --primary-text: #ffffff;
+            --secondary-text: #cccccc;
+            --background-dark: #000000;
+            --background-light: #111111;
+            --accent-light: #ffffff;
+            --accent-gray: #444444;
+            --glow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
-        
-        * {
+
+        body, html {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--text-primary);
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--background-dark);
+            color: var(--primary-text);
             overflow-x: hidden;
-            line-height: 1.6;
+            scroll-behavior: smooth;
         }
-        
-        section {
-            padding: 6rem 1rem;
+
+        .space-mono {
+            font-family: 'Space Mono', monospace;
+        }
+
+        .roboto-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .section {
+            min-height: 100vh;
+            width: 100%;
             position: relative;
             overflow: hidden;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .section-title {
-            font-family: 'Space Mono', monospace;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            display: block;
-        }
-        
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        
-        h1 {
-            font-size: 4rem;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            margin-bottom: 1rem;
-            font-family: 'Space Mono', monospace;
-        }
-        
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            font-family: 'Space Mono', monospace;
-        }
-        
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        p {
-            margin-bottom: 1.5rem;
-            max-width: 700px;
-        }
-        
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        a:hover {
-            text-shadow: var(--glow);
-        }
-        
-        button, .btn {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 0.75rem 2rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-        }
-        
-        button:hover, .btn:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            box-shadow: var(--glow);
-        }
-        
-        /* Navigation */
-        nav {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            padding: 1.5rem 0;
-            transition: all 0.3s ease;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        .logo {
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: 1px;
-            text-transform: lowercase;
-        }
-        
-        .logo span {
-            font-size: 0.8rem;
-            vertical-align: super;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        /* Hero Section */
-        #hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0;
-        }
-        
-        #canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        
+
+        /* Particle Canvas */
         #particleCanvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 2;
-            pointer-events: none;
+            z-index: 0;
         }
-        
-        .hero-content {
-            max-width: 800px;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 2rem;
-            color: var(--text-secondary);
-        }
-        
-        /* AI Chat Section */
-        #ai-chat {
-            background-color: var(--secondary-bg);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .chat-interface {
-            background-color: white;
-            color: black;
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .chat-header {
-            margin-bottom: 2rem;
-        }
-        
-        .chat-header h3 {
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-        
-        .chat-messages {
-            margin-bottom: 2rem;
-            min-height: 200px;
-            max-height: 300px;
-            overflow-y: auto;
-            padding: 1rem 0;
-        }
-        
-        .message {
-            margin-bottom: 1.5rem;
-            max-width: 80%;
-        }
-        
-        .message.user {
-            margin-left: auto;
-            background-color: #e9e9e9;
-            border-radius: 18px 18px 0 18px;
-            padding: 1rem;
-        }
-        
-        .message.ai {
-            margin-right: auto;
-            background-color: #f5f5f5;
-            border-radius: 0 18px 18px 18px;
-            padding: 1rem;
-        }
-        
-        .chat-input {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            padding: 1rem 0 0;
-            border-top: 1px solid #ececec;
-        }
-        
-        .chat-input input {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            border-radius: 30px;
-            background: #f2f2f2;
-            font-size: 0.9rem;
-        }
-        
-        .chat-input button {
-            background: #333;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        
-        .chat-suggestions {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .suggestion-chip {
-            background: #f2f2f2;
-            border-radius: 20px;
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .suggestion-chip:hover {
-            background: #e0e0e0;
-        }
-        
-        /* Grid background and scan line effects */
+
+        /* Grid Background */
         .grid-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.8) 1px, transparent 1px), 
-                        linear-gradient(90deg, rgba(0, 0, 0, 0.8) 1px, transparent 1px);
-            background-size: 40px 40px;
-            background-position: center center;
-            opacity: 0.15;
-            z-index: 1;
-            pointer-events: none;
+            background-image: linear-gradient(rgba(40, 40, 40, 0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(40, 40, 40, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 0;
         }
-        
-        .scan-line {
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--primary-text);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, 
-                                        transparent 0%, 
-                                        rgba(255, 255, 255, 0.03) 50%, 
-                                        transparent 100%);
-            background-size: 100% 8px;
-            opacity: 0.2;
+            opacity: 0;
+        }
+
+        .glitch::before {
+            left: 2px;
+            color: rgba(255, 255, 255, 0.7);
+            animation: glitch-animation 0.4s infinite;
+        }
+
+        .glitch::after {
+            left: -2px;
+            color: rgba(255, 255, 255, 0.7);
+            animation: glitch-animation 0.4s infinite reverse;
+        }
+
+        @keyframes glitch-animation {
+            0% {
+                opacity: 0;
+                transform: translateX(0);
+            }
+            20% {
+                opacity: 0.3;
+                transform: translateX(-2px);
+            }
+            40% {
+                opacity: 0;
+                transform: translateX(0);
+            }
+            60% {
+                opacity: 0.3;
+                transform: translateX(2px);
+            }
+            80% {
+                opacity: 0;
+                transform: translateX(0);
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Futuristic Button */
+        .futuristic-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--primary-text);
+            background: transparent;
+            color: var(--primary-text);
+            padding: 0.75rem 2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .futuristic-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .futuristic-btn:hover::before {
+            left: 100%;
+        }
+
+        .futuristic-btn:hover {
+            box-shadow: var(--glow);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Scan Line Effect */
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.2);
+            opacity: 0.5;
             z-index: 2;
+            animation: scanLine 5s linear infinite;
+        }
+
+        @keyframes scanLine {
+            0% {
+                top: 0%;
+            }
+            100% {
+                top: 100%;
+            }
+        }
+
+        /* Chat Interface */
+        .chat-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            color: black;
+            background-color: white;
+        }
+
+        .chat-message {
+            margin-bottom: 20px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background-color: #e9e9e9;
+            margin-left: auto;
+            border-radius: 18px 18px 0 18px;
+        }
+
+        .ai-message {
+            background-color: #f5f5f5;
+            margin-right: auto;
+            border-radius: 0 18px 18px 18px;
+        }
+
+        .suggestion-chip {
+            background-color: #f2f2f2;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .suggestion-chip:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 1px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
             pointer-events: none;
-            animation: scanAnimation 8s linear infinite;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
         }
-        
-        @keyframes scanAnimation {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100%; }
+
+        .cursor-dot {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
         }
-        
+
+        /* Matrix Effect */
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
         /* Data Flow Animation */
         .data-flow {
             position: absolute;
@@ -382,19 +341,39 @@
                 opacity: 0;
             }
         }
-        
-        /* Ventures & Tech Section */
-        #ventures-tech {
-            background-color: var(--primary-bg);
+
+        /* Tech Node Visualization */
+        .tech-node {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
-        
-        .solutions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
+
+        .tech-node:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            transform: scale(1.2);
         }
-        
+
+        .tech-connection {
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.2);
+            position: absolute;
+            transform-origin: 0 0;
+            z-index: -1;
+        }
+
+        /* Solution Cards */
         .solution-card {
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 2rem;
@@ -405,7 +384,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .solution-card::before {
             content: '';
             position: absolute;
@@ -416,135 +395,73 @@
             background: linear-gradient(to bottom right, rgba(255,255,255,0.1), transparent);
             pointer-events: none;
         }
-        
+
         .solution-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--glow);
             border-color: rgba(255, 255, 255, 0.3);
         }
-        
-        .solution-card h3 {
-            font-family: 'Space Mono', monospace;
-            margin-bottom: 1rem;
-        }
-        
-        .solution-card p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-        
-        .solution-list {
-            list-style-type: none;
-            margin-bottom: 2rem;
-        }
-        
-        .solution-list li {
-            margin-bottom: 0.75rem;
-            padding-left: 1.5rem;
+
+        /* Team Cards */
+        .team-card {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
             position: relative;
+            overflow: hidden;
         }
-        
-        .solution-list li::before {
-            content: '•';
+
+        .team-card::before {
+            content: '';
             position: absolute;
+            top: 0;
             left: 0;
-            color: var(--accent);
-        }
-        
-        .tech-architecture {
-            margin-top: 6rem;
-            text-align: center;
-        }
-        
-        .tech-stats {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            margin-top: 2rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 1.5rem;
-        }
-        
-        /* Innovation Sectors Section */
-        #trusted-by {
-            background-color: var(--secondary-bg);
-            text-align: center;
-            padding: 6rem 1rem;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, white, transparent);
         }
 
-        .trusted-by-content p {
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 3rem;
-            color: var(--text-secondary);
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow);
         }
 
-        .logo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0 4rem;
+        .team-card.ai-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, transparent 50%, rgba(255, 255, 255, 0.05) 51%, transparent 52%);
+            background-size: 100% 4px;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 1;
         }
 
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-        }
-
-        .logo-placeholder {
-            background: rgba(255, 255, 255, 0.03);
+        /* Blog Cards */
+        .blog-card {
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
-            width: 100%;
-            height: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .logo-placeholder:hover {
-            transform: translateY(-5px);
+        .blog-card:hover {
+            transform: translateY(-10px);
             box-shadow: var(--glow);
             border-color: rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.05);
         }
 
-        .logo-placeholder span {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.5);
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-
-        .logo-placeholder:hover span {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        /* Approach section */
-        .approach-preview {
-            max-width: 900px;
-            margin: 0 auto 4rem;
-        }
-
-        .approach-preview h3 {
-            font-family: 'Space Mono', monospace;
-            margin-bottom: 2rem;
-            font-size: 1.8rem;
-            text-transform: uppercase;
-        }
-
-        .approach-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
+        /* Approach Steps */
         .approach-step {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -560,198 +477,53 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
-        .step-number {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.2);
-            margin-bottom: 1rem;
+        /* For Typing Animation */
+        .typing::after {
+            content: '|';
+            animation: blink 0.7s infinite;
         }
 
-        .step-title {
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
-        .step-desc {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .trusted-stats {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 4rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-family: 'Space Mono', monospace;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #fff, #aaa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-        }
-        
-        /* Team Section */
-        #team {
-            background-color: var(--secondary-bg);
-        }
-        
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-        
-        .team-card {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 2rem;
+        /* Sound Toggle */
+        .sound-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
             background-color: rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .team-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, white, transparent);
-        }
-        
-        .team-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--glow);
-        }
-        
-        .team-type {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-family: 'Space Mono', monospace;
-        }
-        
-        .team-card h4 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            font-family: 'Space Mono', monospace;
-        }
-        
-        .team-card h5 {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-        
-        .team-card p {
-            font-size: 0.9rem;
-        }
-        
-        .team-card.ai {
-            background: linear-gradient(145deg, rgba(0,0,0,0.7), rgba(30,30,30,0.7));
-        }
-        
-        .team-card.ai::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg') repeat;
-            background-size: 100px;
-            opacity: 0.05;
-            pointer-events: none;
-        }
-        
-        /* Blog Section */
-        #blog {
-            background-color: var(--primary-bg);
-        }
-        
-        .blog-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-        
-        .blog-card {
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 2rem;
-            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
-        
-        .blog-card:hover {
-            transform: translateY(-10px);
+
+        .sound-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.8);
             box-shadow: var(--glow);
-            border-color: rgba(255, 255, 255, 0.3);
         }
-        
-        .blog-category {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-            font-family: 'Space Mono', monospace;
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
-        
-        .blog-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        
-        .blog-date {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-        
-        /* Partners Section */
-        #partners {
-            background-color: var(--secondary-bg);
-            text-align: center;
-        }
-        
-        .partners-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .partners-content p {
-            margin-bottom: 3rem;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* Utilities */
+
+        /* Utility Classes */
         .read-more {
             display: inline-flex;
             align-items: center;
@@ -771,14 +543,14 @@
             transform: translateX(5px);
         }
         
-        /* Responsive */
+        /* For mobile responsiveness */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.5rem !important;
             }
             
             h2 {
-                font-size: 2rem;
+                font-size: 2rem !important;
             }
             
             .nav-links {
@@ -787,7 +559,7 @@
             
             .solutions-grid,
             .team-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
             }
             
             .tech-stats {
@@ -795,513 +567,587 @@
                 gap: 1rem;
             }
             
-            .logo-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .approach-steps {
-                grid-template-columns: 1fr;
-            }
-            
-            .trusted-stats {
-                gap: 2rem;
-            }
-            
-            .stat-number {
-                font-size: 2.5rem;
+            .chat-container {
+                width: 95% !important;
             }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">galliera<span>3</span></a>
-            <div class="nav-links">
-                <a href="#ventures-tech">Ventures</a>
-                <a href="#ventures-tech">Tech</a>
-                <a href="#team">Team</a>
-                <a href="#blog">Blog</a>
-                <a href="#partners">Contact</a>
-            </div>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Matrix Background Canvas -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar py-4 px-6 flex justify-between items-center">
+        <div class="logo">
+            <h1 class="space-mono text-xl font-bold">galliera<sup>3</sup></h1>
+        </div>
+        <div class="nav-links hidden md:flex space-x-6">
+            <a href="#welcome" class="nav-link text-sm tracking-wider">HOME</a>
+            <a href="#ai-chat" class="nav-link text-sm tracking-wider">CHAT</a>
+            <a href="#ventures-tech" class="nav-link text-sm tracking-wider">VENTURES & TECH</a>
+            <a href="#team" class="nav-link text-sm tracking-wider">TEAM</a>
+            <a href="#blog" class="nav-link text-sm tracking-wider">BLOG</a>
+            <a href="#partners" class="nav-link text-sm tracking-wider">PARTNERS</a>
+        </div>
+        <div class="menu-icon md:hidden cursor-pointer">
+            <i class='bx bx-menu text-2xl'></i>
         </div>
     </nav>
 
-    <section id="hero">
-        <div id="canvas-container"></div>
-        <canvas id="particleCanvas"></canvas>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex flex-col items-center justify-center">
+        <div class="absolute top-4 right-6 cursor-pointer">
+            <i class='bx bx-x text-3xl'></i>
+        </div>
+        <div class="flex flex-col space-y-6 items-center">
+            <a href="#welcome" class="mobile-link text-xl tracking-wider">HOME</a>
+            <a href="#ai-chat" class="mobile-link text-xl tracking-wider">CHAT</a>
+            <a href="#ventures-tech" class="mobile-link text-xl tracking-wider">VENTURES & TECH</a>
+            <a href="#team" class="mobile-link text-xl tracking-wider">TEAM</a>
+            <a href="#blog" class="mobile-link text-xl tracking-wider">BLOG</a>
+            <a href="#partners" class="mobile-link text-xl tracking-wider">PARTNERS</a>
+        </div>
+    </div>
+
+    <!-- Scan Line Effect -->
+    <div class="scan-line"></div>
+
+    <!-- Section 1: Welcome/Hero -->
+    <section id="welcome" class="section flex items-center justify-center relative">
         <div class="grid-bg"></div>
-        <div class="scan-line"></div>
+        <canvas id="particleCanvas"></canvas>
         <div class="data-flow" id="data-flow"></div>
-        <div class="container">
-            <div class="hero-content">
-                <span class="section-title">WELCOME TO</span>
-                <h1>GALLIERA GROUP</h1>
-                <p class="hero-subtitle">Global tech accelerator driving innovation across ventures and development. Invest, build, and scale startups with unparalleled expertise.</p>
-                <a href="#ventures-tech" class="btn">Discover More</a>
+        
+        <div class="container mx-auto px-6 z-10 relative">
+            <div class="text-center fade-in">
+                <p class="text-xs tracking-widest mb-4 glitch" data-text="WELCOME TO">WELCOME TO</p>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 space-mono glitch" data-text="GALLIERA GROUP">GALLIERA GROUP</h1>
+                <p class="text-sm md:text-base max-w-2xl mx-auto mb-10 text-gray-300">
+                    Global tech accelerator driving innovation across ventures and development. Invest, build, and scale startups with unparalleled expertise.
+                </p>
+                <div class="flex justify-center">
+                    <a href="#ventures-tech" class="futuristic-btn">
+                        DISCOVER MORE
+                    </a>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 fade-in">
+                <div class="flex flex-col items-center">
+                    <p class="text-xs tracking-widest mb-2">SCROLL DOWN</p>
+                    <i class='bx bx-chevron-down text-xl animate-bounce'></i>
+                </div>
             </div>
         </div>
     </section>
-    
-    <section id="ai-chat">
+
+    <!-- Section 2: AI Chat Interface -->
+    <section id="ai-chat" class="section flex items-center justify-center relative">
         <div class="grid-bg"></div>
-        <div class="scan-line"></div>
-        <div class="container">
-            <span class="section-title">INTERACT WITH</span>
-            <h2>GALLIERA AI</h2>
-            <div class="chat-interface">
+        
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="text-center mb-12 fade-in">
+                <p class="text-xs tracking-widest mb-2">INTERACT WITH</p>
+                <h2 class="text-3xl md:text-4xl font-bold space-mono">GALLIERA AI</h2>
+            </div>
+            
+            <div class="chat-container fade-in">
                 <div class="chat-header">
-                    <h3>Hey, it's Galliera AI - How can I help?</h3>
+                    <h3 class="text-lg font-bold">Hey, it's Galliera AI - How can I help?</h3>
                 </div>
-                <div class="chat-messages" id="chat-messages">
+                
+                <div id="chat-messages" class="chat-messages mb-6">
                     <!-- Messages will be added here by JS -->
                 </div>
-                <div class="chat-suggestions">
+                
+                <div class="flex flex-wrap mb-6">
                     <div class="suggestion-chip" data-query="Tell me about Galliera Group">Tell me about Galliera Group</div>
                     <div class="suggestion-chip" data-query="What technologies do you use?">What technologies do you use?</div>
                     <div class="suggestion-chip" data-query="How can we partner?">How can we partner?</div>
                 </div>
-                <div class="chat-input">
-                    <input type="text" placeholder="Chat with Galliera AI" id="chat-input">
-                    <button id="send-btn">→</button>
+                
+                <div class="flex border-t border-gray-100 pt-4">
+                    <input type="text" id="chat-input" placeholder="Chat with Galliera AI" class="flex-1 p-3 bg-gray-100 rounded-l-full focus:outline-none">
+                    <button id="send-btn" class="bg-gray-800 text-white px-4 rounded-r-full hover:bg-gray-700 transition">→</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="ventures-tech">
+    <!-- Section 3: Ventures & Tech -->
+    <section id="ventures-tech" class="section relative py-20">
         <div class="grid-bg"></div>
-        <div class="scan-line"></div>
         <div class="data-flow"></div>
-        <div class="container">
-            <span class="section-title">OUR SOLUTIONS</span>
-            <h2>VENTURES & TECH</h2>
-            <div class="solutions-grid">
-                <div class="solution-card">
-                    <h3>GALLIERA VENTURES</h3>
-                    <p>The VC that invests in tech companies around the world</p>
-                    <ul class="solution-list">
-                        <li>Seed to Series A investments in innovative tech startups</li>
-                        <li>Global portfolio with focus on AI, blockchain, and SaaS</li>
-                        <li>Strategic partnerships with leading tech accelerators</li>
-                        <li>Hands-on support beyond capital investment</li>
-                    </ul>
-                    <a href="#" class="read-more">READ MORE</a>
-                </div>
-                <div class="solution-card">
-                    <h3>GALLIERA TECH</h3>
-                    <p>Tech/dev/growth/media partner companies to accelerate startup growth</p>
-                    <ul class="solution-list">
-                        <li>Development expertise across web, mobile, and AI technologies</li>
-                        <li>Growth marketing specialists for explosive user acquisition</li>
-                        <li>Media production for engaging content creation</li>
-                        <li>Integrated approach to product and market fit</li>
-                    </ul>
-                    <a href="#" class="read-more">READ MORE</a>
-                </div>
+        
+        <div class="container mx-auto px-6 z-10 relative">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-xs tracking-widest mb-2">OUR SOLUTIONS</p>
+                <h2 class="text-3xl md:text-4xl font-bold space-mono">VENTURES & TECH</h2>
             </div>
-            <div class="tech-architecture">
-                <h4>TECHNOLOGY ARCHITECTURE</h4>
-                <div class="tech-stats">
-                    <div>9 LLMs</div>
-                    <div>90+ Agent Models</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="trusted-by">
-        <div class="grid-bg"></div>
-        <div class="scan-line"></div>
-        <div class="container">
-            <span class="section-title">MARKET FOCUS</span>
-            <h2>INNOVATION SECTORS</h2>
             
-            <div class="trusted-by-content">
-                <p>Galliera Group has built expertise across cutting-edge technology sectors, driving breakthrough innovations and connecting visionary founders with the resources they need.</p>
-                
-                <div class="logo-grid">
-                    <!-- Tech Sector 1 -->
-                    <div class="logo-container">
-                        <div class="logo-placeholder" style="background: linear-gradient(145deg, rgba(30,30,30,0.7), rgba(50,50,50,0.7));">
-                            <span>QUANTUM COMPUTING</span>
-                        </div>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+                <!-- Galliera Ventures -->
+                <div class="solution-card fade-in">
+                    <h3 class="text-xl font-bold mb-4 space-mono">GALLIERA VENTURES</h3>
+                    <p class="text-gray-300 mb-6">The VC that invests in tech companies around the world</p>
                     
-                    <!-- Tech Sector 2 -->
-                    <div class="logo-container">
-                        <div class="logo-placeholder" style="background: linear-gradient(145deg, rgba(30,30,30,0.7), rgba(50,50,50,0.7));">
-                            <span>AI SOLUTIONS</span>
-                        </div>
-                    </div>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <i class='bx bx-check-circle mr-2 mt-1'></i>
+                            <span>Seed to Series A investments in innovative tech startups</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class='bx bx-check-circle mr-2 mt-1'></i>
+                            <span>Global portfolio with focus on AI, blockchain, and SaaS</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class='bx bx-check-circle mr-2 mt-1'></i>
+                            <span>Strategic partnerships with leading tech accelerators</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class='bx bx-check-circle mr-2 mt-1'></i>
+                            <span>Hands-on support beyond capital investment</span>
+                        </li>
+                    </ul>
                     
-                    <!-- Tech Sector 3 -->
-                    <div class="logo-container">
-                        <div class="logo-placeholder" style="background: linear-gradient(145deg, rgba(30,30,30,0.7), rgba(50,50,50,0.7));">
-                            <span>BLOCKCHAIN</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Tech Sector 4 -->
-                    <div class="logo-container">
-                        <div class="logo-placeholder" style="background: linear-gradient(145deg, rgba(30,30,30,0.7), rgba(50,50,50,0.7));">
-                            <span>ROBOTICS</span>
-                        </div>
-                    </div>
+                    <a href="#" class="read-more">READ MORE</a>
                 </div>
                 
-                <div class="approach-preview">
-                    <h3>FULL-CYCLE ACCELERATION</h3>
-                    <div class="approach-steps">
-                        <div class="approach-step">
-                            <div class="step-number">01</div>
-                            <div class="step-title">Identify
-                                Here's the continuation of the HTML:
+                <!-- Galliera Tech -->
+                <div class="solution-card fade-in">
+                    <h3 class="text-xl font-bold mb-4 space-mono">GALLIERA TECH</h3>
+                    <p class="text-gray-300 mb-6">Tech/dev/growth/media partner companies to accelerate startup growth</p>
+                    
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <i class='bx bx-check-circle mr-2 mt-1'></i>
+                            <span>Development expertise across web, mobile, and AI technologies</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class='bx bx-check-circle mr-2 mt-1'></i>
+                            <span>Growth marketing specialists for explosive user acquisition</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class='bx bx-check-circle mr-2 mt-1'></i>
+                            <span>Media production for engaging content creation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class='bx bx-check-circle mr-2 mt-1'></i>
+                            <span>Integrated approach to product and market fit</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="read-more">READ MORE</a>
+                </div>
+            </div>
+            
+            <!-- Tech Architecture Visualization -->
+            <div class="relative h-96 border border-gray-800 rounded-lg bg-black bg-opacity-70 mb-12 fade-in">
+                <div class="absolute top-4 left-4">
+                    <h4 class="text-xs tracking-widest">TECHNOLOGY ARCHITECTURE</h4>
+                </div>
+                
+                <div id="tech-nodes" class="w-full h-full relative">
+                    <!-- Nodes and connections will be added by JavaScript -->
+                </div>
+                
+                <div class="absolute bottom-4 left-4 right-4 flex justify-between text-xs">
+                    <span>9 LLMs</span>
+                    <span>90+ Agent Models</span>
+                </div>
+            </div>
 
-Copy                            <div class="step-title">Identify Potential</div>
-                            <div class="step-desc">Finding promising tech startups with innovative solutions and market potential</div>
-                        </div>
-                        <div class="approach-step">
-                            <div class="step-number">02</div>
-                            <div class="step-title">Strategic Investment</div>
-                            <div class="step-desc">Providing capital alongside strategic guidance to accelerate growth</div>
-                        </div>
-                        <div class="approach-step">
-                            <div class="step-number">03</div>
-                            <div class="step-title">Technical Execution</div>
-                            <div class="step-desc">Leveraging technical partners to build and refine market-ready products</div>
-                        </div>
-                    </div>
+            <!-- Full Cycle Acceleration -->
+            <div class="text-center mt-20 mb-12 fade-in">
+                <p class="text-xs tracking-widest mb-2">WHAT WE DO</p>
+                <h2 class="text-3xl md:text-4xl font-bold space-mono mb-16">FULL-CYCLE ACCELERATION</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="approach-step fade-in">
+                    <div class="text-2xl space-mono text-gray-500 mb-4">01</div>
+                    <h4 class="text-xl font-bold mb-2">Identify Potential</h4>
+                    <p class="text-gray-400">Finding promising tech startups with innovative solutions and market potential</p>
                 </div>
                 
-                <div class="trusted-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Portfolio Companies</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">12</div>
-                        <div class="stat-label">Countries</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">9</div>
-                        <div class="stat-label">LLMs</div>
-                    </div>
+                <div class="approach-step fade-in">
+                    <div class="text-2xl space-mono text-gray-500 mb-4">02</div>
+                    <h4 class="text-xl font-bold mb-2">Strategic Investment</h4>
+                    <p class="text-gray-400">Providing capital alongside strategic guidance to accelerate growth</p>
+                </div>
+                
+                <div class="approach-step fade-in">
+                    <div class="text-2xl space-mono text-gray-500 mb-4">03</div>
+                    <h4 class="text-xl font-bold mb-2">Technical Execution</h4>
+                    <p class="text-gray-400">Leveraging technical partners to build and refine market-ready products</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="team">
+    <!-- Section 4: Team -->
+    <section id="team" class="section relative py-20">
         <div class="grid-bg"></div>
-        <div class="scan-line"></div>
-        <div class="container">
-            <span class="section-title">OUR TEAM</span>
-            <h2>MEET THE EXPERTS</h2>
-            <div class="team-grid">
-                <!-- Léonie as Founder with proper styling -->
-                <div class="team-card" style="background: linear-gradient(145deg, rgba(30,30,30,0.7), rgba(60,60,60,0.7)); border: 1px solid rgba(255, 255, 255, 0.2); position: relative; overflow: hidden;">
-                    <span class="team-type">HUMAN</span>
-                    <h4 style="color: #ffcc00; font-size: 1.5rem; margin-bottom: 0.5rem; font-family: 'Space Mono', monospace;">LÉONIE</h4>
-                    <h5 style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Founder</h5>
-                    <p style="font-size: 0.9rem;">Serial entrepreneur and tech strategist. Founded Galliera Group to bridge the gap between innovation, capital, and technical execution in the global startup ecosystem.</p>
-                    <!-- Special accent line for founder -->
+        
+        <div class="container mx-auto px-6 z-10 relative">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-xs tracking-widest mb-2">OUR TEAM</p>
+                <h2 class="text-3xl md:text-4xl font-bold space-mono">MEET THE EXPERTS</h2>
+            </div>
+            
+            <!-- Team Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                                <!-- Léonie -->
+                <div class="team-card fade-in" style="background: linear-gradient(145deg, rgba(30,30,30,0.7), rgba(60,60,60,0.7)); border: 1px solid rgba(255, 255, 255, 0.2);">
+                    <span class="text-xs tracking-wider text-gray-400 block mb-2 space-mono">HUMAN</span>
+                    <h4 class="text-xl font-bold mb-1 space-mono" style="color: #ffcc00;">LÉONIE</h4>
+                    <h5 class="text-sm text-gray-400 mb-4">Founder</h5>
+                    <p class="text-sm text-gray-300">
+                        Serial entrepreneur and tech strategist. Founded Galliera Group to bridge the gap between innovation, capital, and technical execution in the global startup ecosystem.
+                    </p>
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, transparent, #ffcc00, transparent);"></div>
                 </div>
                 
-                <div class="team-card ai">
-                    <span class="team-type">AI</span>
-                    <h4>THE AGI</h4>
-                    <h5>Chief Intelligence</h5>
-                    <p>The All-in-One AI Agent but currently limited to be an Advanced AI system specialized in market analysis and trend forecasting. Provides data-driven insights for investment decisions.</p>
+                <!-- THE AGI -->
+                <div class="team-card ai-member fade-in">
+                    <span class="text-xs tracking-wider text-gray-400 block mb-2 space-mono">AI</span>
+                    <h4 class="text-xl font-bold mb-1 space-mono">THE AGI</h4>
+                    <h5 class="text-sm text-gray-400 mb-4">Chief Intelligence</h5>
+                    <p class="text-sm text-gray-300">
+                        The All-in-One AI Agent but currently limited to be an Advanced AI system specialized in market analysis and trend forecasting. Provides data-driven insights for investment decisions.
+                    </p>
+                    <div class="absolute top-2 right-2">
+                        <span class="px-2 py-1 bg-black bg-opacity-50 text-xs rounded border border-gray-700">AI</span>
+                    </div>
                 </div>
                 
-                <div class="team-card">
-                    <span class="team-type">HUMAN</span>
-                    <h4>ALEX</h4>
-                    <h5>Head of Investment</h5>
-                    <p>Former VC partner with 10+ years of experience in tech investments. Expert in identifying promising early-stage startups.</p>
+                <!-- ALEX -->
+                <div class="team-card fade-in">
+                    <span class="text-xs tracking-wider text-gray-400 block mb-2 space-mono">HUMAN</span>
+                    <h4 class="text-xl font-bold mb-1 space-mono">ALEX</h4>
+                    <h5 class="text-sm text-gray-400 mb-4">Head of Investment</h5>
+                    <p class="text-sm text-gray-300">
+                        Former VC partner with 10+ years of experience in tech investments. Expert in identifying promising early-stage startups.
+                    </p>
+                    <div class="absolute top-2 right-2">
+                        <span class="px-2 py-1 bg-black bg-opacity-50 text-xs rounded border border-gray-700">Human</span>
+                    </div>
                 </div>
                 
-                <div class="team-card">
-                    <span class="team-type">HUMAN</span>
-                    <h4>MICHAEL</h4>
-                    <h5>CTO</h5>
-                    <p>Tech innovator with background in AI and distributed systems. Leads the technical strategy and development partnerships.</p>
+                <!-- MICHAEL -->
+                <div class="team-card fade-in">
+                    <span class="text-xs tracking-wider text-gray-400 block mb-2 space-mono">HUMAN</span>
+                    <h4 class="text-xl font-bold mb-1 space-mono">MICHAEL</h4>
+                    <h5 class="text-sm text-gray-400 mb-4">CTO</h5>
+                    <p class="text-sm text-gray-300">
+                        Tech innovator with background in AI and distributed systems. Leads the technical strategy and development partnerships.
+                    </p>
+                    <div class="absolute top-2 right-2">
+                        <span class="px-2 py-1 bg-black bg-opacity-50 text-xs rounded border border-gray-700">Human</span>
+                    </div>
                 </div>
                 
-                <div class="team-card ai">
-                    <span class="team-type">AI</span>
-                    <h4>THE DONNA</h4>
-                    <h5>Operations Intelligence</h5>
-                    <p>AI operations specialist. Manages complex scheduling, communications, and organizational logistics with superhuman efficiency.</p>
+                <!-- THE DONNA -->
+                <div class="team-card ai-member fade-in">
+                    <span class="text-xs tracking-wider text-gray-400 block mb-2 space-mono">AI</span>
+                    <h4 class="text-xl font-bold mb-1 space-mono">THE DONNA</h4>
+                    <h5 class="text-sm text-gray-400 mb-4">Operations Intelligence</h5>
+                    <p class="text-sm text-gray-300">
+                        AI operations specialist. Manages complex scheduling, communications, and organizational logistics with superhuman efficiency.
+                    </p>
+                    <div class="absolute top-2 right-2">
+                        <span class="px-2 py-1 bg-black bg-opacity-50 text-xs rounded border border-gray-700">AI</span>
+                    </div>
                 </div>
                 
-                <div class="team-card ai">
-                    <span class="team-type">AI</span>
-                    <h4>THE BENJAMIN</h4>
-                    <h5>Financial Intelligence</h5>
-                    <p>AI financial analyst. Monitors markets, performs due diligence, and optimizes portfolio allocation with predictive modeling.</p>
+                <!-- THE BENJAMIN -->
+                <div class="team-card ai-member fade-in">
+                    <span class="text-xs tracking-wider text-gray-400 block mb-2 space-mono">AI</span>
+                    <h4 class="text-xl font-bold mb-1 space-mono">THE BENJAMIN</h4>
+                    <h5 class="text-sm text-gray-400 mb-4">Financial Intelligence</h5>
+                    <p class="text-sm text-gray-300">
+                        AI financial analyst. Monitors markets, performs due diligence, and optimizes portfolio allocation with predictive modeling.
+                    </p>
+                    <div class="absolute top-2 right-2">
+                        <span class="px-2 py-1 bg-black bg-opacity-50 text-xs rounded border border-gray-700">AI</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="blog">
+    <!-- Section 5: Blog -->
+    <section id="blog" class="section relative py-20">
         <div class="grid-bg"></div>
-        <div class="scan-line"></div>
-        <div class="container">
-             <span class="section-title">INSIGHTS & NEWS</span>
-             <h2>LATEST FROM OUR BLOG</h2>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <span class="blog-category">FEATURED</span>
-                    <h3>The Future of Tech Acceleration</h3>
-                    <span class="blog-date">June 15, 2023</span>
-                    <p>How the convergence of AI, capital, and development expertise is transforming the startup ecosystem. A new paradigm for tech acceleration.</p>
-                    <a href="#" class="read-more">READ MORE</a>
-                </div>
-                <div class="blog-card">
-                    <span class="blog-category">INSIGHTS</span>
-                    <h3>Venture Capital in the AI Era</h3>
-                    <span class="blog-date">May 28, 2023</span>
-                    <p>Exploring how AI-powered investment models are transforming the venture capital landscape. Data-driven decisions for better outcomes.</p>
-                    <a href="#" class="read-more">READ MORE</a>
-                </div>
-                <div class="blog-card">
-                    <span class="blog-category">TECHNOLOGY</span>
-                    <h3>Scaling Through Tech Partnerships</h3>
-                    <span class="blog-date">April 10, 2023</span>
-                    <p>How strategic technology partnerships can accelerate growth and reduce time-to-market for early-stage startups.</p>
-                    <a href="#" class="read-more">READ MORE</a>
-                </div>
+        
+        <div class="container mx-auto px-6 z-10 relative">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-xs tracking-widest mb-2">INSIGHTS & NEWS</p>
+                <h2 class="text-3xl md:text-4xl font-bold space-mono">LATEST FROM OUR BLOG</h2>
             </div>
-        </div>
-    </section>
-
-    <section id="partners">
-        <div class="grid-bg"></div>
-        <div class="scan-line"></div>
-        <div class="container">
-            <div class="partners-content">
-                <p>Join our network of innovative companies and organizations driving the future of technology and business growth.</p>
-                <a href="#" class="btn">BECOME A PARTNER</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="grid-bg"></div>
-        <div class="scan-line"></div>
-        <div class="container">
-            <span class="section-title">GET IN TOUCH</span>
-            <h2>CONTACT US</h2>
-            <div class="contact-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <p>Ready to accelerate your tech vision? Our team is here to help you build, scale, and innovate.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <!-- Blog Post 1 -->
+                <div class="blog-card fade-in">
+                    <span class="text-xs tracking-widest text-gray-400 block mb-2 space-mono">FEATURED</span>
+                    <h3 class="text-xl font-bold mb-2">The Future of Tech Acceleration</h3>
+                    <span class="text-xs text-gray-400 block mb-4">June 15, 2023</span>
+                    <p class="text-sm text-gray-300 mb-4">
+                        How the convergence of AI, capital, and development expertise is transforming the startup ecosystem. A new paradigm for tech acceleration.
+                    </p>
+                    <a href="#" class="read-more">READ MORE</a>
+                </div>
                 
-                <div class="contact-form" style="margin-top: 4rem; background-color: rgba(255, 255, 255, 0.05); padding: 3rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: left;">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                <!-- Blog Post 2 -->
+                <div class="blog-card fade-in">
+                    <span class="text-xs tracking-widest text-gray-400 block mb-2 space-mono">INSIGHTS</span>
+                    <h3 class="text-xl font-bold mb-2">Venture Capital in the AI Era</h3>
+                    <span class="text-xs text-gray-400 block mb-4">May 28, 2023</span>
+                    <p class="text-sm text-gray-300 mb-4">
+                        Exploring how AI-powered investment models are transforming the venture capital landscape. Data-driven decisions for better outcomes.
+                    </p>
+                    <a href="#" class="read-more">READ MORE</a>
+                </div>
+                
+                <!-- Blog Post 3 -->
+                <div class="blog-card fade-in">
+                    <span class="text-xs tracking-widest text-gray-400 block mb-2 space-mono">TECHNOLOGY</span>
+                    <h3 class="text-xl font-bold mb-2">Scaling Through Tech Partnerships</h3>
+                    <span class="text-xs text-gray-400 block mb-4">April 10, 2023</span>
+                    <p class="text-sm text-gray-300 mb-4">
+                        How strategic technology partnerships can accelerate growth and reduce time-to-market for early-stage startups.
+                    </p>
+                    <a href="#" class="read-more">READ MORE</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Partners -->
+    <section id="partners" class="section relative py-20">
+        <div class="grid-bg"></div>
+        
+        <div class="container mx-auto px-6 z-10 relative">
+            <div class="text-center fade-in">
+                <p class="text-sm max-w-2xl mx-auto mb-8 text-gray-300">
+                    Join our network of innovative companies and organizations driving 
+                    the future of technology and business growth.
+                </p>
+                <a href="#" class="futuristic-btn">
+                    BECOME A PARTNER
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Contact -->
+    <section id="contact" class="section relative py-20">
+        <div class="grid-bg"></div>
+        <div class="scan-line"></div>
+        <div class="container mx-auto px-6 z-10 relative">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-xs tracking-widest mb-2">GET IN TOUCH</p>
+                <h2 class="text-3xl md:text-4xl font-bold space-mono">CONTACT US</h2>
+            </div>
+            
+            <div class="max-w-3xl mx-auto text-center fade-in">
+                <p class="text-gray-300 mb-8">
+                    Ready to accelerate your tech vision? Our team is here to help you build, scale, and innovate.
+                </p>
+                
+                <div class="bg-black bg-opacity-40 border border-gray-800 rounded-lg p-8 text-left">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-family: 'Space Mono', monospace; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Name</label>
-                            <input type="text" style="width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem; color: white; border-radius: 4px;">
+                            <label class="block text-xs tracking-wider text-gray-400 mb-2 space-mono">NAME</label>
+                            <input type="text" class="w-full bg-black bg-opacity-50 border border-gray-700 rounded p-3 text-white">
                         </div>
                         <div>
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-family: 'Space Mono', monospace; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Email</label>
-                            <input type="email" style="width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem; color: white; border-radius: 4px;">
+                            <label class="block text-xs tracking-wider text-gray-400 mb-2 space-mono">EMAIL</label>
+                            <input type="email" class="w-full bg-black bg-opacity-50 border border-gray-700 rounded p-3 text-white">
                         </div>
                     </div>
-                    <div style="margin-bottom: 2rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-family: 'Space Mono', monospace; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Subject</label>
-                        <input type="text" style="width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem; color: white; border-radius: 4px;">
+                    
+                    <div class="mb-6">
+                        <label class="block text-xs tracking-wider text-gray-400 mb-2 space-mono">SUBJECT</label>
+                        <input type="text" class="w-full bg-black bg-opacity-50 border border-gray-700 rounded p-3 text-white">
                     </div>
-                    <div style="margin-bottom: 2rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-family: 'Space Mono', monospace; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Message</label>
-                        <textarea style="width: 100%; min-height: 150px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem; color: white; border-radius: 4px;"></textarea>
+                    
+                    <div class="mb-6">
+                        <label class="block text-xs tracking-wider text-gray-400 mb-2 space-mono">MESSAGE</label>
+                        <textarea rows="5" class="w-full bg-black bg-opacity-50 border border-gray-700 rounded p-3 text-white"></textarea>
                     </div>
-                    <button class="btn" style="width: 100%;">SEND MESSAGE</button>
+                    
+                    <button class="futuristic-btn w-full">SEND MESSAGE</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer style="background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); padding: 4rem 0 2rem; border-top: 1px solid rgba(255, 255, 255, 0.05);">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
-                <!-- Logo and About -->
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800 relative">
+        <div class="grid-bg"></div>
+        
+        <div class="container mx-auto px-6 z-10 relative">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
-                    <a href="#" class="logo" style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 2rem; letter-spacing: 1px; text-transform: lowercase; margin-bottom: 1.5rem; display: block;">
-                        galliera<span style="font-size: 1rem; vertical-align: super;">3</span>
-                    </a>
-                    <p style="color: var(--text-secondary); line-height: 1.6; margin-top: 1rem;">
+                    <h3 class="text-lg font-bold mb-4 space-mono">galliera<sup>3</sup></h3>
+                    <p class="text-sm text-gray-400 mb-4">
                         Global tech accelerator driving innovation across ventures and development.
                     </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class='bx bxl-linkedin text-xl'></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class='bx bxl-twitter text-xl'></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class='bx bxl-instagram text-xl'></i>
+                        </a>
+                    </div>
                 </div>
                 
-                <!-- Quick Links -->
                 <div>
-                    <h4 style="font-family: 'Space Mono', monospace; margin-bottom: 1.5rem; font-size: 1.2rem; letter-spacing: 1px;">NAVIGATION</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 0.75rem;"><a href="#hero" style="color: var(--text-secondary); transition: all 0.3s ease;">Home</a></li>
-                        <li style="margin-bottom: 0.75rem;"><a href="#ventures-tech" style="color: var(--text-secondary); transition: all 0.3s ease;">Ventures & Tech</a></li>
-                        <li style="margin-bottom: 0.75rem;"><a href="#team" style="color: var(--text-secondary); transition: all 0.3s ease;">Team</a></li>
-                        <li style="margin-bottom: 0.75rem;"><a href="#blog" style="color: var(--text-secondary); transition: all 0.3s ease;">Blog</a></li>
-                        <li style="margin-bottom: 0.75rem;"><a href="#contact" style="color: var(--text-secondary); transition: all 0.3s ease;">Contact</a></li>
+                    <h4 class="text-sm font-bold mb-4">COMPANY</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
                     </ul>
                 </div>
                 
-                <!-- Contact -->
                 <div>
-                    <h4 style="font-family: 'Space Mono', monospace; margin-bottom: 1.5rem; font-size: 1.2rem; letter-spacing: 1px;">CONTACT</h4>
-                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                        <div style="min-width: 80px; color: var(--text-secondary);">Email:</div>
-                        <a href="mailto:contact@gallieragroup.com" style="color: var(--text-primary);">contact@gallieragroup.com</a>
-                    </div>
-                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                        <div style="min-width: 80px; color: var(--text-secondary);">Locations:</div>
-                        <span style="color: var(--text-primary);">San Francisco • London • Singapore</span>
-                    </div>
-                    <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                        <a href="#" style="width: 36px; height: 36px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">X</a>
-                        <a href="#" style="width: 36px; height: 36px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">in</a>
-                        <a href="#" style="width: 36px; height: 36px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">G</a>
-                    </div>
+                    <h4 class="text-sm font-bold mb-4">SERVICES</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Ventures</a></li>
+                        <li><a href="#" class="hover:text-white transition">Tech Development</a></li>
+                        <li><a href="#" class="hover:text-white transition">Growth Partners</a></li>
+                        <li><a href="#" class="hover:text-white transition">Media Production</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-sm font-bold mb-4">CONTACT</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-start">
+                            <i class='bx bx-envelope mr-2 mt-1'></i>
+                            <span>contact@gallieragroup.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class='bx bx-map mr-2 mt-1'></i>
+                            <span>123 Innovation Drive<br>Tech City, TC 10101</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
             
-            <!-- Divider -->
-            <div style="height: 1px; background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent); margin: 2rem 0;"></div>
-            
-            <!-- Copyright -->
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">© 2023 Galliera Group. All rights reserved.</p>
-                <div style="display: flex; gap: 2rem;">
-                    <a href="#" style="color: var(--text-secondary); font-size: 0.9rem; transition: all 0.3s ease;">Privacy Policy</a>
-                    <a href="#" style="color: var(--text-secondary); font-size: 0.9rem; transition: all 0.3s ease;">Terms of Service</a>
+            <div class="border-t border-gray-800 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-xs text-gray-500 mb-4 md:mb-0">
+                        &copy; 2023 Galliera Group. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 text-xs text-gray-500">
+                        <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition">Terms of Service</a>
+                        <a href="#" class="hover:text-white transition">Cookies</a>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Sound Toggle -->
+    <div class="sound-toggle" id="soundToggle">
+        <i class='bx bx-volume-mute' id="soundIcon"></i>
+    </div>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.1/dist/gsap.min.js"></script>
     <script>
-        // Check if THREE is loaded
-        if (typeof THREE === 'undefined') {
-            console.error('THREE.js is not loaded!');
-        } else {
-            console.log('THREE.js loaded successfully');
-        }
+        // Custom Cursor Effect
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
         
-        // Enhanced 3D animation setup with mouse-reactive particles
-        let scene, camera, renderer, particles, geometry, material;
-        let particleSystem;
-        const particlesCount = 2000;
-
-        // Main THREE.js animation for 3D space
-        function initAnimation() {
-            // Create scene
-            scene = new THREE.Scene();
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
             
-            // Create camera
-            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 30;
-            
-            // Create renderer
-            renderer = new THREE.WebGLRenderer({ 
-                alpha: true,
-                antialias: true // Smoother particles
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setClearColor(0x000000, 0);
-            
-            // Add to page
-            const container = document.getElementById('canvas-container');
-            if (container) {
-                container.innerHTML = ''; // Clear container first
-                container.appendChild(renderer.domElement);
-            } else {
-                console.error('Canvas container not found');
-                return;
-            }
-            
-            // Create advanced particles
-            geometry = new THREE.BufferGeometry();
-            
-            // Arrays to store particle attributes
-            const positions = new Float32Array(particlesCount * 3);
-            const velocities = new Float32Array(particlesCount * 3);
-            const sizes = new Float32Array(particlesCount);
-            const colors = new Float32Array(particlesCount * 3);
-            
-            // Fill arrays with random values
-            for (let i = 0; i < particlesCount; i++) {
-                const i3 = i * 3;
-                
-                // Position - use spherical distribution for more depth
-                const radius = Math.random() * 50 + 20;
-                const theta = Math.random() * Math.PI * 2;
-                const phi = Math.acos(2 * Math.random() - 1);
-                
-                positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
-                positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-                positions[i3 + 2] = radius * Math.cos(phi);
-                
-                // Velocity - varied for more natural movement
-                velocities[i3] = (Math.random() - 0.5) * 0.05;
-                velocities[i3 + 1] = (Math.random() - 0.5) * 0.05;
-                velocities[i3 + 2] = (Math.random() - 0.5) * 0.05;
-                
-                // Size variation
-                sizes[i] = Math.random() * 2 + 0.5;
-                
-                // Color - slight variation in white/blue for futuristic feel
-                colors[i3] = 0.8 + Math.random() * 0.2;     // R
-                colors[i3 + 1] = 0.8 + Math.random() * 0.2; // G
-                colors[i3 + 2] = 0.9 + Math.random() * 0.1; // B - slightly more blue
-            }
-            
-            // Add attributes to geometry
-            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            geometry.setAttribute('velocity', new THREE.BufferAttribute(velocities, 3));
-            geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-            
-            // Simple PointsMaterial for compatibility
-            material = new THREE.PointsMaterial({
-                color: 0xffffff,
-                size: 0.7,
-                transparent: true,
-                opacity: 0.6
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+        
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        });
+        
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+        
+        // Adding target effect to clickable elements
+        document.querySelectorAll('a, button, .suggestion-chip').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursor.style.border = '1px solid rgba(255, 255, 255, 0.8)';
             });
             
-            particles = new THREE.Points(geometry, material);
-            scene.add(particles);
-            
-            // Start animation
-            animate();
-        }
-
-        // Initialize interactive particles (separate system)
-        function initInteractiveParticles() {
+            item.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.border = '1px solid white';
+            });
+        });
+        
+        // Mobile Menu Toggle
+        const menuIcon = document.querySelector('.menu-icon');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeIcon = document.querySelector('.mobile-menu .bx-x');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        
+        menuIcon.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('flex');
+        });
+        
+        closeIcon.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+        });
+        
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+        
+        // Particle Animation
+        let scene, camera, renderer, particles;
+        
+        function initParticles() {
             const particleCanvas = document.getElementById('particleCanvas');
             
-            if (!particleCanvas) {
-                console.error('Particle canvas not found');
-                return;
-            }
+            // Only initialize if canvas exists
+            if (!particleCanvas) return;
             
-            // Create new scene for particles
-            const particleScene = new THREE.Scene();
-            const particleCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            particleCamera.position.z = 5;
+            // Scene setup
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
             
             // Renderer setup
-            const particleRenderer = new THREE.WebGLRenderer({ 
-                canvas: particleCanvas, 
-                alpha: true 
-            });
-            particleRenderer.setSize(window.innerWidth, particleCanvas.clientHeight);
-            particleRenderer.setPixelRatio(window.devicePixelRatio);
+            renderer = new THREE.WebGLRenderer({ canvas: particleCanvas, alpha: true });
+            renderer.setSize(window.innerWidth, particleCanvas.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
             
-            // Create particles
+            // Particles
             const particlesGeometry = new THREE.BufferGeometry();
             const particlesCount = 1500;
             
@@ -1317,29 +1163,46 @@ Copy                            <div class="step-title">Identify Potential</div>
                 size: 0.03,
                 color: 0xffffff,
                 transparent: true,
-                opacity: 0.6
+                opacity: 0.8
             });
             
-            particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
-            particleScene.add(particleSystem);
+            particles = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particles);
             
-            // Animation function
-            const animateParticles = () => {
-                requestAnimationFrame(animateParticles);
+            // Store initial positions for reference
+            const initialPositions = new Float32Array(posArray.length);
+            initialPositions.set(posArray);
+            
+            // Animation
+            const animate = () => {
+                requestAnimationFrame(animate);
                 
-                particleSystem.rotation.x += 0.0002;
-                particleSystem.rotation.y += 0.0003;
+                particles.rotation.x += 0.0003;
+                particles.rotation.y += 0.0005;
                 
-                particleRenderer.render(particleScene, particleCamera);
+                // Get particle positions for interaction
+                const positions = particlesGeometry.attributes.position.array;
+                
+                // Update particle positions based on mouse movement
+                for (let i = 0; i < positions.length; i += 3) {
+                    // Add gentle ambient motion
+                    positions[i] += Math.sin(Date.now() * 0.001 + i) * 0.002;
+                    positions[i+1] += Math.cos(Date.now() * 0.001 + i) * 0.002;
+                }
+                
+                // Mark positions for update
+                particlesGeometry.attributes.position.needsUpdate = true;
+                
+                renderer.render(scene, camera);
             };
             
-            animateParticles();
+            animate();
             
             // Resize handler
             window.addEventListener('resize', () => {
-                particleCamera.aspect = window.innerWidth / particleCanvas.clientHeight;
-                particleCamera.updateProjectionMatrix();
-                particleRenderer.setSize(window.innerWidth, particleCanvas.clientHeight);
+                camera.aspect = window.innerWidth / particleCanvas.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, particleCanvas.clientHeight);
             });
             
             // Mouse interaction
@@ -1350,21 +1213,80 @@ Copy                            <div class="step-title">Identify Potential</div>
                 mouseX = (event.clientX / window.innerWidth) * 2 - 1;
                 mouseY = (event.clientY / window.innerHeight) * 2 - 1;
                 
-                if (typeof gsap !== 'undefined') {
-                    gsap.to(particleSystem.rotation, {
-                        x: mouseY * 0.1,
-                        y: mouseX * 0.1,
-                        duration: 2
-                    });
-                } else {
-                    // Fallback if GSAP is not available
-                    particleSystem.rotation.x = mouseY * 0.1;
-                    particleSystem.rotation.y = mouseX * 0.1;
+                gsap.to(particles.rotation, {
+                    x: mouseY * 0.1,
+                    y: mouseX * 0.1,
+                    duration: 2
+                });
+                
+                // Update particles based on mouse position
+                const positions = particlesGeometry.attributes.position.array;
+                
+                for (let i = 0; i < positions.length; i += 3) {
+                    // Calculate distance from mouse position
+                    const x = positions[i];
+                    const y = positions[i+1];
+                    const distX = x - mouseX * 5;
+                    const distY = y - mouseY * 5;
+                    const dist = Math.sqrt(distX * distX + distY * distY);
+                    
+                    // Apply force based on distance
+                    if (dist < 5) {
+                        const force = 0.1 * (1 - dist / 5);
+                        positions[i] += distX * force;
+                        positions[i+1] += distY * force;
+                    }
                 }
+                
+                particlesGeometry.attributes.position.needsUpdate = true;
             });
         }
         
-        // Create data flow particles
+        // Matrix Effect
+        function initMatrix() {
+            const canvas = document.getElementById('matrixCanvas');
+            
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const columns = Math.floor(canvas.width / 20);
+            const drops = [];
+            
+            for (let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+            
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '15px monospace';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = String.fromCharCode(Math.floor(Math.random() * 94) + 33);
+                    ctx.fillText(text, i * 20, drops[i] * 20);
+                    
+                    if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(drawMatrix, 50);
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+        
+        // Data Flow Animation
         function createDataFlow() {
             const dataFlowContainer = document.getElementById('data-flow');
             if (!dataFlowContainer) {
@@ -1412,102 +1334,14 @@ Copy                            <div class="step-title">Identify Potential</div>
             }
         }
         
-        let mouseX = 0, mouseY = 0;
-        let targetMouseX = 0, targetMouseY = 0;
-        
-        function onMouseMove(event) {
-            targetMouseX = (event.clientX - window.innerWidth / 2) * 0.001;
-            targetMouseY = (event.clientY - window.innerHeight / 2) * 0.001;
-            
-            // If we have the particle system for mouse interaction
-            if (particleSystem) {
-                const normalized_x = (event.clientX / window.innerWidth) * 2 - 1;
-                const normalized_y = (event.clientY / window.innerHeight) * 2 - 1;
-                
-                if (typeof gsap !== 'undefined') {
-                    gsap.to(particleSystem.rotation, {
-                        x: normalized_y * 0.2,
-                        y: normalized_x * 0.2,
-                        duration: 1
-                    });
-                }
-            }
-        }
-        
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            try {
-                if (!particles || !geometry || !scene || !camera || !renderer) return;
-                
-                // Smooth mouse movement
-                mouseX += (targetMouseX - mouseX) * 0.05;
-                mouseY += (targetMouseY - mouseY) * 0.05;
-                
-                const positions = geometry.attributes.position.array;
-                const velocities = geometry.attributes.velocity.array;
-                
-                // Update particle positions
-                for (let i = 0; i < particlesCount; i++) {
-                    const i3 = i * 3;
-                    
-                    // Update positions based on velocity
-                    positions[i3] += velocities[i3];
-                    positions[i3 + 1] += velocities[i3 + 1];
-                    positions[i3 + 2] += velocities[i3 + 2];
-                    
-                    // Create a subtle swirling effect
-                    const x = positions[i3];
-                    const y = positions[i3 + 1];
-                    const z = positions[i3 + 2];
-                    
-                    const distance = Math.sqrt(x*x + y*y + z*z);
-                    
-                    // Add slight rotation around y axis based on distance
-                    const angle = 0.0001 * distance;
-                    const cosAngle = Math.cos(angle);
-                    const sinAngle = Math.sin(angle);
-                    
-                    positions[i3] = x * cosAngle - z * sinAngle;
-                    positions[i3 + 2] = z * cosAngle + x * sinAngle;
-                    
-                    // Boundaries check
-                    const limit = 70;
-                    if (Math.abs(positions[i3]) > limit) velocities[i3] = -velocities[i3];
-                    if (Math.abs(positions[i3 + 1]) > limit) velocities[i3 + 1] = -velocities[i3 + 1];
-                    if (Math.abs(positions[i3 + 2]) > limit) velocities[i3 + 2] = -velocities[i3 + 2];
-                }
-                
-                // Mark positions for update
-                geometry.attributes.position.needsUpdate = true;
-                
-                // Rotate particle system
-                particles.rotation.y += 0.0005;
-                
-                // Move camera based on mouse position
-                camera.position.x += (mouseX * 10 - camera.position.x) * 0.05;
-                camera.position.y += (-mouseY * 10 - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
-                
-                // Render the scene
-                renderer.render(scene, camera);
-            } catch (error) {
-                console.error("Error in animation loop:", error);
-            }
-        }
-        
-        // Simple chat functionality with typewriter effect
+        // Chat Interface with Typewriter Effect
         function initChat() {
             const chatMessages = document.getElementById('chat-messages');
             const chatInput = document.getElementById('chat-input');
             const sendBtn = document.getElementById('send-btn');
             const suggestionChips = document.querySelectorAll('.suggestion-chip');
             
-            // Check if elements exist
-            if (!chatMessages || !chatInput || !sendBtn) {
-                console.error('Chat elements not found!');
-                return;
-            }
+            if (!chatMessages || !chatInput || !sendBtn) return;
             
             // Define responses
             const responses = {
@@ -1515,6 +1349,11 @@ Copy                            <div class="step-title">Identify Potential</div>
                 "technologies": "We utilize a sophisticated tech stack that includes 9 specialized LLMs (Large Language Models) and over 90 'home-made' agent models. Our architecture is designed to optimize startup growth through AI-driven analytics, development acceleration tools, and automated scaling processes.",
                 "partner": "We have multiple partnership opportunities. Startups can apply for investment through Galliera Ventures or work with our Galliera Tech division for development and growth support. Established companies can join our network as technology or distribution partners."
             };
+            
+            // Welcome message with typewriter effect
+            setTimeout(function() {
+                addAIMessageWithTypewriter("Hi there! How can I help you learn about Galliera Group?");
+            }, 500);
             
             // Function to add user message to chat
             function addUserMessage(text) {
@@ -1539,12 +1378,6 @@ Copy                            <div class="step-title">Identify Potential</div>
                 let dots = 1;
                 const typingIndicator = setInterval(() => {
                     if (dots === 1) {
-                        messageDiv.textContent = "●";
-                        dots = 2;
-                    } else if (dots === 2) {
-                        messageDiv.textContent = "● ●";
-                        dots
-                                            if (dots === 1) {
                         messageDiv.textContent = "●";
                         dots = 2;
                     } else if (dots === 2) {
@@ -1578,11 +1411,6 @@ Copy                            <div class="step-title">Identify Potential</div>
                     typeNextChar();
                 }, 1200); // Show typing indicator for 1.2 seconds
             }
-            
-            // Welcome message with typewriter effect
-            setTimeout(function() {
-                addAIMessageWithTypewriter("Hi there! How can I help you learn about Galliera Group?");
-            }, 500);
             
             // Function to process query
             function processQuery(query) {
@@ -1626,50 +1454,243 @@ Copy                            <div class="step-title">Identify Potential</div>
             
             // Suggestion chip click events
             suggestionChips.forEach(function(chip) {
+                chip.addEventListener('click', function()
+                                                  // Suggestion chip click events
+            suggestionChips.forEach(function(chip) {
                 chip.addEventListener('click', function() {
-                    const query = this.getAttribute('data-query');
+                    const query = this.textContent;
                     processQuery(query);
                 });
             });
         }
         
-        // Initialize everything when page loads
-        window.addEventListener('load', function() {
-            console.log('Page loaded, initializing...');
-            initAnimation();
-            initInteractiveParticles(); // Add the interactive particles
-            createDataFlow();
-            initChat();
+        // Tech Visualization
+        function initTechVisualization() {
+            const techNodesContainer = document.getElementById('tech-nodes');
             
-            // Add scroll animations for sections
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
+            if (!techNodesContainer) return;
+            
+            // Create nodes
+            const nodeCount = 20; // 9 LLMs + some agent models
+            const nodes = [];
+            
+            // Clear any existing nodes
+            techNodesContainer.innerHTML = '';
+            
+            // Function to create connections between nodes
+            function createConnection(node1, node2) {
+                const connection = document.createElement('div');
+                connection.className = 'tech-connection';
+                
+                // Calculate position and rotation
+                const x1 = parseInt(node1.style.left);
+                const y1 = parseInt(node1.style.top);
+                const x2 = parseInt(node2.style.left);
+                const y2 = parseInt(node2.style.top);
+                
+                const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+                
+                connection.style.width = `${length}px`;
+                connection.style.left = `${x1}px`;
+                connection.style.top = `${y1}px`;
+                connection.style.transform = `rotate(${angle}deg)`;
+                
+                techNodesContainer.appendChild(connection);
+            }
+            
+            // Create LLM nodes (larger, positioned centrally)
+            for (let i = 0; i < 9; i++) {
+                const node = document.createElement('div');
+                node.className = 'tech-node blinking';
+                node.textContent = 'LLM';
+                
+                // Position in a circular pattern in the center
+                const angle = (i / 9) * 2 * Math.PI;
+                const radius = techNodesContainer.clientHeight * 0.25;
+                const centerX = techNodesContainer.clientWidth / 2;
+                const centerY = techNodesContainer.clientHeight / 2;
+                
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                
+                node.style.left = `${x}px`;
+                node.style.top = `${y}px`;
+                node.style.width = '40px';
+                node.style.height = '40px';
+                node.style.zIndex = '2';
+                
+                techNodesContainer.appendChild(node);
+                nodes.push(node);
+            }
+            
+            // Create agent model nodes (smaller, positioned around)
+            for (let i = 0; i < nodeCount - 9; i++) {
+                const node = document.createElement('div');
+                node.className = 'tech-node';
+                node.textContent = 'A';
+                
+                // Random position around the edges
+                let x, y;
+                
+                // Determine random position either on the edge or far from center
+                if (Math.random() > 0.5) {
+                    // Position on the edge
+                    const side = Math.floor(Math.random() * 4);
+                    switch(side) {
+                        case 0: // top
+                            x = Math.random() * techNodesContainer.clientWidth;
+                            y = techNodesContainer.clientHeight * 0.1;
+                            break;
+                        case 1: // right
+                            x = techNodesContainer.clientWidth * 0.9;
+                            y = Math.random() * techNodesContainer.clientHeight;
+                            break;
+                        case 2: // bottom
+                            x = Math.random() * techNodesContainer.clientWidth;
+                            y = techNodesContainer.clientHeight * 0.9;
+                            break;
+                        case 3: // left
+                            x = techNodesContainer.clientWidth * 0.1;
+                            y = Math.random() * techNodesContainer.clientHeight;
+                            break;
                     }
-                });
-            }, { threshold: 0.1 });
-            
-            // Observe all sections and cards
-            document.querySelectorAll('section, .solution-card, .team-card, .blog-card').forEach(el => {
-                observer.observe(el);
-            });
-            
-            // Navbar scroll effect
-            window.addEventListener('scroll', function() {
-                const nav = document.querySelector('nav');
-                if (window.scrollY > 50) {
-                    nav.style.padding = '1rem 0';
-                    nav.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
                 } else {
-                    nav.style.padding = '1.5rem 0';
-                    nav.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                    // Position randomly but far from center
+                    const angle = Math.random() * 2 * Math.PI;
+                    const radius = techNodesContainer.clientHeight * 0.4;
+                    const centerX = techNodesContainer.clientWidth / 2;
+                    const centerY = techNodesContainer.clientHeight / 2;
+                    
+                    x = centerX + radius * Math.cos(angle);
+                    y = centerY + radius * Math.sin(angle);
+                }
+                
+                node.style.left = `${x}px`;
+                node.style.top = `${y}px`;
+                
+                techNodesContainer.appendChild(node);
+                nodes.push(node);
+            }
+            
+            // Create connections
+            // Connect each LLM to a few agent models
+            for (let i = 0; i < 9; i++) {
+                // Each LLM connects to 2-3 agent models
+                const connectCount = 2 + Math.floor(Math.random() * 2);
+                
+                for (let j = 0; j < connectCount; j++) {
+                    // Choose a random agent model to connect to
+                    const agentIndex = 9 + Math.floor(Math.random() * (nodeCount - 9));
+                    if (agentIndex < nodes.length) {
+                        createConnection(nodes[i], nodes[agentIndex]);
+                    }
+                }
+            }
+            
+            // Connect agent models to each other
+            for (let i = 9; i < nodes.length; i++) {
+                if (Math.random() > 0.7) {
+                    const targetIndex = 9 + Math.floor(Math.random() * (nodes.length - 9));
+                    if (targetIndex < nodes.length && targetIndex !== i) {
+                        createConnection(nodes[i], nodes[targetIndex]);
+                    }
+                }
+            }
+            
+            // Add interactivity
+            nodes.forEach(node => {
+                node.addEventListener('mouseenter', () => {
+                    node.style.transform = 'scale(1.2)';
+                    node.style.boxShadow = '0 0 15px rgba(255, 255, 255, 0.5)';
+                });
+                
+                node.addEventListener('mouseleave', () => {
+                    node.style.transform = 'scale(1)';
+                    node.style.boxShadow = '0 0 5px rgba(255, 255, 255, 0.2)';
+                });
+            });
+        }
+        
+        // Sound effects
+        let soundEnabled = false;
+        const hoverSound = new Audio('https://cdn.jsdelivr.net/gh/andrefcasimiro/impact-sounds@master/sounds/glass.mp3');
+        const clickSound = new Audio('https://cdn.jsdelivr.net/gh/andrefcasimiro/impact-sounds@master/sounds/wood.mp3');
+        
+        // Set low volume
+        hoverSound.volume = 0.2;
+        clickSound.volume = 0.2;
+        
+        function initSoundEffects() {
+            const soundToggle = document.getElementById('soundToggle');
+            const soundIcon = document.getElementById('soundIcon');
+            
+            if (!soundToggle || !soundIcon) return;
+            
+            soundToggle.addEventListener('click', () => {
+                soundEnabled = !soundEnabled;
+                
+                if (soundEnabled) {
+                    soundIcon.className = 'bx bx-volume-full';
+                    clickSound.play();
+                } else {
+                    soundIcon.className = 'bx bx-volume-mute';
                 }
             });
             
-            // Mouse move event
-            document.addEventListener('mousemove', onMouseMove);
+            // Add sound to interactive elements
+            document.querySelectorAll('a, button, .suggestion-chip, .nav-link, .futuristic-btn').forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    if (soundEnabled) {
+                        hoverSound.currentTime = 0;
+                        hoverSound.play();
+                    }
+                });
+                
+                item.addEventListener('click', () => {
+                    if (soundEnabled) {
+                        clickSound.currentTime = 0;
+                        clickSound.play();
+                    }
+                });
+            });
+        }
+        
+        // Scroll animation
+        function initScrollAnimation() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = () => {
+                const triggerBottom = window.innerHeight * 0.85;
+                
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    
+                    if (elementTop < triggerBottom) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', fadeInOnScroll);
+            window.addEventListener('load', fadeInOnScroll);
+            window.addEventListener('resize', fadeInOnScroll);
+        }
+        
+        // Initialize everything on load
+        window.addEventListener('load', () => {
+            initParticles();
+            initMatrix();
+            initChat();
+            initTechVisualization();
+            initSoundEffects();
+            initScrollAnimation();
+            createDataFlow();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                initTechVisualization();
+            });
         });
     </script>
 </body>
