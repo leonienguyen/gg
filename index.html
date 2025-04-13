@@ -525,5 +525,125 @@
         }, 1000);
     });
 </script>
+    <!-- Fix for chatbot functionality -->
+<script>
+  // Wait for the page to fully load
+  window.addEventListener('load', function() {
+    console.log("Chat Fix Script Running");
+    
+    // Get all the required chat elements
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const suggestionChips = document.querySelectorAll('.suggestion-chip');
+    
+    // Check if elements exist
+    if (!chatMessages || !chatInput || !sendBtn) {
+      console.error("Chat elements not found!");
+      return;
+    }
+    
+    // Define responses
+    const responses = {
+      "about galliera": "Galliera Group is a Global Tech Accelerator composed of two main divisions: Galliera Ventures, our VC arm that invests in promising tech companies worldwide, and Galliera Tech, which includes tech/dev/growth/media partner companies that help accelerate startups through both product and growth phases.",
+      "technologies": "We utilize a sophisticated tech stack that includes 9 specialized LLMs (Large Language Models) and over 90 'home-made' agent models. Our architecture is designed to optimize startup growth through AI-driven analytics, development acceleration tools, and automated scaling processes.",
+      "partner": "We have multiple partnership opportunities. Startups can apply for investment through Galliera Ventures or work with our Galliera Tech division for development and growth support. Established companies can join our network as technology or distribution partners.",
+      "investments": "Galliera Ventures focuses on seed to Series A investments in innovative tech startups globally. We have a particular focus on AI, blockchain, SaaS, and emerging technologies with transformative potential. Our 50+ portfolio companies receive both capital and access to our technical resources.",
+      "team": "Our team combines human expertise with AI capabilities. Key members include human experts like Léonie - the Founder and her human-machine team, alongside AI systems like The AGI (Strategic Intelligence), The Donna (Operations), and The Benjamin (Financial Analysis)."
+    };
+    
+    // Function to add message to chat
+    function addMessage(text, isUser = false) {
+      console.log("Adding message:", text, "User:", isUser);
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message');
+      messageDiv.classList.add(isUser ? 'user' : 'ai');
+      messageDiv.textContent = text;
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Function to process query
+    function processQuery(query) {
+      console.log("Processing query:", query);
+      query = query.toLowerCase().trim();
+      addMessage(query, true);
+      
+      // Simulate thinking
+      setTimeout(() => {
+        let response = "You may want to talk to Léonie our big boss? ;)";
+        
+        // Simple keyword matching
+        if (query.includes("galliera") || query.includes("about") || query.includes("group")) {
+          response = responses["about galliera"];
+        } else if (query.includes("tech") || query.includes("technologies")) {
+          response = responses["technologies"];
+        } else if (query.includes("partner")) {
+          response = responses["partner"];
+        } else if (query.includes("invest") || query.includes("portfolio")) {
+          response = responses["investments"];
+        } else if (query.includes("team") || query.includes("who")) {
+          response = responses["team"];
+        }
+        
+        console.log("Response:", response);
+        
+        // Simple typing animation
+        const responseDiv = document.createElement('div');
+        responseDiv.classList.add('message', 'ai');
+        chatMessages.appendChild(responseDiv);
+        
+        let i = 0;
+        function typeWriter() {
+          if (i < response.length) {
+            responseDiv.textContent += response.charAt(i);
+            i++;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            setTimeout(typeWriter, 20);
+          }
+        }
+        
+        typeWriter();
+      }, 1000);
+    }
+    
+    // Add event listeners
+    sendBtn.addEventListener('click', function() {
+      console.log("Send button clicked");
+      const query = chatInput.value.trim();
+      if (query) {
+        processQuery(query);
+        chatInput.value = '';
+      }
+    });
+    
+    chatInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        console.log("Enter key pressed");
+        const query = chatInput.value.trim();
+        if (query) {
+          processQuery(query);
+          chatInput.value = '';
+        }
+      }
+    });
+    
+    suggestionChips.forEach(chip => {
+      chip.addEventListener('click', function() {
+        console.log("Suggestion chip clicked:", this.getAttribute('data-query'));
+        const query = this.getAttribute('data-query');
+        processQuery(query);
+      });
+    });
+    
+    // Add welcome message
+    setTimeout(function() {
+      addMessage("Hey there! I'm Galliera AI. How can I help you learn about our tech accelerator, investments, or team?", false);
+    }, 1000);
+    
+    console.log("Chat fix script complete");
+  });
+</script>
+
 </body>
 </html>
