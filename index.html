@@ -15,6 +15,16 @@
             --text-secondary: #aaaaaa;
             --glow: 0 0 10px rgba(255, 255, 255, 0.7);
         }
+        #particleCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
         
         * {
             margin: 0;
@@ -758,6 +768,7 @@
 
     <section id="hero">
         <div id="canvas-container"></div>
+        <canvas id="particleCanvas"></canvas>
         <div class="grid-bg"></div>
         <div class="scan-line"></div>
         <div class="data-flow" id="data-flow"></div>
@@ -1275,7 +1286,129 @@
                 renderer.setSize(window.innerWidth, window.innerHeight);
             }
         });
+        // Interactive particle system
+let particleSystem;
+
+function initInteractiveParticles() {
+    const particleCanvas = document.getElementById('particleCanvas');
+    
+    if (!particleCanvas) {
+        console.error('Particle canvas not found');
+        return;
+    }
+    
+    // Create new scene for particles
+    const particleScene = new THREE.Scene();
+    const particleCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    particleCamera.position.z = 5;
+    
+    // Renderer setup
+    const particleRenderer = new THREE.WebGLRenderer({ 
+        canvas: particleCanvas, 
+        alpha: true 
+    });
+    particleRenderer.setSize(window.innerWidth, particleCanvas.clientHeight);
+    particleRenderer.setPixelRatio(window.devicePixelRatio);
+    
+    // Create particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 2000; // More particles for a denser effect
+    
+    const posArray = new Float32Array(particlesCount * 3);
+    
+    // Distribute particles more evenly across the screen
+    for (let i = 0; i < particlesCount * 3; i += 3) {
+        // Create a more planar distribution (less depth)
+        posArray[i] = (Math.random() - 0.5) * 10;     // X - wider spread
+        posArray[i + 1] = (Math.random() - 0.5) * 10; // Y - wider spread
+        posArray[i + 2] = (Math.random() - 0.5) * 3;  // Z - less depth, more planar
+    }
+    
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    
+    // Smaller, brighter particles
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.02,
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.8
+    });
+    
+    particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
+    particleScene.add(particleSystem);
+    
+    // Store initial positions for reference
+    const initialPositions = new Float32Array(posArray.length);
+    initialPositions.set(posArray);
+    
+    // Store mouse position
+    let mouseX = 0.5;
+    let mouseY = 0.5;
+    
+    // Mouse move handler with direct influence on particles
+    document.addEventListener('mousemove', (event) => {
+        mouseX = event.clientX / window.innerWidth;
+        mouseY = event.clientY / window.innerHeight;
+    });
+    
+    // Animation function with direct particle manipulation
+    const animateParticles = () => {
+        requestAnimationFrame(animateParticles);
         
+        // Get particle positions
+        const positions = particlesGeometry.attributes.position.array;
+        
+        // Update each particle based on mouse position
+        for (let i = 0; i < positions.length; i += 3) {
+            // Reference to initial position
+            const ix = initialPositions[i];
+            const iy = initialPositions[i+1];
+            const iz = initialPositions[i+2];
+            
+            // Calculate distance from mouse (in normalized coordinates)
+            const mouseXNorm = mouseX * 2 - 1; // Convert to -1 to 1 range
+            const mouseYNorm = -mouseY * 2 + 1; // Convert to -1 to 1 range and invert Y
+            
+            // Calculate influence based on distance
+            const dx = mouseXNorm - ix;
+            const dy = mouseYNorm - iy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            // Apply force - particles closer to mouse move more
+            const maxDistance = 3;
+            const influence = Math.max(0, 1 - dist / maxDistance);
+            
+            // Move particles - stronger effect for closer particles
+            positions[i] = ix + dx * influence * 0.1;
+            positions[i+1] = iy + dy * influence * 0.1;
+            
+            // Add gentle ambient motion
+            positions[i] += Math.sin(Date.now() * 0.001 + i) * 0.002;
+            positions[i+1] += Math.cos(Date.now() * 0.001 + i) * 0.002;
+        }
+        
+        // Mark positions as needing update
+        particlesGeometry.attributes.position.needsUpdate = true;
+        
+        // Apply subtle rotation
+        particleSystem.rotation.x += 0.0003;
+        particleSystem.rotation.y += 0.0004;
+        
+        // Render
+        particleRenderer.render(particleScene, particleCamera);
+    };
+    
+    // Start animation
+    animateParticles();
+    
+    // Resize handler
+    window.addEventListener('resize', () => {
+        particleCamera.aspect = window.innerWidth / particleCanvas.clientHeight;
+        particleCamera.updateProjectionMatrix();
+        particleRenderer.setSize(window.innerWidth, particleCanvas.clientHeight);
+    });
+}
+
         // Mouse move event
         document.addEventListener('mousemove', onMouseMove);
         
