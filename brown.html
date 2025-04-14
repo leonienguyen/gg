@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galliera Group - Global Tech Accelerator</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -104,198 +104,6 @@
         .connection-line::after {
             right: -4px;
         }
-
-        /* Chatbot Styles */
-        .chatbot-toggle {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #8d5e40;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: all 0.3s;
-        }
-
-        .chatbot-toggle:hover {
-            transform: scale(1.05);
-            background: #d4a785;
-        }
-
-        .chatbot-container {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 350px;
-            height: 500px;
-            background: rgba(40, 24, 18, 0.95);
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            z-index: 999;
-            overflow: hidden;
-            transition: all 0.3s;
-            transform: translateY(20px);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .chatbot-container.active {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .chatbot-header {
-            padding: 15px 20px;
-            background: linear-gradient(135deg, #3d2218 0%, #8d5e40 100%);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .chatbot-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-        }
-
-        .chatbot-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .message {
-            max-width: 80%;
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            border-radius: 18px;
-            line-height: 1.4;
-            font-size: 0.95rem;
-        }
-
-        .message.bot {
-            background: rgba(255, 255, 255, 0.1);
-            border-top-left-radius: 4px;
-            align-self: flex-start;
-        }
-
-        .message.user {
-            background: rgba(141, 94, 64, 0.8);
-            border-top-right-radius: 4px;
-            align-self: flex-end;
-        }
-
-        .suggestion-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 5px;
-        }
-
-        .suggestion-chip {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 8px 12px;
-            border-radius: 16px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .suggestion-chip:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        .chatbot-input {
-            padding: 15px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-        }
-
-        .chatbot-input input {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            padding: 10px 15px;
-            border-radius: 20px;
-            color: white;
-            font-size: 0.95rem;
-        }
-
-        .chatbot-input input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .chatbot-input input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .chatbot-send {
-            background: transparent;
-            border: none;
-            margin-left: 10px;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-
-        .chatbot-send:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .chatbot-typing {
-            display: flex;
-            margin-bottom: 15px;
-            align-self: flex-start;
-        }
-
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-            margin: 0 2px;
-            opacity: 0.5;
-            animation: typingAnimation 1.5s infinite ease-in-out;
-        }
-
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.3s;
-        }
-
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-
-        @keyframes typingAnimation {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
-        }
     </style>
 </head>
 <body>
@@ -335,7 +143,6 @@
 
     <!-- Who We Help Section -->
     <section id="help" class="container mx-auto px-6 py-16">
-        <!-- Section content as before -->
         <div class="mb-16">
             <p class="section-heading mb-4">// WHO WE HELP</p>
             <h2 class="text-4xl md:text-5xl font-bold mb-4">
@@ -394,189 +201,255 @@
         </div>
     </section>
 
-    <!-- Other sections remain the same -->
     <!-- Galliera Ventures Section -->
     <section id="ventures" class="container mx-auto px-6 py-16">
-        <!-- Content same as before -->
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <p class="section-heading mb-4">GALLIERA VENTURES</p>
+                <h2 class="text-4xl font-bold mb-6">
+                    Strategically invest in tech potential
+                </h2>
+                <p class="opacity-80 mb-10">
+                    Our VC arm invests in promising tech companies worldwide, providing not just capital, but strategic guidance, industry connections, and technical expertise to accelerate growth.
+                </p>
+                <div class="flex flex-col space-y-6">
+                    <div class="flex items-center">
+                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <span>Global investment approach</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <span>Strategic partnerships</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <span>Long-term value creation</span>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <a href="#" class="arrow-link inline-flex items-center">
+                        <span class="mr-2">Read more</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="copper-gradient rounded-2xl p-8 relative z-10">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
+                            <i class="fas fa-microchip text-3xl mb-4"></i>
+                            <span class="text-sm opacity-80 text-center">Quantum Computing</span>
+                        </div>
+                        <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
+                            <i class="fas fa-brain text-3xl mb-4"></i>
+                            <span class="text-sm opacity-80 text-center">AI Solutions</span>
+                        </div>
+                        <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
+                            <i class="fas fa-cube text-3xl mb-4"></i>
+                            <span class="text-sm opacity-80 text-center">Blockchain</span>
+                        </div>
+                        <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
+                            <i class="fas fa-robot text-3xl mb-4"></i>
+                            <span class="text-sm opacity-80 text-center">Robotics</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dotted-line absolute w-48 h-48 -top-10 -right-10 z-0 rounded-full"></div>
+                <div class="dotted-line absolute w-32 h-32 -bottom-5 -left-10 z-0 rounded-full"></div>
+            </div>
+        </div>
     </section>
 
     <!-- Galliera Tech Section -->
     <section id="tech" class="container mx-auto px-6 py-16">
-        <!-- Content same as before -->
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="order-2 md:order-1 relative">
+                <div class="light-copper-gradient rounded-2xl p-10 relative z-10">
+                    <div class="flex justify-center items-center mb-10">
+                        <div class="icon-bubble w-24 h-24 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-code text-2xl"></i>
+                        </div>
+                        <div class="connection-line w-20 mx-6"></div>
+                        <div class="icon-bubble w-24 h-24 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-user text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="dotted-line w-full h-px mb-10"></div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="icon-bubble rounded-full w-12 h-12 flex items-center justify-center">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <div class="icon-bubble rounded-full w-12 h-12 flex items-center justify-center">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="icon-bubble rounded-full w-12 h-12 flex items-center justify-center">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="dotted-line absolute w-64 h-64 -bottom-10 -right-10 z-0 rounded-full"></div>
+            </div>
+            <div class="order-1 md:order-2">
+                <p class="section-heading mb-4">PARTNER COMPANIES</p>
+                <h2 class="text-4xl font-bold mb-6">
+                    Expert teams power your vision
+                </h2>
+                <p class="opacity-80 mb-6">
+                    Galliera Tech encompasses our network of specialized partner companies in development, growth, and media. We own a stake in these companies and leverage their expertise to accelerate startup success.
+                </p>
+                <p class="opacity-80 mb-10">
+                    Gain immediate access to expert resources, technology solutions, and market expertise without the cost and complexity of building in-house capabilities.
+                </p>
+                <div class="flex flex-col space-y-6">
+                    <div class="flex items-center">
+                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <span>Development Partners</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <span>Growth Partners</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <span>Media Partners</span>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <a href="#" class="arrow-link inline-flex items-center">
+                        <span class="mr-2">Read more</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Features Section -->
     <section id="features" class="container mx-auto px-6 py-16">
-        <!-- Content same as before -->
+        <p class="section-heading mb-4 text-center">OUR APPROACH</p>
+        <h2 class="text-4xl font-bold mb-12 text-center">
+            Full-cycle acceleration
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="copper-gradient rounded-2xl p-8">
+                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-search text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Identify Potential</h3>
+                <p class="opacity-80">
+                    Our expert team identifies promising tech startups with innovative solutions and significant market potential.
+                </p>
+            </div>
+            
+            <div class="copper-gradient rounded-2xl p-8">
+                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-coins text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Strategic Investment</h3>
+                <p class="opacity-80">
+                    Galliera Ventures provides capital alongside strategic guidance to accelerate growth and market penetration.
+                </p>
+            </div>
+            
+            <div class="copper-gradient rounded-2xl p-8">
+                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-cogs text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Technical Execution</h3>
+                <p class="opacity-80">
+                    Our network of technical partners provides development expertise to build and refine market-ready products.
+                </p>
+            </div>
+            
+            <div class="light-copper-gradient rounded-2xl p-8">
+                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-chart-bar text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Market Growth</h3>
+                <p class="opacity-80">
+                    Specialized growth partners implement strategies to achieve rapid market adoption and user acquisition.
+                </p>
+            </div>
+            
+            <div class="light-copper-gradient rounded-2xl p-8">
+                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-bullhorn text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Brand Amplification</h3>
+                <p class="opacity-80">
+                    Media partners create and distribute compelling content to build brand recognition and industry authority.
+                </p>
+            </div>
+            
+            <div class="light-copper-gradient rounded-2xl p-8">
+                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-rocket text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Global Scaling</h3>
+                <p class="opacity-80">
+                    Comprehensive support to scale operations internationally and capture global market opportunities.
+                </p>
+            </div>
+        </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="container mx-auto px-6 py-24">
-        <!-- Content same as before -->
+        <div class="copper-gradient rounded-3xl p-12 md:p-16 relative overflow-hidden">
+            <div class="dotted-line absolute w-96 h-96 -top-20 -right-20 z-0 rounded-full"></div>
+            <div class="dotted-line absolute w-64 h-64 -bottom-10 -left-10 z-0 rounded-full"></div>
+            
+            <div class="relative z-10 max-w-3xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    Ready to accelerate your tech vision?
+                </h2>
+                <p class="opacity-80 text-lg mb-10">
+                    Join forces with Galliera Group to transform your innovative idea into a market-leading success. Our global network and expert resources are ready to power your journey.
+                </p>
+                <button class="connect-btn px-10 py-4 rounded-full text-lg font-medium">
+                    Connect with us
+                </button>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer class="container mx-auto px-6 py-12">
-        <!-- Content same as before -->
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="text-2xl font-bold mb-6 md:mb-0">
+                galliera<sup class="text-xs">3</sup>
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-white border-opacity-10 mt-10 pt-10 text-center opacity-60 text-sm">
+            © 2023 Galliera Group. All rights reserved.
+        </div>
     </footer>
-
-    <!-- Chatbot Toggle Button -->
-    <div class="chatbot-toggle" id="chatbot-toggle">
-        <i class="fas fa-comment-alt"></i>
-    </div>
-
-    <!-- Chatbot Container -->
-    <div class="chatbot-container" id="chatbot-container">
-        <div class="chatbot-header">
-            <div class="flex items-center">
-                <div class="chatbot-avatar">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div>
-                    <div class="font-bold">Galliera AI</div>
-                    <div class="text-xs opacity-70">Assistant</div>
-                </div>
-            </div>
-            <div class="chatbot-close" id="chatbot-close">
-                <i class="fas fa-times"></i>
-            </div>
-        </div>
-        <div class="chatbot-messages" id="chatbot-messages">
-            <div class="message bot">
-                Hello! I'm Galliera AI, your assistant. How can I help you with our tech acceleration services today?
-            </div>
-            <div class="suggestion-chips">
-                <div class="suggestion-chip" onclick="sendMessage('Tell me about Galliera Group')">About Galliera Group</div>
-                <div class="suggestion-chip" onclick="sendMessage('What technologies do you use?')">Technologies</div>
-                <div class="suggestion-chip" onclick="sendMessage('How can we partner?')">Partnership</div>
-            </div>
-        </div>
-        <div class="chatbot-input">
-            <input type="text" id="chatbot-input-field" placeholder="Type your message..." onkeydown="if(event.key === 'Enter') sendMessageFromInput()">
-            <button class="chatbot-send" onclick="sendMessageFromInput()">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- JavaScript for chatbot functionality -->
-    <script>
-        // Chatbot toggle functionality
-        const chatbotToggle = document.getElementById('chatbot-toggle');
-        const chatbotContainer = document.getElementById('chatbot-container');
-        const chatbotClose = document.getElementById('chatbot-close');
-        const chatbotMessages = document.getElementById('chatbot-messages');
-        const chatbotInputField = document.getElementById('chatbot-input-field');
-
-        chatbotToggle.addEventListener('click', () => {
-            chatbotContainer.classList.add('active');
-        });
-
-        chatbotClose.addEventListener('click', () => {
-            chatbotContainer.classList.remove('active');
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Sample responses for the chatbot
-        const responses = {
-            "tell me about galliera group": "Galliera Group is a global tech accelerator driving innovation across ventures and development. We invest in, build, and scale startups with unparalleled expertise, bridging the gap between innovative ideas and market success.",
-            "what technologies do you use": "At Galliera, we use cutting-edge technologies including AI, blockchain, quantum computing, and advanced cloud infrastructure. Our technical partners specialize in web and mobile development, database solutions, and emerging technologies.",
-            "how can we partner": "There are multiple ways to partner with Galliera Group:\n1. As a startup seeking investment and acceleration\n2. As a technology provider joining our partner network\n3. As an investor participating in our funding rounds\n\nWould you like to discuss any specific partnership opportunity?",
-            "default": "I'm sorry, I don't have specific information about that. Would you like to connect with our team for more details about this topic?"
-        };
-
-        // Function to send a message from the user
-        function sendMessage(message) {
-            // Add user message to chat
-            const userMessageElement = document.createElement('div');
-            userMessageElement.className = 'message user';
-            userMessageElement.textContent = message;
-            chatbotMessages.appendChild(userMessageElement);
-
-            // Clear input field if this was called from input
-            chatbotInputField.value = '';
-
-            // Scroll to bottom
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-
-            // Show typing indicator
-            const typingIndicator = document.createElement('div');
-            typingIndicator.className = 'chatbot-typing';
-            typingIndicator.innerHTML = `
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-            `;
-            chatbotMessages.appendChild(typingIndicator);
-
-            // Process response after a delay to simulate thinking
-            setTimeout(() => {
-                // Remove typing indicator
-                chatbotMessages.removeChild(typingIndicator);
-                
-                // Get response
-                let responseText = getResponse(message);
-                
-                // Add bot response
-                const botMessageElement = document.createElement('div');
-                botMessageElement.className = 'message bot';
-                botMessageElement.textContent = responseText;
-                chatbotMessages.appendChild(botMessageElement);
-
-                // Add suggestion chips for certain responses
-                if (message.toLowerCase().includes('partner')) {
-                    const suggestionChips = document.createElement('div');
-                    suggestionChips.className = 'suggestion-chips';
-                    suggestionChips.innerHTML = `
-                        <div class="suggestion-chip" onclick="sendMessage('I represent a startup')">I represent a startup</div>
-                        <div class="suggestion-chip" onclick="sendMessage('I\'m a tech provider')">I'm a tech provider</div>
-                        <div class="suggestion-chip" onclick="sendMessage('I\'m an investor')">I'm an investor</div>
-                    `;
-                    chatbotMessages.appendChild(suggestionChips);
-                }
-
-                // Scroll to bottom
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            }, 1500);
-        }
-
-        // Function to get appropriate response
-        function getResponse(message) {
-            const lowercaseMessage = message.toLowerCase();
-            
-            if (lowercaseMessage.includes('galliera group') || lowercaseMessage.includes('about')) {
-                return responses["tell me about galliera group"];
-            } else if (lowercaseMessage.includes('technologies') || lowercaseMessage.includes('tech')) {
-                return responses["what technologies do you use"];
-            } else if (lowercaseMessage.includes('partner')) {
-                return responses["how can we partner"];
-            } else {
-                return responses["default"];
-            }
-        }
-
-        // Function to send message from input field
-        function sendMessageFromInput() {
-            const message = chatbotInputField.value.trim();
-            if (message) {
-                sendMessage(message);
-            }
-        }
-
-        // Initialize the page
-        window.onload = function() {
-            // Any initialization code can go here
-            console.log('Galliera website loaded successfully');
-        };
-    </script>
 </body>
 </html>
