@@ -16,159 +16,572 @@
             overflow-x: hidden;
         }
 
-        /* Add these styles to your existing style section */
-.dark-background {
-    background: linear-gradient(135deg, #2c1a12 0%, #6b4732 50%, #af7c5d 100%);
-}
-
-/* Chat Interface Styles */
-.chat-container {
-    background-color: rgba(15, 15, 15, 0.7);
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    margin: 40px auto;
-    overflow: hidden;
-    max-width: 800px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.chat-area {
-    height: 400px;
-    padding: 20px;
-    overflow-y: auto;
-    background-color: rgba(20, 20, 20, 0.5);
-}
-
-.message {
-    display: flex;
-    margin-bottom: 20px;
-}
-
-.message-content {
-    padding: 12px 16px;
-    border-radius: 16px;
-    max-width: 80%;
-}
-
-.user .message-content {
-    background-color: #8d5e40;
-    color: white;
-    margin-left: auto;
-    border-bottom-right-radius: 3px;
-}
-
-.bot .message-content {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-bottom-left-radius: 3px;
-}
-
-.avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.user-input {
-    display: flex;
-    padding: 16px;
-    background-color: rgba(30, 30, 30, 0.7);
-}
-
-.user-input input {
-    flex-grow: 1;
-    padding: 12px 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 16px;
-}
-
-.user-input input:focus {
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-.user-input button {
-    background-color: #8d5e40;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 0 20px;
-    margin-left: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.user-input button:hover {
-    background-color: #d4a785;
-}
-
-.chat-suggestions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.suggestion-chip {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 14px;
-}
-
-.suggestion-chip:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.typing-indicator {
-    display: flex;
-    padding: 12px 16px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    border-bottom-left-radius: 3px;
-    max-width: fit-content;
-}
-
-.typing-dot {
-    width: 8px;
-    height: 8px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    margin: 0 3px;
-    animation: typing-animation 1.4s infinite ease-in-out;
-}
-
-.typing-dot:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.typing-dot:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.typing-dot:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-@keyframes typing-animation {
-    0%, 60%, 100% {
-        transform: translateY(0);
-    }
-    30% {
-        transform: translateY(-5px);
-    }
-}
-
+        /* Full height hero section */
+        .hero-section {
+            min-height: calc(100vh - 140px); /* Accounting for nav height */
+            display: flex;
+            align-items: center;
+        }
         
+        /* Simpler Abstract Animation */
+        .innovation-animation {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .innovation-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+        
+        .innovation-circle {
+            position: absolute;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+        
+        .center-circle {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #8d5e40 0%, #d4a785 100%);
+            z-index: 3;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        .orbit-container {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .orbit {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .orbit-1 {
+            animation: spin 20s linear infinite;
+        }
+        
+        .orbit-2 {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            animation: spin 15s linear infinite reverse;
+        }
+        
+        .orbit-3 {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            animation: spin 10s linear infinite;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        
+        .orbit-particle-1 {
+            top: 0%;
+            left: 50%;
+            background: #d4a785;
+            animation: glow 4s ease-in-out infinite;
+        }
+        
+        .orbit-particle-2 {
+            top: 50%;
+            left: 0%;
+            background: #8d5e40;
+            animation: glow 4s ease-in-out infinite 1s;
+        }
+        
+        .orbit-particle-3 {
+            top: 100%;
+            left: 50%;
+            background: #af7c5d;
+            animation: glow 4s ease-in-out infinite 2s;
+        }
+        
+        .orbit-particle-4 {
+            top: 50%;
+            left: 100%;
+            background: #3d2218;
+            animation: glow 4s ease-in-out infinite 3s;
+        }
+        
+        .orbit-particle-5 {
+            top: 15%;
+            left: 85%;
+            background: #d4a785;
+            animation: glow 4s ease-in-out infinite 1.5s;
+        }
+        
+        .orbit-particle-6 {
+            top: 85%;
+            left: 15%;
+            background: #8d5e40;
+            animation: glow 4s ease-in-out infinite 2.5s;
+        }
+        
+        .connection-line {
+            position: absolute;
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
+            z-index: 1;
+        }
+        
+        .line-1 {
+            top: 45%;
+            left: 25%;
+            transform: rotate(45deg);
+            animation: fadeInOut 8s ease-in-out infinite;
+        }
+        
+        .line-2 {
+            top: 55%;
+            left: 45%;
+            transform: rotate(-30deg);
+            animation: fadeInOut 8s ease-in-out infinite 2s;
+        }
+        
+        .line-3 {
+            top: 35%;
+            left: 60%;
+            transform: rotate(60deg);
+            animation: fadeInOut 8s ease-in-out infinite 4s;
+        }
+        
+        .line-4 {
+            top: 65%;
+            left: 35%;
+            transform: rotate(-60deg);
+            animation: fadeInOut 8s ease-in-out infinite 6s;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            color: white;
+            z-index: 4;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .icon-1 {
+            top: 15%;
+            left: 25%;
+            background: linear-gradient(135deg, #3d2218 0%, #8d5e40 100%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .icon-2 {
+            top: 70%;
+            left: 20%;
+            background: linear-gradient(135deg, #8d5e40 0%, #d4a785 100%);
+            animation: float 6s ease-in-out infinite 2s;
+        }
+        
+        .icon-3 {
+            top: 25%;
+            left: 75%;
+            background: linear-gradient(135deg, #d4a785 0%, #af7c5d 100%);
+            animation: float 6s ease-in-out infinite 4s;
+        }
+        
+        .icon-4 {
+            top: 65%;
+            left: 75%;
+            background: linear-gradient(135deg, #3d2218 0%, #8d5e40 100%);
+            animation: float 6s ease-in-out infinite 1s;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            }
+        }
+        
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+                opacity: 1;
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+                opacity: 0.8;
+            }
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #3d2218 0%, #8d5e40 100%);
+            margin: 15% auto;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            position: relative;
+            text-align: center;
+            animation: slideIn 0.4s;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .close-modal:hover {
+            opacity: 0.7;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* ChatGPT-like Chat Interface Styles */
+        .chat-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            margin: 40px auto;
+            overflow: hidden;
+            max-width: 900px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            height: 550px;
+        }
+
+        .chat-header {
+            background: #ffffff;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e6e6e6;
+            z-index: 10;
+        }
+
+        .chat-header-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .chat-area {
+            flex-grow: 1;
+            padding: 0;
+            overflow-y: auto;
+            background-color: white;
+            scroll-behavior: smooth;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-area::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-area::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .chat-area::-webkit-scrollbar-thumb {
+            background-color: #d1d1d1;
+            border-radius: 3px;
+        }
+
+        .chat-area::-webkit-scrollbar-thumb:hover {
+            background-color: #b1b1b1;
+        }
+
+        .message-row {
+            width: 100%;
+            padding: 20px 24px;
+            animation: fade-in 0.3s ease-out;
+        }
+
+        .message-row.user {
+            background-color: #ffffff;
+        }
+
+        .message-row.bot {
+            background-color: #f7f7f8;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .message {
+            display: flex;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .user .message {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 90%;
+            line-height: 1.5;
+        }
+
+        .user .message-content {
+            color: #333;
+            text-align: right;
+        }
+
+        .bot .message-content {
+            color: #333;
+        }
+
+        .avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            background-color: #8d5e40;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .user-avatar {
+            background-color: #10a37f;
+            margin-left: 16px;
+            margin-right: 0;
+            order: 2;
+        }
+
+        .input-container {
+            padding: 10px 24px 20px 24px;
+            background-color: white;
+            border-top: 1px solid #f0f0f0;
+            position: relative;
+        }
+
+        .suggestions-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .suggestion-chip {
+            background-color: #f7f7f8;
+            padding: 8px 16px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 13px;
+            border: 1px solid #e0e0e0;
+            color: #333;
+        }
+
+        .suggestion-chip:hover {
+            background-color: #efefef;
+        }
+
+        .user-input-wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .user-input {
+            flex-grow: 1;
+            padding: 12px 16px;
+            border: none;
+            color: #333;
+            font-size: 15px;
+            background: transparent;
+            min-height: 24px;
+            max-height: 200px;
+            overflow-y: auto;
+            resize: none;
+        }
+
+        .user-input:focus {
+            outline: none;
+        }
+
+        .send-button {
+            background: none;
+            border: none;
+            color: #8d5e40;
+            cursor: pointer;
+            padding: 0 12px;
+            font-size: 16px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+
+        .send-button:hover {
+            color: #d4a785;
+        }
+
+        .send-button:disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            max-width: fit-content;
+        }
+
+        .typing-dots {
+            display: flex;
+            align-items: center;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #8d5e40;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typing-animation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing-animation {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-4px);
+            }
+        }
+        
+        /* Website styles */
         .copper-gradient {
             background: linear-gradient(135deg, #3d2218 0%, #8d5e40 100%);
         }
@@ -257,9 +670,35 @@
         .connection-line::after {
             right: -4px;
         }
+
+        .dark-background {
+            background: linear-gradient(135deg, #2c1a12 0%, #6b4732 50%, #af7c5d 100%);
+        }
+
+        .email-text {
+            font-size: 24px;
+            color: #ffffff;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 12px 24px;
+            border-radius: 8px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 class="text-2xl font-bold mb-6">Contact Us</h2>
+            <p class="mb-6">Reach out to us for any inquiries or collaboration opportunities:</p>
+            <div class="email-text">
+                <a href="mailto:contact@gallieragroup.com">contact@gallieragroup.com</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="container mx-auto px-6 py-8">
         <div class="flex justify-between items-center">
@@ -270,64 +709,107 @@
                 <a href="#ventures" class="nav-item">Ventures</a>
                 <a href="#tech" class="nav-item">Tech</a>
                 <a href="#help" class="nav-item">Who We Help</a>
-                <a href="#features" class="nav-item">Features</a>
+                <a href="#how-it-works" class="nav-item">How it works</a>
                 <a href="#contact" class="nav-item">Contact</a>
             </div>
-            <button class="connect-btn px-6 py-2 rounded-full">
+            <button class="connect-btn px-6 py-2 rounded-full" onclick="openModal()">
                 Get Started
             </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="container mx-auto px-6 py-24">
-        <div class="max-w-3xl">
-            <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
-                Accelerate your innovation
-            </h1>
-            <p class="text-lg md:text-xl opacity-80 mb-10 max-w-2xl">
-                Global tech accelerator driving innovation across ventures and development. Invest, build, and scale startups with unparalleled expertise.
-            </p>
-            <button class="connect-btn px-8 py-3 rounded-full text-lg font-medium">
-                Connect with us
-            </button>
+    <section class="container mx-auto px-6 hero-section">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+                    Accelerate your innovation
+                </h1>
+                <p class="text-lg md:text-xl opacity-80 mb-10 max-w-2xl">
+                    Global tech accelerator driving innovation across ventures and development. Invest, build, and scale startups with unparalleled expertise.
+                </p>
+                <button class="connect-btn px-8 py-3 rounded-full text-lg font-medium" onclick="openModal()">
+                    Connect with us
+                </button>
+            </div>
+            <div class="innovation-animation hidden md:block">
+                <div class="innovation-container">
+                    <!-- Center circle -->
+                    <div class="innovation-circle center-circle"></div>
+                    
+                    <!-- Orbits and particles -->
+                    <div class="orbit-container">
+                        <div class="orbit orbit-1">
+                            <div class="particle orbit-particle-1"></div>
+                            <div class="particle orbit-particle-2"></div>
+                            <div class="particle orbit-particle-3"></div>
+                            <div class="particle orbit-particle-4"></div>
+                        </div>
+                        
+                        <div class="orbit orbit-2">
+                            <div class="particle orbit-particle-5"></div>
+                            <div class="particle orbit-particle-6"></div>
+                        </div>
+                        
+                        <div class="orbit orbit-3"></div>
+                    </div>
+                    
+                    <!-- Connection lines -->
+                    <div class="connection-line line-1"></div>
+                    <div class="connection-line line-2"></div>
+                    <div class="connection-line line-3"></div>
+                    <div class="connection-line line-4"></div>
+                    
+                    <!-- Floating icons -->
+                    <div class="floating-icon icon-1">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="floating-icon icon-2">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="floating-icon icon-3">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="floating-icon icon-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Galliera AI Section -->
-<section id="galliera-ai" class="dark-background py-24">
-    <div class="container mx-auto px-6 text-center">
-        <p class="section-heading mb-4">INTERACT WITH</p>
-        <h2 class="text-5xl md:text-6xl font-bold mb-10">GALLIERA AI</h2>
-    </div>
-    
-    <!-- Chat Interface -->
-    <div class="container mx-auto px-6 pb-16">
-        <div class="chat-container">
-            <div class="chat-area" id="chat-area">
-                <div class="message bot">
-                    <div class="avatar">
-                        <i class="fas fa-robot"></i>
+    <section id="galliera-ai" class="dark-background py-24">
+        <div class="container mx-auto px-6 text-center">
+            <p class="section-heading mb-4">INTERACT WITH</p>
+            <h2 class="text-5xl md:text-6xl font-bold mb-10">GALLIERA AI</h2>
+        </div>
+        
+        <!-- Chat Interface -->
+        <div class="container mx-auto px-6 pb-16">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-header-title">Galliera Super Agent</div>
+                </div>
+                <div class="chat-area" id="chat-area">
+                    <!-- No welcome message as requested -->
+                </div>
+                <div class="input-container">
+                    <div class="suggestions-container">
+                        <div class="suggestion-chip" onclick="sendSuggestion('Tell me about Galliera Group')">Tell me about Galliera Group</div>
+                        <div class="suggestion-chip" onclick="sendSuggestion('What technologies do you use?')">What technologies do you use?</div>
+                        <div class="suggestion-chip" onclick="sendSuggestion('How can we partner?')">How can we partner?</div>
                     </div>
-                    <div class="message-content">
-                        Hey, it's Galliera AI - How can I help?
+                    <div class="user-input-wrapper">
+                        <input type="text" class="user-input" id="message-input" placeholder="Message Galliera Super Agent..." onkeydown="if(event.key==='Enter') sendUserMessage()">
+                        <button class="send-button" id="send-button" onclick="sendUserMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="chat-suggestions">
-                    <div class="suggestion-chip" onclick="sendMessage('Tell me about Galliera Group')">Tell me about Galliera Group</div>
-                    <div class="suggestion-chip" onclick="sendMessage('What technologies do you use?')">What technologies do you use?</div>
-                    <div class="suggestion-chip" onclick="sendMessage('How can we partner?')">How can we partner?</div>
-                </div>
-            </div>
-            <div class="user-input">
-                <input type="text" id="message-input" placeholder="Type your message here..." onkeydown="if(event.key==='Enter') sendUserMessage()">
-                <button onclick="sendUserMessage()">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Who We Help Section -->
     <section id="help" class="container mx-auto px-6 py-16">
@@ -524,8 +1006,8 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="container mx-auto px-6 py-16">
+    <!-- How it works Section (previously Features) -->
+    <section id="how-it-works" class="container mx-auto px-6 py-16">
         <p class="section-heading mb-4 text-center">OUR APPROACH</p>
         <h2 class="text-4xl font-bold mb-12 text-center">
             Full-cycle acceleration
@@ -595,81 +1077,80 @@
     </section>
 
     <!-- Meet The Experts Section -->
-<section id="experts" class="container mx-auto px-6 py-16">
-    <p class="section-heading mb-4 text-center">OUR TEAM</p>
-    <h2 class="text-4xl font-bold mb-12 text-center">
-        Meet the Experts
-    </h2>
-    
-    <div class="grid md:grid-cols-3 gap-8">
-        <!-- Human Expert 1 -->
-        <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden">
-            <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
-            <h3 class="text-xl font-semibold mb-1">LONIE</h3>
-            <p class="text-sm font-medium opacity-80 mb-4">Founder</p>
-            <p class="opacity-80 text-sm">
-                Serial entrepreneur and tech strategist. Founded Galliera Group to bridge the gap between innovation, capital, and technical execution in the global startup ecosystem.
-            </p>
-            <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
-        </div>
+    <section id="experts" class="container mx-auto px-6 py-16">
+        <p class="section-heading mb-4 text-center">OUR TEAM</p>
+        <h2 class="text-4xl font-bold mb-12 text-center">
+            Meet the Experts
+        </h2>
         
-        <!-- AI Expert -->
-        <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden">
-            <p class="uppercase text-sm opacity-70 mb-2">AI</p>
-            <h3 class="text-xl font-semibold mb-1">THE AGI</h3>
-            <p class="text-sm font-medium opacity-80 mb-4">Chief Intelligence</p>
-            <p class="opacity-80 text-sm">
-                The All-in-One AI Agent but currently limited to be an Advanced AI system specialized in market analysis and trend forecasting. Provides data-driven insights for investment decisions.
-            </p>
-            <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Human Expert 1 -->
+            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden">
+                <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
+                <h3 class="text-xl font-semibold mb-1">LONIE</h3>
+                <p class="text-sm font-medium opacity-80 mb-4">Founder</p>
+                <p class="opacity-80 text-sm">
+                    Serial entrepreneur and tech strategist. Founded Galliera Group to bridge the gap between innovation, capital, and technical execution in the global startup ecosystem.
+                </p>
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+            </div>
+            
+            <!-- AI Expert -->
+            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden">
+                <p class="uppercase text-sm opacity-70 mb-2">AI</p>
+                <h3 class="text-xl font-semibold mb-1">THE AGI</h3>
+                <p class="text-sm font-medium opacity-80 mb-4">Chief Intelligence</p>
+                <p class="opacity-80 text-sm">
+                    The All-in-One AI Agent but currently limited to be an Advanced AI system specialized in market analysis and trend forecasting. Provides data-driven insights for investment decisions.
+                </p>
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+            </div>
+            
+            <!-- Human Expert 2 -->
+            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden">
+                <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
+                <h3 class="text-xl font-semibold mb-1">ALEX</h3>
+                <p class="text-sm font-medium opacity-80 mb-4">Head of Investment</p>
+                <p class="opacity-80 text-sm">
+                    Former VC partner with 10+ years of experience in tech investments. Expert in identifying promising early-stage startups.
+                </p>
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+            </div>
+            
+            <!-- Human Expert 3 -->
+            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden">
+                <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
+                <h3 class="text-xl font-semibold mb-1">MICHAEL</h3>
+                <p class="text-sm font-medium opacity-80 mb-4">CTO</p>
+                <p class="opacity-80 text-sm">
+                    Tech innovator with background in AI and distributed systems. Leads the technical strategy and development partnerships.
+                </p>
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+            </div>
+            
+            <!-- AI Expert 2 -->
+            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden">
+                <p class="uppercase text-sm opacity-70 mb-2">AI</p>
+                <h3 class="text-xl font-semibold mb-1">THE DONNA</h3>
+                <p class="text-sm font-medium opacity-80 mb-4">Operations Intelligence</p>
+                <p class="opacity-80 text-sm">
+                    AI operations specialist. Manages complex scheduling, communications, and organizational logistics with superhuman efficiency.
+                </p>
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+            </div>
+            
+            <!-- AI Expert 3 -->
+            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden">
+                <p class="uppercase text-sm opacity-70 mb-2">AI</p>
+                <h3 class="text-xl font-semibold mb-1">THE BENJAMIN</h3>
+                <p class="text-sm font-medium opacity-80 mb-4">Financial Intelligence</p>
+                <p class="opacity-80 text-sm">
+                    AI financial analyst. Monitors markets, performs due diligence, and optimizes portfolio allocation with predictive modeling.
+                </p>
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+            </div>
         </div>
-        
-        <!-- Human Expert 2 -->
-        <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden">
-            <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
-            <h3 class="text-xl font-semibold mb-1">ALEX</h3>
-            <p class="text-sm font-medium opacity-80 mb-4">Head of Investment</p>
-            <p class="opacity-80 text-sm">
-                Former VC partner with 10+ years of experience in tech investments. Expert in identifying promising early-stage startups.
-            </p>
-            <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
-        </div>
-        
-        <!-- Human Expert 3 -->
-        <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden">
-            <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
-            <h3 class="text-xl font-semibold mb-1">MICHAEL</h3>
-            <p class="text-sm font-medium opacity-80 mb-4">CTO</p>
-            <p class="opacity-80 text-sm">
-                Tech innovator with background in AI and distributed systems. Leads the technical strategy and development partnerships.
-            </p>
-            <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
-        </div>
-        
-        <!-- AI Expert 2 -->
-        <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden">
-            <p class="uppercase text-sm opacity-70 mb-2">AI</p>
-            <h3 class="text-xl font-semibold mb-1">THE DONNA</h3>
-            <p class="text-sm font-medium opacity-80 mb-4">Operations Intelligence</p>
-            <p class="opacity-80 text-sm">
-                AI operations specialist. Manages complex scheduling, communications, and organizational logistics with superhuman efficiency.
-            </p>
-            <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
-        </div>
-        
-        <!-- AI Expert 3 -->
-        <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden">
-            <p class="uppercase text-sm opacity-70 mb-2">AI</p>
-            <h3 class="text-xl font-semibold mb-1">THE BENJAMIN</h3>
-            <p class="text-sm font-medium opacity-80 mb-4">Financial Intelligence</p>
-            <p class="opacity-80 text-sm">
-                AI financial analyst. Monitors markets, performs due diligence, and optimizes portfolio allocation with predictive modeling.
-            </p>
-            <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
-        </div>
-    </div>
-</section>
-
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="container mx-auto px-6 py-24">
@@ -684,7 +1165,7 @@
                 <p class="opacity-80 text-lg mb-10">
                     Join forces with Galliera Group to transform your innovative idea into a market-leading success. Our global network and expert resources are ready to power your journey.
                 </p>
-                <button class="connect-btn px-10 py-4 rounded-full text-lg font-medium">
+                <button class="connect-btn px-10 py-4 rounded-full text-lg font-medium" onclick="openModal()">
                     Connect with us
                 </button>
             </div>
@@ -716,5 +1197,150 @@
             © 2023 Galliera Group. All rights reserved.
         </div>
     </footer>
+
+    <script>
+        // Modal functionality
+        function openModal() {
+            document.getElementById('contactModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // Chatbot functionality
+        const chatArea = document.getElementById('chat-area');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        
+        // Bot responses
+        const botResponses = {
+            'tell me about galliera group': "Galliera Group is a global tech accelerator that bridges the gap between innovative ideas and market success. We combine venture capital investment with technical expertise and strategic guidance to help startups build, scale, and succeed globally.",
+            'what technologies do you use': "At Galliera Group, we leverage cutting-edge technologies across various domains including AI/ML, blockchain, cloud infrastructure, quantum computing, and IoT. Our technical partners specialize in modern web and mobile development frameworks, data science tools, and enterprise-grade solutions.",
+            'how can we partner': "There are multiple ways to partner with Galliera Group: 1) As a startup seeking investment and technical support, 2) As a technical service provider joining our network of partners, 3) As an investor looking to co-invest in promising tech startups, or 4) As an industry expert interested in mentoring our portfolio companies. Please contact us at contact@gallieragroup.com to discuss partnership opportunities.",
+            'default': "Thank you for your message. To provide more specific information on how Galliera Group can help accelerate your innovation, please contact us at contact@gallieragroup.com for a personalized consultation."
+        };
+        
+        // Function to add a message to the chat
+        function addMessage(content, isUser = false) {
+            const messageRow = document.createElement('div');
+            messageRow.className = `message-row ${isUser ? 'user' : 'bot'}`;
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            
+            if (!isUser) {
+                const avatar = document.createElement('div');
+                avatar.className = 'avatar';
+                avatar.innerHTML = '<i class="fas fa-robot"></i>';
+                messageDiv.appendChild(avatar);
+            }
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.innerHTML = `<p>${content}</p>`;
+            messageDiv.appendChild(messageContent);
+            
+            if (isUser) {
+                const avatar = document.createElement('div');
+                avatar.className = 'avatar user-avatar';
+                avatar.innerHTML = '<i class="fas fa-user"></i>';
+                messageDiv.appendChild(avatar);
+            }
+            
+            messageRow.appendChild(messageDiv);
+            chatArea.appendChild(messageRow);
+            
+            // Scroll to bottom
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+        
+        // Function to add typing indicator
+        function showTypingIndicator() {
+            const indicatorRow = document.createElement('div');
+            indicatorRow.className = 'message-row bot';
+            indicatorRow.id = 'typing-indicator-row';
+            
+            const indicatorDiv = document.createElement('div');
+            indicatorDiv.className = 'message';
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar';
+            avatar.innerHTML = '<i class="fas fa-robot"></i>';
+            
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'typing-indicator';
+            typingIndicator.innerHTML = `
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            
+            indicatorDiv.appendChild(avatar);
+            indicatorDiv.appendChild(typingIndicator);
+            indicatorRow.appendChild(indicatorDiv);
+            chatArea.appendChild(indicatorRow);
+            
+            // Scroll to bottom
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+        
+        // Function to remove typing indicator
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator-row');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+        
+        // Function to send message
+        function sendUserMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                // Add user message
+                addMessage(message, true);
+                
+                // Clear input
+                messageInput.value = '';
+                
+                // Show typing indicator
+                showTypingIndicator();
+                
+                // Simulate bot thinking and respond after a delay
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    
+                    // Get bot response
+                    let response = botResponses.default;
+                    const messageLower = message.toLowerCase();
+                    
+                    for (const [key, value] of Object.entries(botResponses)) {
+                        if (messageLower.includes(key)) {
+                            response = value;
+                            break;
+                        }
+                    }
+                    
+                    addMessage(response);
+                }, 1500);
+            }
+        }
+        
+        // Function to handle suggestion chips
+        function sendSuggestion(text) {
+            messageInput.value = text;
+            sendUserMessage();
+        }
+    </script>
 </body>
 </html>
