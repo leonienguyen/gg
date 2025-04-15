@@ -23,256 +23,204 @@
             align-items: center;
         }
         
-        /* Simpler Abstract Animation */
+        /* Simpler, Interactive Abstract Animation */
         .innovation-animation {
             position: relative;
             width: 100%;
             height: 450px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
         .innovation-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
         }
         
         .innovation-circle {
             position: absolute;
             border-radius: 50%;
+            background: rgba(212, 167, 133, 0.2);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s ease;
+            animation: pulse-grow 6s infinite ease-in-out;
         }
         
-        .center-circle {
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            animation-delay: 0s;
+        }
+        
+        .circle-2 {
+            width: 240px;
+            height: 240px;
+            background: rgba(141, 94, 64, 0.2);
+            animation-delay: 0.5s;
+        }
+        
+        .circle-3 {
+            width: 180px;
+            height: 180px;
+            background: rgba(212, 167, 133, 0.3);
+            animation-delay: 1s;
+        }
+        
+        .innovation-center {
+            position: absolute;
             width: 120px;
             height: 120px;
             background: linear-gradient(135deg, #8d5e40 0%, #d4a785 100%);
-            z-index: 3;
-            animation: pulse 4s ease-in-out infinite;
-        }
-        
-        .orbit-container {
-            position: absolute;
-            width: 300px;
-            height: 300px;
+            border-radius: 50%;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 5;
         }
         
-        .orbit {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .orbit-1 {
-            animation: spin 20s linear infinite;
-        }
-        
-        .orbit-2 {
-            width: 80%;
-            height: 80%;
-            top: 10%;
-            left: 10%;
-            animation: spin 15s linear infinite reverse;
-        }
-        
-        .orbit-3 {
-            width: 60%;
-            height: 60%;
-            top: 20%;
-            left: 20%;
-            animation: spin 10s linear infinite;
+        .innovation-center i {
+            font-size: 40px;
+            color: white;
         }
         
         .particle {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background: white;
             border-radius: 50%;
-            transform: translate(-50%, -50%);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: particle-move 8s infinite linear;
         }
         
-        .orbit-particle-1 {
-            top: 0%;
-            left: 50%;
-            background: #d4a785;
-            animation: glow 4s ease-in-out infinite;
+        .particle-1 {
+            top: 30%;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 12s;
         }
         
-        .orbit-particle-2 {
-            top: 50%;
-            left: 0%;
-            background: #8d5e40;
-            animation: glow 4s ease-in-out infinite 1s;
+        .particle-2 {
+            top: 70%;
+            left: 20%;
+            animation-delay: 1s;
+            animation-duration: 10s;
         }
         
-        .orbit-particle-3 {
-            top: 100%;
-            left: 50%;
-            background: #af7c5d;
-            animation: glow 4s ease-in-out infinite 2s;
+        .particle-3 {
+            top: 20%;
+            left: 80%;
+            animation-delay: 2s;
+            animation-duration: 14s;
         }
         
-        .orbit-particle-4 {
-            top: 50%;
-            left: 100%;
-            background: #3d2218;
-            animation: glow 4s ease-in-out infinite 3s;
+        .particle-4 {
+            top: 80%;
+            left: 75%;
+            animation-delay: 3s;
+            animation-duration: 11s;
         }
         
-        .orbit-particle-5 {
-            top: 15%;
-            left: 85%;
-            background: #d4a785;
-            animation: glow 4s ease-in-out infinite 1.5s;
-        }
-        
-        .orbit-particle-6 {
-            top: 85%;
-            left: 15%;
-            background: #8d5e40;
-            animation: glow 4s ease-in-out infinite 2.5s;
-        }
-        
-        .connection-line {
+        .orbit {
             position: absolute;
-            width: 100px;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
-            z-index: 1;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         
-        .line-1 {
-            top: 45%;
-            left: 25%;
-            transform: rotate(45deg);
-            animation: fadeInOut 8s ease-in-out infinite;
+        .orbit-1 {
+            width: 340px;
+            height: 340px;
+            animation: rotate 20s linear infinite;
         }
         
-        .line-2 {
-            top: 55%;
-            left: 45%;
-            transform: rotate(-30deg);
-            animation: fadeInOut 8s ease-in-out infinite 2s;
+        .orbit-2 {
+            width: 240px;
+            height: 240px;
+            animation: rotate 15s linear infinite reverse;
         }
         
-        .line-3 {
-            top: 35%;
-            left: 60%;
-            transform: rotate(60deg);
-            animation: fadeInOut 8s ease-in-out infinite 4s;
-        }
-        
-        .line-4 {
-            top: 65%;
-            left: 35%;
-            transform: rotate(-60deg);
-            animation: fadeInOut 8s ease-in-out infinite 6s;
-        }
-        
-        .floating-icon {
+        .orbit-dot {
             position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4a785 0%, #8d5e40 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             z-index: 4;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
-        .icon-1 {
-            top: 15%;
-            left: 25%;
-            background: linear-gradient(135deg, #3d2218 0%, #8d5e40 100%);
-            animation: float 6s ease-in-out infinite;
+        .orbit-dot i {
+            font-size: 12px;
+            color: white;
         }
         
-        .icon-2 {
-            top: 70%;
-            left: 20%;
-            background: linear-gradient(135deg, #8d5e40 0%, #d4a785 100%);
-            animation: float 6s ease-in-out infinite 2s;
+        .dot-1 {
+            top: -12px;
+            left: calc(50% - 12px);
         }
         
-        .icon-3 {
-            top: 25%;
-            left: 75%;
-            background: linear-gradient(135deg, #d4a785 0%, #af7c5d 100%);
-            animation: float 6s ease-in-out infinite 4s;
+        .dot-2 {
+            bottom: -12px;
+            left: calc(50% - 12px);
         }
         
-        .icon-4 {
-            top: 65%;
-            left: 75%;
-            background: linear-gradient(135deg, #3d2218 0%, #8d5e40 100%);
-            animation: float 6s ease-in-out infinite 1s;
+        .dot-3 {
+            left: -12px;
+            top: calc(50% - 12px);
         }
         
-        @keyframes pulse {
+        .dot-4 {
+            right: -12px;
+            top: calc(50% - 12px);
+        }
+        
+        @keyframes pulse-grow {
             0%, 100% {
                 transform: translate(-50%, -50%) scale(1);
-                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                opacity: 0.2;
             }
             50% {
                 transform: translate(-50%, -50%) scale(1.1);
-                box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+                opacity: 0.3;
             }
         }
         
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-        
-        @keyframes glow {
-            0%, 100% {
-                box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-                opacity: 1;
-            }
-            50% {
-                box-shadow: 0 0 20px rgba(255, 255, 255, 1);
-                opacity: 0.8;
-            }
-        }
-        
-        @keyframes fadeInOut {
-            0%, 100% {
+        @keyframes particle-move {
+            0% {
+                transform: translate(0, 0) scale(0.8);
                 opacity: 0;
             }
-            50% {
-                opacity: 0.8;
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100px, -100px) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
             }
         }
         
@@ -335,31 +283,34 @@
             }
         }
         
-        /* ChatGPT-like Chat Interface Styles */
+        /* Improved ChatGPT-like Chat Interface Styles */
         .chat-container {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.98);
             border-radius: 8px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
             margin: 40px auto;
             overflow: hidden;
-            max-width: 900px;
+            max-width: 700px; /* Smaller width */
             color: #333;
             display: flex;
             flex-direction: column;
-            height: 550px;
+            min-height: 400px; /* Smaller initial height */
+            max-height: 80vh; /* Maximum height relative to viewport */
+            transition: height 0.3s ease;
         }
 
         .chat-header {
-            background: #ffffff;
-            padding: 16px 24px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 20px;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #e6e6e6;
+            border-bottom: 1px solid rgba(230, 230, 230, 0.8);
             z-index: 10;
+            backdrop-filter: blur(5px);
         }
 
         .chat-header-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             color: #333;
         }
@@ -368,10 +319,12 @@
             flex-grow: 1;
             padding: 0;
             overflow-y: auto;
-            background-color: white;
+            background-color: transparent;
             scroll-behavior: smooth;
             display: flex;
             flex-direction: column;
+            min-height: 280px; /* Smaller chat area */
+            max-height: calc(80vh - 120px); /* Auto adjust for larger content */
         }
 
         .chat-area::-webkit-scrollbar {
@@ -379,31 +332,31 @@
         }
 
         .chat-area::-webkit-scrollbar-track {
-            background-color: #f1f1f1;
+            background-color: rgba(241, 241, 241, 0.5);
             border-radius: 3px;
         }
 
         .chat-area::-webkit-scrollbar-thumb {
-            background-color: #d1d1d1;
+            background-color: rgba(209, 209, 209, 0.8);
             border-radius: 3px;
         }
 
         .chat-area::-webkit-scrollbar-thumb:hover {
-            background-color: #b1b1b1;
+            background-color: rgba(177, 177, 177, 0.8);
         }
 
         .message-row {
             width: 100%;
-            padding: 20px 24px;
+            padding: 16px 20px;
             animation: fade-in 0.3s ease-out;
         }
 
         .message-row.user {
-            background-color: #ffffff;
+            background-color: transparent;
         }
 
         .message-row.bot {
-            background-color: #f7f7f8;
+            background-color: rgba(247, 247, 248, 0.7);
         }
 
         @keyframes fade-in {
@@ -417,7 +370,7 @@
 
         .message {
             display: flex;
-            max-width: 800px;
+            max-width: 650px;
             margin: 0 auto;
         }
 
@@ -440,74 +393,75 @@
         }
 
         .avatar {
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 16px;
+            margin-right: 14px;
             background-color: #8d5e40;
             color: white;
             flex-shrink: 0;
+            font-size: 13px;
         }
 
         .user-avatar {
             background-color: #10a37f;
-            margin-left: 16px;
+            margin-left: 14px;
             margin-right: 0;
             order: 2;
         }
 
         .input-container {
-            padding: 10px 24px 20px 24px;
-            background-color: white;
-            border-top: 1px solid #f0f0f0;
+            padding: 8px 20px 16px 20px;
+            background-color: transparent;
+            border-top: 1px solid rgba(240, 240, 240, 0.7);
             position: relative;
         }
 
         .suggestions-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 16px;
+            gap: 6px;
+            margin-bottom: 12px;
         }
 
         .suggestion-chip {
-            background-color: #f7f7f8;
-            padding: 8px 16px;
+            background-color: rgba(247, 247, 248, 0.8);
+            padding: 6px 14px;
             border-radius: 16px;
             cursor: pointer;
             transition: background-color 0.2s;
-            font-size: 13px;
-            border: 1px solid #e0e0e0;
+            font-size: 12px;
+            border: 1px solid rgba(224, 224, 224, 0.7);
             color: #333;
         }
 
         .suggestion-chip:hover {
-            background-color: #efefef;
+            background-color: rgba(239, 239, 239, 0.9);
         }
 
         .user-input-wrapper {
             display: flex;
             align-items: center;
             width: 100%;
-            border: 1px solid #e0e0e0;
+            border: 1px solid rgba(224, 224, 224, 0.7);
             border-radius: 8px;
-            background-color: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
             position: relative;
         }
 
         .user-input {
             flex-grow: 1;
-            padding: 12px 16px;
+            padding: 10px 14px;
             border: none;
             color: #333;
-            font-size: 15px;
+            font-size: 14px;
             background: transparent;
-            min-height: 24px;
-            max-height: 200px;
+            min-height: 22px;
+            max-height: 150px;
             overflow-y: auto;
             resize: none;
         }
@@ -521,9 +475,9 @@
             border: none;
             color: #8d5e40;
             cursor: pointer;
-            padding: 0 12px;
-            font-size: 16px;
-            height: 40px;
+            padding: 0 10px;
+            font-size: 15px;
+            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -542,7 +496,7 @@
         .typing-indicator {
             display: flex;
             align-items: center;
-            padding: 14px 16px;
+            padding: 12px 14px;
             max-width: fit-content;
         }
 
@@ -552,8 +506,8 @@
         }
 
         .typing-dot {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background-color: #8d5e40;
             border-radius: 50%;
             margin: 0 2px;
@@ -577,7 +531,7 @@
                 transform: translateY(0);
             }
             30% {
-                transform: translateY(-4px);
+                transform: translateY(-3px);
             }
         }
         
@@ -674,6 +628,25 @@
         .dark-background {
             background: linear-gradient(135deg, #2c1a12 0%, #6b4732 50%, #af7c5d 100%);
         }
+        
+        /* Improved background transition for the AI section */
+        .ai-section-bg {
+            background: linear-gradient(180deg, rgba(44, 26, 18, 0.7) 0%, rgba(107, 71, 50, 0.9) 100%);
+            box-shadow: 0 -50px 100px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ai-section-bg::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(180deg, rgba(44, 26, 18, 0) 0%, rgba(44, 26, 18, 0.7) 100%);
+            z-index: 1;
+        }
 
         .email-text {
             font-size: 24px;
@@ -683,6 +656,53 @@
             padding: 12px 24px;
             border-radius: 8px;
             display: inline-block;
+        }
+        
+        /* Team photos styles */
+        .team-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            margin: 0 auto 20px auto;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .expert-card {
+            transition: all 0.3s ease;
+        }
+        
+        .expert-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .expert-card:hover .team-photo {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .photo-overlay {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .photo-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(141, 94, 64, 0.2) 0%, rgba(212, 167, 133, 0.2) 100%);
+            z-index: 2;
         }
     </style>
 </head>
@@ -710,6 +730,7 @@
                 <a href="#tech" class="nav-item">Tech</a>
                 <a href="#help" class="nav-item">Who We Help</a>
                 <a href="#how-it-works" class="nav-item">How it works</a>
+                <a href="#experts" class="nav-item">Team</a>
                 <a href="#contact" class="nav-item">Contact</a>
             </div>
             <button class="connect-btn px-6 py-2 rounded-full" onclick="openModal()">
@@ -734,52 +755,43 @@
             </div>
             <div class="innovation-animation hidden md:block">
                 <div class="innovation-container">
-                    <!-- Center circle -->
-                    <div class="innovation-circle center-circle"></div>
+                    <div class="innovation-circle circle-1"></div>
+                    <div class="innovation-circle circle-2"></div>
+                    <div class="innovation-circle circle-3"></div>
                     
-                    <!-- Orbits and particles -->
-                    <div class="orbit-container">
-                        <div class="orbit orbit-1">
-                            <div class="particle orbit-particle-1"></div>
-                            <div class="particle orbit-particle-2"></div>
-                            <div class="particle orbit-particle-3"></div>
-                            <div class="particle orbit-particle-4"></div>
+                    <div class="orbit orbit-1">
+                        <div class="orbit-dot dot-1">
+                            <i class="fas fa-rocket"></i>
                         </div>
-                        
-                        <div class="orbit orbit-2">
-                            <div class="particle orbit-particle-5"></div>
-                            <div class="particle orbit-particle-6"></div>
+                        <div class="orbit-dot dot-2">
+                            <i class="fas fa-cogs"></i>
                         </div>
-                        
-                        <div class="orbit orbit-3"></div>
                     </div>
                     
-                    <!-- Connection lines -->
-                    <div class="connection-line line-1"></div>
-                    <div class="connection-line line-2"></div>
-                    <div class="connection-line line-3"></div>
-                    <div class="connection-line line-4"></div>
+                    <div class="orbit orbit-2">
+                        <div class="orbit-dot dot-3">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="orbit-dot dot-4">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                    </div>
                     
-                    <!-- Floating icons -->
-                    <div class="floating-icon icon-1">
+                    <div class="innovation-center">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <div class="floating-icon icon-2">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <div class="floating-icon icon-3">
-                        <i class="fas fa-cube"></i>
-                    </div>
-                    <div class="floating-icon icon-4">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
                 </div>
+                
+                <div class="particle particle-1"></div>
+                <div class="particle particle-2"></div>
+                <div class="particle particle-3"></div>
+                <div class="particle particle-4"></div>
             </div>
         </div>
     </section>
 
     <!-- Galliera AI Section -->
-    <section id="galliera-ai" class="dark-background py-24">
+    <section id="galliera-ai" class="ai-section-bg py-24">
         <div class="container mx-auto px-6 text-center">
             <p class="section-heading mb-4">INTERACT WITH</p>
             <h2 class="text-5xl md:text-6xl font-bold mb-10">GALLIERA AI</h2>
@@ -1006,7 +1018,7 @@
         </div>
     </section>
 
-    <!-- How it works Section (previously Features) -->
+    <!-- How it works Section (formerly Features) -->
     <section id="how-it-works" class="container mx-auto px-6 py-16">
         <p class="section-heading mb-4 text-center">OUR APPROACH</p>
         <h2 class="text-4xl font-bold mb-12 text-center">
@@ -1085,69 +1097,87 @@
         
         <div class="grid md:grid-cols-3 gap-8">
             <!-- Human Expert 1 -->
-            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden">
+            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+                <div class="photo-overlay">
+                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Lonie" class="team-photo">
+                </div>
                 <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
-                <h3 class="text-xl font-semibold mb-1">LEONIE</h3>
+                <h3 class="text-xl font-semibold mb-1">LONIE</h3>
                 <p class="text-sm font-medium opacity-80 mb-4">Founder</p>
                 <p class="opacity-80 text-sm">
                     Serial entrepreneur and tech strategist. Founded Galliera Group to bridge the gap between innovation, capital, and technical execution in the global startup ecosystem.
                 </p>
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
             </div>
             
             <!-- AI Expert -->
-            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden">
+            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+                <div class="photo-overlay">
+                    <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="THE AGI" class="team-photo">
+                </div>
                 <p class="uppercase text-sm opacity-70 mb-2">AI</p>
                 <h3 class="text-xl font-semibold mb-1">THE AGI</h3>
-                <p class="text-sm font-medium opacity-80 mb-4">Chief Intelligence Officer</p>
+                <p class="text-sm font-medium opacity-80 mb-4">Chief Intelligence</p>
                 <p class="opacity-80 text-sm">
                     The All-in-One AI Agent but currently limited to be an Advanced AI system specialized in market analysis and trend forecasting. Provides data-driven insights for investment decisions.
                 </p>
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
             </div>
             
             <!-- Human Expert 2 -->
-            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden">
+            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+                <div class="photo-overlay">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Alex" class="team-photo">
+                </div>
                 <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
                 <h3 class="text-xl font-semibold mb-1">ALEX</h3>
                 <p class="text-sm font-medium opacity-80 mb-4">Head of Investment</p>
                 <p class="opacity-80 text-sm">
                     Former VC partner with 10+ years of experience in tech investments. Expert in identifying promising early-stage startups.
                 </p>
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
             </div>
             
             <!-- Human Expert 3 -->
-            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden">
+            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+                <div class="photo-overlay">
+                    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Michael" class="team-photo">
+                </div>
                 <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
                 <h3 class="text-xl font-semibold mb-1">MICHAEL</h3>
                 <p class="text-sm font-medium opacity-80 mb-4">CTO</p>
                 <p class="opacity-80 text-sm">
                     Tech innovator with background in AI and distributed systems. Leads the technical strategy and development partnerships.
                 </p>
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
             </div>
             
             <!-- AI Expert 2 -->
-            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden">
+            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+                <div class="photo-overlay">
+                    <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="THE DONNA" class="team-photo">
+                </div>
                 <p class="uppercase text-sm opacity-70 mb-2">AI</p>
                 <h3 class="text-xl font-semibold mb-1">THE DONNA</h3>
                 <p class="text-sm font-medium opacity-80 mb-4">Operations Intelligence</p>
                 <p class="opacity-80 text-sm">
                     AI operations specialist. Manages complex scheduling, communications, and organizational logistics with superhuman efficiency.
                 </p>
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
             </div>
             
             <!-- AI Expert 3 -->
-            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden">
+            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+                <div class="photo-overlay">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="THE BENJAMIN" class="team-photo">
+                </div>
                 <p class="uppercase text-sm opacity-70 mb-2">AI</p>
                 <h3 class="text-xl font-semibold mb-1">THE BENJAMIN</h3>
                 <p class="text-sm font-medium opacity-80 mb-4">Financial Intelligence</p>
                 <p class="opacity-80 text-sm">
                     AI financial analyst. Monitors markets, performs due diligence, and optimizes portfolio allocation with predictive modeling.
                 </p>
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
             </div>
         </div>
     </section>
@@ -1198,6 +1228,7 @@
         </div>
     </footer>
 
+    <!-- JavaScript for Modal and Chat Functionality -->
     <script>
         // Modal functionality
         function openModal() {
@@ -1212,135 +1243,161 @@
         window.onclick = function(event) {
             const modal = document.getElementById('contactModal');
             if (event.target == modal) {
-                modal.style.display = 'none';
+                closeModal();
             }
         }
         
-        // Chatbot functionality
-        const chatArea = document.getElementById('chat-area');
-        const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
+        // Chat functionality
+        function sendUserMessage() {
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value.trim();
+            
+            if (message) {
+                addUserMessage(message);
+                messageInput.value = '';
+                
+                // Simulate AI thinking with delay
+                setTimeout(() => {
+                    showTypingIndicator();
+                    
+                    // Simulate AI response time
+                    setTimeout(() => {
+                        hideTypingIndicator();
+                        respondToMessage(message);
+                    }, 1500);
+                }, 500);
+            }
+        }
         
-        // Bot responses
-        const botResponses = {
-            'tell me about galliera group': "Galliera Group is a global tech accelerator that bridges the gap between innovative ideas and market success. We combine venture capital investment with technical expertise and strategic guidance to help startups build, scale, and succeed globally.",
-            'what technologies do you use': "At Galliera Group, we leverage cutting-edge technologies across various domains including AI/ML, blockchain, cloud infrastructure, quantum computing, and IoT. Our technical partners specialize in modern web and mobile development frameworks, data science tools, and enterprise-grade solutions.",
-            'how can we partner': "There are multiple ways to partner with Galliera Group: 1) As a startup seeking investment and technical support, 2) As a technical service provider joining our network of partners, 3) As an investor looking to co-invest in promising tech startups, or 4) As an industry expert interested in mentoring our portfolio companies. Please contact us at contact@gallieragroup.com to discuss partnership opportunities.",
-            'default': "Thank you for your message. To provide more specific information on how Galliera Group can help accelerate your innovation, please contact us at contact@gallieragroup.com for a personalized consultation."
-        };
+        function sendSuggestion(suggestion) {
+            addUserMessage(suggestion);
+            
+            // Simulate AI thinking with delay
+            setTimeout(() => {
+                showTypingIndicator();
+                
+                // Simulate AI response time
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    respondToMessage(suggestion);
+                }, 1500);
+            }, 500);
+        }
         
-        // Function to add a message to the chat
-        function addMessage(content, isUser = false) {
+        function addUserMessage(message) {
+            const chatArea = document.getElementById('chat-area');
             const messageRow = document.createElement('div');
-            messageRow.className = `message-row ${isUser ? 'user' : 'bot'}`;
+            messageRow.className = 'message-row user';
             
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message';
-            
-            if (!isUser) {
-                const avatar = document.createElement('div');
-                avatar.className = 'avatar';
-                avatar.innerHTML = '<i class="fas fa-robot"></i>';
-                messageDiv.appendChild(avatar);
-            }
-            
-            const messageContent = document.createElement('div');
-            messageContent.className = 'message-content';
-            messageContent.innerHTML = `<p>${content}</p>`;
-            messageDiv.appendChild(messageContent);
-            
-            if (isUser) {
-                const avatar = document.createElement('div');
-                avatar.className = 'avatar user-avatar';
-                avatar.innerHTML = '<i class="fas fa-user"></i>';
-                messageDiv.appendChild(avatar);
-            }
-            
-            messageRow.appendChild(messageDiv);
-            chatArea.appendChild(messageRow);
-            
-            // Scroll to bottom
-            chatArea.scrollTop = chatArea.scrollHeight;
-        }
-        
-        // Function to add typing indicator
-        function showTypingIndicator() {
-            const indicatorRow = document.createElement('div');
-            indicatorRow.className = 'message-row bot';
-            indicatorRow.id = 'typing-indicator-row';
-            
-            const indicatorDiv = document.createElement('div');
-            indicatorDiv.className = 'message';
-            
-            const avatar = document.createElement('div');
-            avatar.className = 'avatar';
-            avatar.innerHTML = '<i class="fas fa-robot"></i>';
-            
-            const typingIndicator = document.createElement('div');
-            typingIndicator.className = 'typing-indicator';
-            typingIndicator.innerHTML = `
-                <div class="typing-dots">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
+            messageRow.innerHTML = `
+                <div class="message">
+                    <div class="message-content">
+                        <p>${message}</p>
+                    </div>
+                    <div class="avatar user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
                 </div>
             `;
             
-            indicatorDiv.appendChild(avatar);
-            indicatorDiv.appendChild(typingIndicator);
-            indicatorRow.appendChild(indicatorDiv);
-            chatArea.appendChild(indicatorRow);
-            
-            // Scroll to bottom
+            chatArea.appendChild(messageRow);
             chatArea.scrollTop = chatArea.scrollHeight;
         }
         
-        // Function to remove typing indicator
-        function removeTypingIndicator() {
-            const indicator = document.getElementById('typing-indicator-row');
-            if (indicator) {
-                indicator.remove();
+        function showTypingIndicator() {
+            const chatArea = document.getElementById('chat-area');
+            const typingRow = document.createElement('div');
+            typingRow.className = 'message-row bot';
+            typingRow.id = 'typing-indicator-row';
+            
+            typingRow.innerHTML = `
+                <div class="message">
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="typing-indicator">
+                        <div class="typing-dots">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            chatArea.appendChild(typingRow);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+        
+        function hideTypingIndicator() {
+            const typingRow = document.getElementById('typing-indicator-row');
+            if (typingRow) {
+                typingRow.remove();
             }
         }
         
-        // Function to send message
-        function sendUserMessage() {
-            const message = messageInput.value.trim();
-            if (message) {
-                // Add user message
-                addMessage(message, true);
-                
-                // Clear input
-                messageInput.value = '';
-                
-                // Show typing indicator
-                showTypingIndicator();
-                
-                // Simulate bot thinking and respond after a delay
-                setTimeout(() => {
-                    removeTypingIndicator();
-                    
-                    // Get bot response
-                    let response = botResponses.default;
-                    const messageLower = message.toLowerCase();
-                    
-                    for (const [key, value] of Object.entries(botResponses)) {
-                        if (messageLower.includes(key)) {
-                            response = value;
-                            break;
-                        }
-                    }
-                    
-                    addMessage(response);
-                }, 1500);
+        function respondToMessage(message) {
+            const chatArea = document.getElementById('chat-area');
+            const messageRow = document.createElement('div');
+            messageRow.className = 'message-row bot';
+            
+            let response = '';
+            
+            // Simple response logic
+            if (message.toLowerCase().includes('galliera group')) {
+                response = "Galliera Group is a global tech accelerator that bridges the gap between innovative ideas and market success. We combine venture capital investment with technical expertise and growth support to help startups scale effectively.";
+            } else if (message.toLowerCase().includes('technologies') || message.toLowerCase().includes('tech')) {
+                response = "We specialize in cutting-edge technologies including AI/ML, blockchain, quantum computing, and advanced web and mobile solutions. Our technical partners bring expertise in everything from backend infrastructure to intuitive UI/UX design.";
+            } else if (message.toLowerCase().includes('partner')) {
+                response = "We offer several partnership opportunities! Startups can apply for investment and acceleration, technical teams can join our partner network, and established companies can collaborate on innovation initiatives. Would you like more details on a specific type of partnership?";
+            } else {
+                response = "Thanks for your message. Galliera Group helps tech startups accelerate their growth through strategic investment, technical expertise, and market connections. How can we help with your specific interests?";
+            }
+            
+            messageRow.innerHTML = `
+                <div class="message">
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>${response}</p>
+                    </div>
+                </div>
+            `;
+            
+            chatArea.appendChild(messageRow);
+            chatArea.scrollTop = chatArea.scrollHeight;
+            
+            // If chat area becomes larger than its container, adjust the chatbot's size
+            adjustChatbotSize();
+        }
+        
+        function adjustChatbotSize() {
+            const chatArea = document.getElementById('chat-area');
+            const chatContainer = document.querySelector('.chat-container');
+            
+            // If content is larger than minimum height, let it grow up to max-height
+            if (chatArea.scrollHeight > chatArea.clientHeight) {
+                chatArea.style.height = 'auto';
+                const newHeight = Math.min(chatArea.scrollHeight, window.innerHeight * 0.6);
+                chatArea.style.height = newHeight + 'px';
             }
         }
         
-        // Function to handle suggestion chips
-        function sendSuggestion(text) {
-            messageInput.value = text;
-            sendUserMessage();
-        }
+        // Initialize - display suggestions if chat is empty
+        window.onload = function() {
+            const chatArea = document.getElementById('chat-area');
+            if (chatArea.children.length === 0) {
+                // If you want to add a welcome message or anything on load
+            }
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        };
     </script>
 </body>
 </html>
