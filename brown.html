@@ -625,29 +625,6 @@
             right: -4px;
         }
 
-        .dark-background {
-            background: linear-gradient(135deg, #2c1a12 0%, #6b4732 50%, #af7c5d 100%);
-        }
-        
-        /* Improved background transition for the AI section */
-        .ai-section-bg {
-            background: linear-gradient(180deg, rgba(44, 26, 18, 0.7) 0%, rgba(107, 71, 50, 0.9) 100%);
-            box-shadow: 0 -50px 100px rgba(0, 0, 0, 0.15);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .ai-section-bg::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            left: 0;
-            right: 0;
-            height: 150px;
-            background: linear-gradient(180deg, rgba(44, 26, 18, 0) 0%, rgba(44, 26, 18, 0.7) 100%);
-            z-index: 1;
-        }
-
         .email-text {
             font-size: 24px;
             color: #ffffff;
@@ -658,19 +635,7 @@
             display: inline-block;
         }
         
-        /* Team photos styles */
-        .team-photo {
-            width: 140px;
-            height: 140px;
-            border-radius: 10px;
-            object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            margin: 0 auto 20px auto;
-            display: block;
-            transition: all 0.3s ease;
-        }
-        
+        /* Experts section styles */
         .expert-card {
             transition: all 0.3s ease;
         }
@@ -680,29 +645,53 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
         
+        /* Team Photo Styles */
+        .team-photo-container {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 0 auto 20px auto;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .team-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+        
         .expert-card:hover .team-photo {
             transform: scale(1.05);
-            border-color: rgba(255, 255, 255, 0.4);
         }
         
         .photo-overlay {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 20px auto;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .photo-overlay::after {
-            content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(141, 94, 64, 0.2) 0%, rgba(212, 167, 133, 0.2) 100%);
-            z-index: 2;
+            background: linear-gradient(0deg, rgba(141, 94, 64, 0.2) 0%, rgba(61, 34, 24, 0) 50%);
+        }
+        
+        .ai-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(212, 167, 133, 0.8);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        /* Section with consistent background */
+        .section-bg {
+            background: linear-gradient(135deg, #2c1a12 0%, #6b4732 50%, #af7c5d 100%);
         }
     </style>
 </head>
@@ -730,7 +719,7 @@
                 <a href="#tech" class="nav-item">Tech</a>
                 <a href="#help" class="nav-item">Who We Help</a>
                 <a href="#how-it-works" class="nav-item">How it works</a>
-                <a href="#experts" class="nav-item">Team</a>
+                <a href="#experts" class="nav-item">Our Team</a>
                 <a href="#contact" class="nav-item">Contact</a>
             </div>
             <button class="connect-btn px-6 py-2 rounded-full" onclick="openModal()">
@@ -791,7 +780,7 @@
     </section>
 
     <!-- Galliera AI Section -->
-    <section id="galliera-ai" class="ai-section-bg py-24">
+    <section id="galliera-ai" class="section-bg py-24">
         <div class="container mx-auto px-6 text-center">
             <p class="section-heading mb-4">INTERACT WITH</p>
             <h2 class="text-5xl md:text-6xl font-bold mb-10">GALLIERA AI</h2>
@@ -824,59 +813,61 @@
     </section>
 
     <!-- Who We Help Section -->
-    <section id="help" class="container mx-auto px-6 py-16">
-        <div class="mb-16">
-            <p class="section-heading mb-4">// WHO WE HELP</p>
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                Effortlessly connect to<br>
-                your next breakthrough
-            </h2>
-            <p class="opacity-80 max-w-2xl mb-6">
-                We bridge the gap between innovative ideas and market success, providing the resources, expertise, and connections that tech startups need to thrive.
-            </p>
-            <a href="#" class="arrow-link inline-flex items-center">
-                <span class="mr-2">Read more</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="copper-gradient rounded-2xl p-10 relative overflow-hidden">
-                <div class="mb-8">
-                    <h3 class="uppercase text-sm tracking-wider opacity-70 mb-2">INNOVATION ACCELERATOR</h3>
-                    <p class="opacity-80 mb-6">
-                        Platform will strategically accelerate your growth journey through expert guidance, technical resources, and market connections.
-                    </p>
-                </div>
-                <div class="flex items-center mb-10">
-                    <div class="icon-bubble w-16 h-16 rounded-xl flex items-center justify-center mr-6">
-                        <i class="fas fa-chart-line text-xl"></i>
-                    </div>
-                    <div class="connection-line w-24"></div>
-                    <div class="icon-bubble w-16 h-16 rounded-xl flex items-center justify-center ml-6">
-                        <i class="fas fa-rocket text-xl"></i>
-                    </div>
-                </div>
-                <div class="dotted-line h-24 absolute right-16 bottom-0 w-1"></div>
+    <section id="help" class="section-bg py-16">
+        <div class="container mx-auto px-6">
+            <div class="mb-16">
+                <p class="section-heading mb-4">// WHO WE HELP</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Effortlessly connect to<br>
+                    your next breakthrough
+                </h2>
+                <p class="opacity-80 max-w-2xl mb-6">
+                    We bridge the gap between innovative ideas and market success, providing the resources, expertise, and connections that tech startups need to thrive.
+                </p>
+                <a href="#" class="arrow-link inline-flex items-center">
+                    <span class="mr-2">Read more</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
 
-            <div class="light-copper-gradient rounded-2xl p-10 relative overflow-hidden">
-                <div class="absolute right-0 top-0 w-72 h-72 dotted-line opacity-10 rounded-full"></div>
-                <div class="mb-8">
-                    <h3 class="uppercase text-sm tracking-wider opacity-70 mb-2">TECHNICAL EXCELLENCE</h3>
-                    <p class="opacity-80 mb-6">
-                        Our technical partners provide top-tier development resources that transform innovative ideas into market-ready products.
-                    </p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="copper-gradient rounded-2xl p-10 relative overflow-hidden">
+                    <div class="mb-8">
+                        <h3 class="uppercase text-sm tracking-wider opacity-70 mb-2">INNOVATION ACCELERATOR</h3>
+                        <p class="opacity-80 mb-6">
+                            Platform will strategically accelerate your growth journey through expert guidance, technical resources, and market connections.
+                        </p>
+                    </div>
+                    <div class="flex items-center mb-10">
+                        <div class="icon-bubble w-16 h-16 rounded-xl flex items-center justify-center mr-6">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <div class="connection-line w-24"></div>
+                        <div class="icon-bubble w-16 h-16 rounded-xl flex items-center justify-center ml-6">
+                            <i class="fas fa-rocket text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="dotted-line h-24 absolute right-16 bottom-0 w-1"></div>
                 </div>
-                <div class="flex flex-wrap gap-4">
-                    <div class="icon-bubble w-12 h-12 rounded-full flex items-center justify-center">
-                        <i class="fas fa-code text-sm"></i>
+
+                <div class="light-copper-gradient rounded-2xl p-10 relative overflow-hidden">
+                    <div class="absolute right-0 top-0 w-72 h-72 dotted-line opacity-10 rounded-full"></div>
+                    <div class="mb-8">
+                        <h3 class="uppercase text-sm tracking-wider opacity-70 mb-2">TECHNICAL EXCELLENCE</h3>
+                        <p class="opacity-80 mb-6">
+                            Our technical partners provide top-tier development resources that transform innovative ideas into market-ready products.
+                        </p>
                     </div>
-                    <div class="icon-bubble w-12 h-12 rounded-full flex items-center justify-center">
-                        <i class="fas fa-mobile-alt text-sm"></i>
-                    </div>
-                    <div class="icon-bubble w-12 h-12 rounded-full flex items-center justify-center">
-                        <i class="fas fa-database text-sm"></i>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="icon-bubble w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fas fa-code text-sm"></i>
+                        </div>
+                        <div class="icon-bubble w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-sm"></i>
+                        </div>
+                        <div class="icon-bubble w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fas fa-database text-sm"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -884,404 +875,406 @@
     </section>
 
     <!-- Galliera Ventures Section -->
-    <section id="ventures" class="container mx-auto px-6 py-16">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-                <p class="section-heading mb-4">GALLIERA VENTURES</p>
-                <h2 class="text-4xl font-bold mb-6">
-                    Strategically invest in tech potential
-                </h2>
-                <p class="opacity-80 mb-10">
-                    Our VC arm invests in promising tech companies worldwide, providing not just capital, but strategic guidance, industry connections, and technical expertise to accelerate growth.
-                </p>
-                <div class="flex flex-col space-y-6">
-                    <div class="flex items-center">
-                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
-                            <i class="fas fa-globe"></i>
+    <section id="ventures" class="section-bg py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <p class="section-heading mb-4">GALLIERA VENTURES</p>
+                    <h2 class="text-4xl font-bold mb-6">
+                        Strategically invest in tech potential
+                    </h2>
+                    <p class="opacity-80 mb-10">
+                        Our VC arm invests in promising tech companies worldwide, providing not just capital, but strategic guidance, industry connections, and technical expertise to accelerate growth.
+                    </p>
+                    <div class="flex flex-col space-y-6">
+                        <div class="flex items-center">
+                            <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <span>Global investment approach</span>
                         </div>
-                        <span>Global investment approach</span>
+                        <div class="flex items-center">
+                            <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <span>Strategic partnerships</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <span>Long-term value creation</span>
+                        </div>
                     </div>
-                    <div class="flex items-center">
-                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <span>Strategic partnerships</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
-                            <i class="fas fa-chart-pie"></i>
-                        </div>
-                        <span>Long-term value creation</span>
-                    </div>
-                </div>
-                <div class="mt-10">
-                    <a href="#" class="arrow-link inline-flex items-center">
-                        <span class="mr-2">Read more</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="relative">
-                <div class="copper-gradient rounded-2xl p-8 relative z-10">
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
-                            <i class="fas fa-microchip text-3xl mb-4"></i>
-                            <span class="text-sm opacity-80 text-center">Quantum Computing</span>
-                        </div>
-                        <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
-                            <i class="fas fa-brain text-3xl mb-4"></i>
-                            <span class="text-sm opacity-80 text-center">AI Solutions</span>
-                        </div>
-                        <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
-                            <i class="fas fa-cube text-3xl mb-4"></i>
-                            <span class="text-sm opacity-80 text-center">Blockchain</span>
-                        </div>
-                        <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
-                            <i class="fas fa-robot text-3xl mb-4"></i>
-                            <span class="text-sm opacity-80 text-center">Robotics</span>
-                        </div>
+                    <div class="mt-10">
+                        <a href="#" class="arrow-link inline-flex items-center">
+                            <span class="mr-2">Read more</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="dotted-line absolute w-48 h-48 -top-10 -right-10 z-0 rounded-full"></div>
-                <div class="dotted-line absolute w-32 h-32 -bottom-5 -left-10 z-0 rounded-full"></div>
+                <div class="relative">
+                    <div class="copper-gradient rounded-2xl p-8 relative z-10">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
+                                <i class="fas fa-microchip text-3xl mb-4"></i>
+                                <span class="text-sm opacity-80 text-center">Quantum Computing</span>
+                            </div>
+                            <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
+                                <i class="fas fa-brain text-3xl mb-4"></i>
+                                <span class="text-sm opacity-80 text-center">AI Solutions</span>
+                            </div>
+                            <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
+                                <i class="fas fa-cube text-3xl mb-4"></i>
+                                <span class="text-sm opacity-80 text-center">Blockchain</span>
+                            </div>
+                            <div class="icon-bubble rounded-xl p-6 flex flex-col items-center justify-center aspect-square">
+                                <i class="fas fa-robot text-3xl mb-4"></i>
+                                <span class="text-sm opacity-80 text-center">Robotics</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dotted-line absolute w-48 h-48 -top-10 -right-10 z-0 rounded-full"></div>
+                    <div class="dotted-line absolute w-32 h-32 -bottom-5 -left-10 z-0 rounded-full"></div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Galliera Tech Section -->
-    <section id="tech" class="container mx-auto px-6 py-16">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div class="order-2 md:order-1 relative">
-                <div class="light-copper-gradient rounded-2xl p-10 relative z-10">
-                    <div class="flex justify-center items-center mb-10">
-                        <div class="icon-bubble w-24 h-24 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-code text-2xl"></i>
+    <section id="tech" class="section-bg py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1 relative">
+                    <div class="light-copper-gradient rounded-2xl p-10 relative z-10">
+                        <div class="flex justify-center items-center mb-10">
+                            <div class="icon-bubble w-24 h-24 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-code text-2xl"></i>
+                            </div>
+                            <div class="connection-line w-20 mx-6"></div>
+                            <div class="icon-bubble w-24 h-24 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-user text-2xl"></i>
+                            </div>
                         </div>
-                        <div class="connection-line w-20 mx-6"></div>
-                        <div class="icon-bubble w-24 h-24 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-user text-2xl"></i>
+                        <div class="dotted-line w-full h-px mb-10"></div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="icon-bubble rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-code-branch"></i>
+                            </div>
+                            <div class="icon-bubble rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div class="icon-bubble rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="dotted-line w-full h-px mb-10"></div>
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="icon-bubble rounded-full w-12 h-12 flex items-center justify-center">
-                            <i class="fas fa-code-branch"></i>
-                        </div>
-                        <div class="icon-bubble rounded-full w-12 h-12 flex items-center justify-center">
-                            <i class="fas fa-paint-brush"></i>
-                        </div>
-                        <div class="icon-bubble rounded-full w-12 h-12 flex items-center justify-center">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                    </div>
+                    <div class="dotted-line absolute w-64 h-64 -bottom-10 -right-10 z-0 rounded-full"></div>
                 </div>
-                <div class="dotted-line absolute w-64 h-64 -bottom-10 -right-10 z-0 rounded-full"></div>
-            </div>
-            <div class="order-1 md:order-2">
-                <p class="section-heading mb-4">PARTNER COMPANIES</p>
-                <h2 class="text-4xl font-bold mb-6">
-                    Expert teams power your vision
-                </h2>
-                <p class="opacity-80 mb-6">
-                    Galliera Tech encompasses our network of specialized partner companies in development, growth, and media. We own a stake in these companies and leverage their expertise to accelerate startup success.
-                </p>
-                <p class="opacity-80 mb-10">
-                    Gain immediate access to expert resources, technology solutions, and market expertise without the cost and complexity of building in-house capabilities.
-                </p>
-                <div class="flex flex-col space-y-6">
-                    <div class="flex items-center">
-                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
-                            <i class="fas fa-code"></i>
+                <div class="order-1 md:order-2">
+                    <p class="section-heading mb-4">PARTNER COMPANIES</p>
+                    <h2 class="text-4xl font-bold mb-6">
+                        Expert teams power your vision
+                    </h2>
+                    <p class="opacity-80 mb-6">
+                        Galliera Tech encompasses our network of specialized partner companies in development, growth, and media. We own a stake in these companies and leverage their expertise to accelerate startup success.
+                    </p>
+                    <p class="opacity-80 mb-10">
+                        Gain immediate access to expert resources, technology solutions, and market expertise without the cost and complexity of building in-house capabilities.
+                    </p>
+                    <div class="flex flex-col space-y-6">
+                        <div class="flex items-center">
+                            <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <span>Development Partners</span>
                         </div>
-                        <span>Development Partners</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
-                            <i class="fas fa-chart-line"></i>
+                        <div class="flex items-center">
+                            <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span>Growth Partners</span>
                         </div>
-                        <span>Growth Partners</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
-                            <i class="fas fa-bullhorn"></i>
+                        <div class="flex items-center">
+                            <div class="icon-bubble w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <span>Media Partners</span>
                         </div>
-                        <span>Media Partners</span>
                     </div>
-                </div>
-                <div class="mt-10">
-                    <a href="#" class="arrow-link inline-flex items-center">
-                        <span class="mr-2">Read more</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <div class="mt-10">
+                        <a href="#" class="arrow-link inline-flex items-center">
+                            <span class="mr-2">Read more</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How it works Section (formerly Features) -->
-    <section id="how-it-works" class="container mx-auto px-6 py-16">
-        <p class="section-heading mb-4 text-center">OUR APPROACH</p>
-        <h2 class="text-4xl font-bold mb-12 text-center">
-            Full-cycle acceleration
-        </h2>
-        
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="copper-gradient rounded-2xl p-8">
-                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-                    <i class="fas fa-search text-xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold mb-4">Identify Potential</h3>
-                <p class="opacity-80">
-                    Our expert team identifies promising tech startups with innovative solutions and significant market potential.
-                </p>
-            </div>
+    <!-- How it works Section -->
+    <section id="how-it-works" class="section-bg py-16">
+        <div class="container mx-auto px-6">
+            <p class="section-heading mb-4 text-center">OUR APPROACH</p>
+            <h2 class="text-4xl font-bold mb-12 text-center">
+                Full-cycle acceleration
+            </h2>
             
-            <div class="copper-gradient rounded-2xl p-8">
-                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-                    <i class="fas fa-coins text-xl"></i>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="copper-gradient rounded-2xl p-8">
+                    <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-search text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Identify Potential</h3>
+                    <p class="opacity-80">
+                        Our expert team identifies promising tech startups with innovative solutions and significant market potential.
+                    </p>
                 </div>
-                <h3 class="text-xl font-semibold mb-4">Strategic Investment</h3>
-                <p class="opacity-80">
-                    Galliera Ventures provides capital alongside strategic guidance to accelerate growth and market penetration.
-                </p>
-            </div>
-            
-            <div class="copper-gradient rounded-2xl p-8">
-                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-                    <i class="fas fa-cogs text-xl"></i>
+                
+                <div class="copper-gradient rounded-2xl p-8">
+                    <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-coins text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Strategic Investment</h3>
+                    <p class="opacity-80">
+                        Galliera Ventures provides capital alongside strategic guidance to accelerate growth and market penetration.
+                    </p>
                 </div>
-                <h3 class="text-xl font-semibold mb-4">Technical Execution</h3>
-                <p class="opacity-80">
-                    Our network of technical partners provides development expertise to build and refine market-ready products.
-                </p>
-            </div>
-            
-            <div class="light-copper-gradient rounded-2xl p-8">
-                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-                    <i class="fas fa-chart-bar text-xl"></i>
+                
+                <div class="copper-gradient rounded-2xl p-8">
+                    <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-cogs text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Technical Execution</h3>
+                    <p class="opacity-80">
+                        Our network of technical partners provides development expertise to build and refine market-ready products.
+                    </p>
                 </div>
-                <h3 class="text-xl font-semibold mb-4">Market Growth</h3>
-                <p class="opacity-80">
-                    Specialized growth partners implement strategies to achieve rapid market adoption and user acquisition.
-                </p>
-            </div>
-            
-            <div class="light-copper-gradient rounded-2xl p-8">
-                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-                    <i class="fas fa-bullhorn text-xl"></i>
+                
+                <div class="light-copper-gradient rounded-2xl p-8">
+                    <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-bar text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Market Growth</h3>
+                    <p class="opacity-80">
+                        Specialized growth partners implement strategies to achieve rapid market adoption and user acquisition.
+                    </p>
                 </div>
-                <h3 class="text-xl font-semibold mb-4">Brand Amplification</h3>
-                <p class="opacity-80">
-                    Media partners create and distribute compelling content to build brand recognition and industry authority.
-                </p>
-            </div>
-            
-            <div class="light-copper-gradient rounded-2xl p-8">
-                <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-                    <i class="fas fa-rocket text-xl"></i>
+                
+                <div class="light-copper-gradient rounded-2xl p-8">
+                    <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-bullhorn text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Brand Amplification</h3>
+                    <p class="opacity-80">
+                        Media partners create and distribute compelling content to build brand recognition and industry authority.
+                    </p>
                 </div>
-                <h3 class="text-xl font-semibold mb-4">Global Scaling</h3>
-                <p class="opacity-80">
-                    Comprehensive support to scale operations internationally and capture global market opportunities.
-                </p>
+                
+                <div class="light-copper-gradient rounded-2xl p-8">
+                    <div class="icon-bubble w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-rocket text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Global Scaling</h3>
+                    <p class="opacity-80">
+                        Comprehensive support to scale operations internationally and capture global market opportunities.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Meet The Experts Section -->
-    <section id="experts" class="container mx-auto px-6 py-16">
-        <p class="section-heading mb-4 text-center">OUR TEAM</p>
-        <h2 class="text-4xl font-bold mb-12 text-center">
-            Meet the Experts
-        </h2>
-        
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Human Expert 1 -->
-            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
-                <div class="photo-overlay">
-                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Leonie" class="team-photo">
-                </div>
-                <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
-                <h3 class="text-xl font-semibold mb-1">LEONIE</h3>
-                <p class="text-sm font-medium opacity-80 mb-4">Founder</p>
-                <p class="opacity-80 text-sm">
-                    Serial entrepreneur and tech strategist. Founded Galliera Group to bridge the gap between innovation, capital, and technical execution in the global startup ecosystem.
-                </p>
-            </div>
+    <section id="experts" class="section-bg py-16">
+        <div class="container mx-auto px-6">
+            <p class="section-heading mb-4 text-center">OUR TEAM</p>
+            <h2 class="text-4xl font-bold mb-12 text-center">
+                Meet the Experts
+            </h2>
             
-            <!-- AI Expert -->
-            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
-                <div class="photo-overlay">
-                    <img src="https://unsplash.com/fr/photos/illustration-de-robot-noir-et-blanc-fv1EFjgIb94" alt="THE AGI" class="team-photo">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Human Expert 1 -->
+                <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                    <div class="team-photo-container">
+                        <img src="https://cdn.jsdelivr.net/gh/leonienguyen/gg@main/team-1.jpg" alt="Leonie" class="team-photo">
+                        <div class="photo-overlay"></div>
+                    </div>
+                    <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
+                    <h3 class="text-xl font-semibold mb-1">LEONIE</h3>
+                    <p class="text-sm font-medium opacity-80 mb-4">Founder</p>
+                    <p class="opacity-80 text-sm">
+                        Serial entrepreneur and tech strategist. Founded Galliera Group to bridge the gap between innovation, capital, and technical execution in the global startup ecosystem.
+                    </p>
+                    <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
                 </div>
-                <p class="uppercase text-sm opacity-70 mb-2">AI</p>
-                <h3 class="text-xl font-semibold mb-1">THE AGI</h3>
-                <p class="text-sm font-medium opacity-80 mb-4">Chief Intelligence</p>
-                <p class="opacity-80 text-sm">
-                    The All-in-One AI Agent but currently limited to be an Advanced AI system specialized in market analysis and trend forecasting. Provides data-driven insights for investment decisions.
-                </p>
-            </div>
-            
-            <!-- Human Expert 2 -->
-            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
-                <div class="photo-overlay">
-                    <img src="https://unsplash.com/fr/photos/homme-en-costume-noir-portant-des-lunettes-WJSM6lgaN2c" alt="Alex" class="team-photo">
+                
+                <!-- AI Expert -->
+                <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                    <div class="team-photo-container">
+                        <img src="https://unsplash.com/fr/photos/illustration-de-robot-noir-et-blanc-fv1EFjgIb94" alt="The AGI" class="team-photo">
+                        <div class="photo-overlay"></div>
+                        <div class="ai-badge">AI</div>
+                    </div>
+                    <p class="uppercase text-sm opacity-70 mb-2">AI</p>
+                    <h3 class="text-xl font-semibold mb-1">THE AGI</h3>
+                    <p class="text-sm font-medium opacity-80 mb-4">Chief Intelligence</p>
+                    <p class="opacity-80 text-sm">
+                        The All-in-One AI Agent specialized in market analysis and trend forecasting. Provides data-driven insights for investment decisions.
+                    </p>
+                    <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
                 </div>
-                <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
-                <h3 class="text-xl font-semibold mb-1">ALEX</h3>
-                <p class="text-sm font-medium opacity-80 mb-4">Head of Investment</p>
-                <p class="opacity-80 text-sm">
-                    Former VC partner with 10+ years of experience in tech investments. Expert in identifying promising early-stage startups.
-                </p>
-            </div>
-            
-            <!-- Human Expert 3 -->
-            <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
-                <div class="photo-overlay">
-                    <img src="https://unsplash.com/fr/photos/man-wearing-black-notched-lapel-suit-jacket-in-focus-photography-WMD64tMfc4k" alt="Michael" class="team-photo">
+                
+                <!-- Human Expert 2 -->
+                <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                    <div class="team-photo-container">
+                        <img src="https://unsplash.com/fr/photos/un-homme-en-costume-et-lunettes-posant-pour-une-photo-qpyR0WKV_Cs" alt="Alex" class="team-photo">
+                        <div class="photo-overlay"></div>
+                    </div>
+                    <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
+                    <h3 class="text-xl font-semibold mb-1">ALEX</h3>
+                    <p class="text-sm font-medium opacity-80 mb-4">Head of Investment</p>
+                    <p class="opacity-80 text-sm">
+                        Former VC partner with 10+ years of experience in tech investments. Expert in identifying promising early-stage startups.
+                    </p>
+                    <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
                 </div>
-                <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
-                <h3 class="text-xl font-semibold mb-1">MICHAEL</h3>
-                <p class="text-sm font-medium opacity-80 mb-4">CTO</p>
-                <p class="opacity-80 text-sm">
-                    Tech innovator with background in AI and distributed systems. Leads the technical strategy and development partnerships.
-                </p>
-            </div>
-            
-            <!-- AI Expert 2 -->
-            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
-                <div class="photo-overlay">
-                    <img src="https://unsplash.com/fr/photos/illustration-de-robot-noir-et-blanc-fv1EFjgIb94" alt="THE DONNA" class="team-photo">
+                
+                <!-- Human Expert 3 -->
+                <div class="copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                    <div class="team-photo-container">
+                        <img src="https://unsplash.com/fr/photos/man-wearing-black-notched-lapel-suit-jacket-in-focus-photography-WMD64tMfc4k" alt="Michael" class="team-photo">
+                        <div class="photo-overlay"></div>
+                    </div>
+                    <p class="uppercase text-sm opacity-70 mb-2">HUMAN</p>
+                    <h3 class="text-xl font-semibold mb-1">MICHAEL</h3>
+                    <p class="text-sm font-medium opacity-80 mb-4">CTO</p>
+                    <p class="opacity-80 text-sm">
+                        Tech innovator with background in AI and distributed systems. Leads the technical strategy and development partnerships.
+                    </p>
+                    <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
                 </div>
-                <p class="uppercase text-sm opacity-70 mb-2">AI</p>
-                <h3 class="text-xl font-semibold mb-1">THE DONNA</h3>
-                <p class="text-sm font-medium opacity-80 mb-4">Operations Intelligence</p>
-                <p class="opacity-80 text-sm">
-                    AI operations specialist. Manages complex scheduling, communications, and organizational logistics with superhuman efficiency.
-                </p>
-            </div>
-            
-            <!-- AI Expert 3 -->
-            <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
-                <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
-                <div class="photo-overlay">
-                    <img src="https://unsplash.com/fr/photos/illustration-de-robot-noir-et-blanc-fv1EFjgIb94" alt="THE BENJAMIN" class="team-photo">
+                
+                <!-- AI Expert 2 -->
+                <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                    <div class="team-photo-container">
+                        <img src="https://unsplash.com/fr/photos/illustration-de-robot-noir-et-blanc-fv1EFjgIb94" alt="The Donna" class="team-photo">
+                        <div class="photo-overlay"></div>
+                        <div class="ai-badge">AI</div>
+                    </div>
+                    <p class="uppercase text-sm opacity-70 mb-2">AI</p>
+                    <h3 class="text-xl font-semibold mb-1">THE DONNA</h3>
+                    <p class="text-sm font-medium opacity-80 mb-4">Operations Intelligence</p>
+                    <p class="opacity-80 text-sm">
+                        AI operations specialist. Manages complex scheduling, communications, and organizational logistics with superhuman efficiency.
+                    </p>
+                    <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
                 </div>
-                <p class="uppercase text-sm opacity-70 mb-2">AI</p>
-                <h3 class="text-xl font-semibold mb-1">THE BENJAMIN</h3>
-                <p class="text-sm font-medium opacity-80 mb-4">Financial Intelligence</p>
-                <p class="opacity-80 text-sm">
-                    AI financial analyst. Monitors markets, performs due diligence, and optimizes portfolio allocation with predictive modeling.
-                </p>
+                
+                <!-- AI Expert 3 -->
+                <div class="light-copper-gradient rounded-2xl p-8 relative overflow-hidden expert-card">
+                    <div class="team-photo-container">
+                        <img src="https://unsplash.com/fr/photos/illustration-de-robot-noir-et-blanc-fv1EFjgIb94" alt="The Benjamin" class="team-photo">
+                        <div class="photo-overlay"></div>
+                        <div class="ai-badge">AI</div>
+                    </div>
+                    <p class="uppercase text-sm opacity-70 mb-2">AI</p>
+                    <h3 class="text-xl font-semibold mb-1">THE BENJAMIN</h3>
+                    <p class="text-sm font-medium opacity-80 mb-4">Financial Intelligence</p>
+                    <p class="opacity-80 text-sm">
+                        AI financial analyst. Monitors markets, performs due diligence, and optimizes portfolio allocation with predictive modeling.
+                    </p>
+                    <div class="absolute -bottom-12 -right-12 w-40 h-40 rounded-full dotted-line"></div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="container mx-auto px-6 py-24">
-        <div class="copper-gradient rounded-3xl p-12 md:p-16 relative overflow-hidden">
-            <div class="dotted-line absolute w-96 h-96 -top-20 -right-20 z-0 rounded-full"></div>
-            <div class="dotted-line absolute w-64 h-64 -bottom-10 -left-10 z-0 rounded-full"></div>
-            
-            <div class="relative z-10 max-w-3xl mx-auto text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                    Ready to accelerate your tech vision?
-                </h2>
-                <p class="opacity-80 text-lg mb-10">
-                    Join forces with Galliera Group to transform your innovative idea into a market-leading success. Our global network and expert resources are ready to power your journey.
-                </p>
-                <button class="connect-btn px-10 py-4 rounded-full text-lg font-medium" onclick="openModal()">
-                    Connect with us
-                </button>
+    <section id="contact" class="section-bg py-24">
+        <div class="container mx-auto px-6">
+            <div class="copper-gradient rounded-3xl p-12 md:p-16 relative overflow-hidden">
+                <div class="dotted-line absolute w-96 h-96 -top-20 -right-20 z-0 rounded-full"></div>
+                <div class="dotted-line absolute w-64 h-64 -bottom-10 -left-10 z-0 rounded-full"></div>
+                
+                <div class="relative z-10 max-w-3xl mx-auto text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        Ready to accelerate your tech vision?
+                    </h2>
+                    <p class="opacity-80 text-lg mb-10">
+                        Join forces with Galliera Group to transform your innovative idea into a market-leading success. Our global network and expert resources are ready to power your journey.
+                    </p>
+                    <button class="connect-btn px-10 py-4 rounded-full text-lg font-medium" onclick="openModal()">
+                        Connect with us
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="container mx-auto px-6 py-12">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-            <div class="text-2xl font-bold mb-6 md:mb-0">
-                galliera<sup class="text-xs">3</sup>
+    <footer class="section-bg py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-2xl font-bold mb-6 md:mb-0">
+                    galliera<sup class="text-xs">3</sup>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
             </div>
-            <div class="flex space-x-6">
-                <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" class="opacity-70 hover:opacity-100 transition-opacity">
-                    <i class="fab fa-github"></i>
-                </a>
+            <div class="border-t border-white border-opacity-10 mt-10 pt-10 text-center opacity-60 text-sm">
+                © 2023 Galliera Group. All rights reserved.
             </div>
-        </div>
-        <div class="border-t border-white border-opacity-10 mt-10 pt-10 text-center opacity-60 text-sm">
-            © 2023 Galliera Group. All rights reserved.
         </div>
     </footer>
 
-    <!-- JavaScript for Modal and Chat Functionality -->
     <script>
-        // Modal functionality
-        function openModal() {
-            document.getElementById('contactModal').style.display = 'block';
-        }
-        
-        function closeModal() {
-            document.getElementById('contactModal').style.display = 'none';
-        }
-        
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            const modal = document.getElementById('contactModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-        
         // Chat functionality
+        function sendSuggestion(message) {
+            // Add user message
+            addUserMessage(message);
+            
+            // Simulate bot response after a delay
+            setTimeout(() => {
+                showTypingIndicator();
+                
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    addBotMessage(getBotResponse(message));
+                }, 1500);
+            }, 500);
+        }
+        
         function sendUserMessage() {
             const messageInput = document.getElementById('message-input');
             const message = messageInput.value.trim();
             
-            if (message) {
+            if (message !== '') {
                 addUserMessage(message);
                 messageInput.value = '';
                 
-                // Simulate AI thinking with delay
+                // Simulate bot response
                 setTimeout(() => {
                     showTypingIndicator();
                     
-                    // Simulate AI response time
                     setTimeout(() => {
-                        hideTypingIndicator();
-                        respondToMessage(message);
+                        removeTypingIndicator();
+                        addBotMessage(getBotResponse(message));
                     }, 1500);
                 }, 500);
             }
-        }
-        
-        function sendSuggestion(suggestion) {
-            addUserMessage(suggestion);
-            
-            // Simulate AI thinking with delay
-            setTimeout(() => {
-                showTypingIndicator();
-                
-                // Simulate AI response time
-                setTimeout(() => {
-                    hideTypingIndicator();
-                    respondToMessage(suggestion);
-                }, 1500);
-            }, 500);
         }
         
         function addUserMessage(message) {
@@ -1291,11 +1284,31 @@
             
             messageRow.innerHTML = `
                 <div class="message">
+                    <div class="avatar user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
                     <div class="message-content">
                         <p>${message}</p>
                     </div>
-                    <div class="avatar user-avatar">
-                        <i class="fas fa-user"></i>
+                </div>
+            `;
+            
+            chatArea.appendChild(messageRow);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+        
+        function addBotMessage(message) {
+            const chatArea = document.getElementById('chat-area');
+            const messageRow = document.createElement('div');
+            messageRow.className = 'message-row bot';
+            
+            messageRow.innerHTML = `
+                <div class="message">
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>${message}</p>
                     </div>
                 </div>
             `;
@@ -1306,11 +1319,11 @@
         
         function showTypingIndicator() {
             const chatArea = document.getElementById('chat-area');
-            const typingRow = document.createElement('div');
-            typingRow.className = 'message-row bot';
-            typingRow.id = 'typing-indicator-row';
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'message-row bot';
+            typingIndicator.id = 'typing-indicator';
             
-            typingRow.innerHTML = `
+            typingIndicator.innerHTML = `
                 <div class="message">
                     <div class="avatar">
                         <i class="fas fa-robot"></i>
@@ -1325,79 +1338,50 @@
                 </div>
             `;
             
-            chatArea.appendChild(typingRow);
+            chatArea.appendChild(typingIndicator);
             chatArea.scrollTop = chatArea.scrollHeight;
         }
         
-        function hideTypingIndicator() {
-            const typingRow = document.getElementById('typing-indicator-row');
-            if (typingRow) {
-                typingRow.remove();
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
             }
         }
         
-        function respondToMessage(message) {
-            const chatArea = document.getElementById('chat-area');
-            const messageRow = document.createElement('div');
-            messageRow.className = 'message-row bot';
+        function getBotResponse(message) {
+            // Simple responses for demo purposes
+            const lowercaseMsg = message.toLowerCase();
             
-            let response = '';
-            
-            // Simple response logic
-            if (message.toLowerCase().includes('galliera group')) {
-                response = "Galliera Group is a global tech accelerator that bridges the gap between innovative ideas and market success. We combine venture capital investment with technical expertise and growth support to help startups scale effectively.";
-            } else if (message.toLowerCase().includes('technologies') || message.toLowerCase().includes('tech')) {
-                response = "We specialize in cutting-edge technologies including AI/ML, blockchain, quantum computing, and advanced web and mobile solutions. Our technical partners bring expertise in everything from backend infrastructure to intuitive UI/UX design.";
-            } else if (message.toLowerCase().includes('partner')) {
-                response = "We offer several partnership opportunities! Startups can apply for investment and acceleration, technical teams can join our partner network, and established companies can collaborate on innovation initiatives. Would you like more details on a specific type of partnership?";
+            if (lowercaseMsg.includes('about galliera') || lowercaseMsg.includes('what is galliera')) {
+                return 'Galliera Group is a global tech accelerator that drives innovation across ventures and development. We help startups invest, build, and scale with unparalleled expertise, connecting innovative ideas with the resources to make them reality.';
+            } else if (lowercaseMsg.includes('technologies') || lowercaseMsg.includes('tech stack')) {
+                return 'We work with cutting-edge technologies across various domains including AI/ML, blockchain, quantum computing, and distributed systems. Our technical partners specialize in full-stack development, cloud infrastructure, and mobile applications.';
+            } else if (lowercaseMsg.includes('partner') || lowercaseMsg.includes('collaborate') || lowercaseMsg.includes('work together')) {
+                return 'We offer multiple partnership options depending on your needs: investment through Galliera Ventures, technical development with our partner companies, or joining our accelerator program. Please send details about your project to contact@gallieragroup.com and our team will get in touch.';
+            } else if (lowercaseMsg.includes('hello') || lowercaseMsg.includes('hi') || lowercaseMsg.includes('hey')) {
+                return 'Hello! How can I assist you with Galliera Group today?';
             } else {
-                response = "Thanks for your message. Galliera Group helps tech startups accelerate their growth through strategic investment, technical expertise, and market connections. How can we help with your specific interests?";
-            }
-            
-            messageRow.innerHTML = `
-                <div class="message">
-                    <div class="avatar">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="message-content">
-                        <p>${response}</p>
-                    </div>
-                </div>
-            `;
-            
-            chatArea.appendChild(messageRow);
-            chatArea.scrollTop = chatArea.scrollHeight;
-            
-            // If chat area becomes larger than its container, adjust the chatbot's size
-            adjustChatbotSize();
-        }
-        
-        function adjustChatbotSize() {
-            const chatArea = document.getElementById('chat-area');
-            const chatContainer = document.querySelector('.chat-container');
-            
-            // If content is larger than minimum height, let it grow up to max-height
-            if (chatArea.scrollHeight > chatArea.clientHeight) {
-                chatArea.style.height = 'auto';
-                const newHeight = Math.min(chatArea.scrollHeight, window.innerHeight * 0.6);
-                chatArea.style.height = newHeight + 'px';
+                return 'That\'s an interesting question. To provide more specific information, please contact our team at contact@gallieragroup.com. They\'ll be happy to help with any inquiries about our investment approach, technical capabilities, or partnership opportunities.';
             }
         }
         
-        // Initialize - display suggestions if chat is empty
-        window.onload = function() {
-            const chatArea = document.getElementById('chat-area');
-            if (chatArea.children.length === 0) {
-                // If you want to add a welcome message or anything on load
+        // Modal functionality
+        function openModal() {
+            document.getElementById('contactModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
             }
-            
-            // Close modal with Escape key
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    closeModal();
-                }
-            });
-        };
+        }
     </script>
 </body>
 </html>
